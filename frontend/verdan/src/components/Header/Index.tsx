@@ -1,10 +1,13 @@
 import logo from '../../assets/images/logoVerdan.webp';
 import { FaSearch } from 'react-icons/fa';
 
+import styles from './Header.module.scss';
+
+
 export function Header() {
   return(
     <header>
-      <div>
+      <div className={styles.logo}>
         <img src={logo} alt="Logo verdan Shopping" />
       </div>
 
@@ -18,10 +21,10 @@ export function Header() {
           </ul>
        </nav>
 
-      <div>
+      <div className={styles.search}>
         <input type="search" placeholder='Pesquise aqui'/>
         <button><FaSearch/></button>
-      </div>
+      </div>{/* terminar de fazer*/}
 
     </header>
   )

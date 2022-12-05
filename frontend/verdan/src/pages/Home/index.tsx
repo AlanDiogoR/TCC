@@ -1,3 +1,4 @@
+import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header/Index";
 import { Produtos } from "../../components/Produtos";
 import { Banner } from "./Banner";
@@ -10,6 +11,8 @@ export function Home() {
       <Banner/>
 
       <Produtos/>
+
+      <Footer/>
     </>
     
   )
