@@ -21,11 +21,13 @@ export function Header() {
           </ul>
        </nav>
 
-      <div className={styles.pesquisar}>
-        <input type="text"  className={styles.pesquisarTxt}/>
-        <a href="#hh" className={styles.pesquisarBtn}>
-          <FaSearch/>
-        </a>{/*concertar o css da lupa*/}
+      <div className={styles.containerPesquisar}>
+        <div className={styles.pesquisar}>
+          <input type="text"  className={styles.pesquisarTxt}/>
+          <a href="#hh" className={styles.pesquisarBtn}>
+            <FaSearch/>
+          </a>{/*concertar o css da lupa*/}
+        </div>
       </div>
 
     </header>

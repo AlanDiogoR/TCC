@@ -2,7 +2,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem;
+  padding: 1.8rem;
 
   background-color: var(--header);
 }
@@ -41,11 +41,13 @@ nav ul li a {
   justify-content: center;
   align-items: center;
 }
+.containerPesquisar {
+  display: flex;
+  gap: 1rem;
+}
 
 .pesquisar {
-  position: fixed;
-  top: 28px;
-  left: 97%;
+  position: absolute;
   transform: translate(-50%, -50%);
   background:#ffffff;
   height: 40px;
@@ -57,7 +59,7 @@ nav ul li a {
 }
 
 .pesquisarTxt {
-  border:none;
+  border: none;
   background: none;
   outline: none;
   padding: 0;
@@ -65,7 +67,7 @@ nav ul li a {
   font-size: 15px;
   line-height: 40px;
   width: 0;
-  transition:.8s;
+  transition: .5s;
 }
 
 .pesquisarBtn {
@@ -76,18 +78,14 @@ nav ul li a {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition:.8s;
-
+  transition: .5s;
 }
 
 .pesquisar:hover > .pesquisarTxt{
-  width: 180px;
+  width: 11rem;
   padding: 0 6px;
 }
-
-.pesquisar:hover > .pesquisarBtn {
-  background: rgb(255, 255, 255);  
-}/*mudar o pesquisar*/
+/*mudar o pesquisar*/
 /*
 
 .search {
