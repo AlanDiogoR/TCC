@@ -41,6 +41,53 @@ nav ul li a {
   justify-content: center;
   align-items: center;
 }
+
+.pesquisar {
+  position: fixed;
+  top: 28px;
+  left: 97%;
+  transform: translate(-50%, -50%);
+  background:#ffffff;
+  height: 40px;
+  padding: 10px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pesquisarTxt {
+  border:none;
+  background: none;
+  outline: none;
+  padding: 0;
+  color: #000000;
+  font-size: 15px;
+  line-height: 40px;
+  width: 0;
+  transition:.8s;
+}
+
+.pesquisarBtn {
+  width: 20px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:.8s;
+
+}
+
+.pesquisar:hover > .pesquisarTxt{
+  width: 180px;
+  padding: 0 6px;
+}
+
+.pesquisar:hover > .pesquisarBtn {
+  background: rgb(255, 255, 255);  
+}/*mudar o pesquisar*/
 /*
 
 .search {

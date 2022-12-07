@@ -21,10 +21,12 @@ export function Header() {
           </ul>
        </nav>
 
-      <div className={styles.search}>
-        <input type="search" placeholder='Pesquise aqui'/>
-        <button><FaSearch/></button>
-      </div>{/* terminar de fazer*/}
+      <div className={styles.pesquisar}>
+        <input type="text"  className={styles.pesquisarTxt}/>
+        <a href="#hh" className={styles.pesquisarBtn}>
+          <FaSearch/>
+        </a>{/*concertar o css da lupa*/}
+      </div>
 
     </header>
   )
