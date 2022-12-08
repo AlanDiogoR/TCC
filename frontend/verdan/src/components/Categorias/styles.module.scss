@@ -1,0 +1,14 @@
+.categorias {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0 0.5rem 0;
+
+  background-color: var(--H-nav);
+}
+
+.hRow {
+  border-right: 2px solid white;
+  content: '';
+  transition: 0.1s;
+}

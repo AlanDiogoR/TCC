@@ -12,7 +12,7 @@
 .produto:hover {
   border: 1px solid var(--verde-menta);
   outline: 1px solid var(--verde-menta); 
-  box-shadow: 3px 3px 10px black;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.719);
 }
 
 .produto > div > img {
@@ -34,5 +34,35 @@ h3 {
   font-size: 1.4rem;
 }
 
+.footer {
+  display: flex;
+  margin: 0.875rem;
+}
+
+.price {
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-right: 2rem;
+}
+
+.comprarButon {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  padding-left: 2rem;
+}
+
+.comprarButon > button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+.comprarButon > button > a{
+  text-decoration: none;
+  color: red;
+  text-transform: uppercase;
+  font-weight: bold;
+}
 
 

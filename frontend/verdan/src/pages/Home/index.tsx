@@ -1,6 +1,6 @@
+import { Categorias } from "../../components/Categorias";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header/Index";
-import { Container } from "../../components/Container";
 import { Banner } from "./Banner";
 
 export function Home() {
@@ -8,9 +8,9 @@ export function Home() {
     <>
       <Header/>
 
-      <Banner/>
+      <Categorias/>
 
-      <Container/>  
+      <Banner/> 
 
       <Footer/>
     </>

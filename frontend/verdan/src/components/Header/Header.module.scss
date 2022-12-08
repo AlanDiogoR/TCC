@@ -12,6 +12,12 @@ header > .logo {
   height: 5rem;
 }
 
+.logoImg {
+  width: 11.5rem;
+  height: 5rem;
+}
+
+
 header > .logo > img {
   width: 100%;
   height: 100%;
@@ -34,13 +40,20 @@ nav ul li a {
   text-decoration: none;
   list-style: none;
 
-  width: 100%;
+  width: 80%;
   height: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+nav ul li a:hover {
+  border: 1px solid white;
+  outline: 1px solid white;
+  border-radius: 4px;
+}
+
 .containerPesquisar {
   display: flex;
   gap: 1rem;

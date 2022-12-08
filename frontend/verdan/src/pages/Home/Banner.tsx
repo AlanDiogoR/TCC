@@ -6,17 +6,9 @@ import styles from './Banner.module.scss';
 
 export function Banner() {
   return (
-    <ul className={styles.slider}>
-      <li>
-        <img src={b1}  alt="imagem produto"/>
-      </li>
-      <li>
-        <img src={B2} alt="imagem produto"/>
-      </li>
-      <li>
-        <img src={B3} alt="imagem produto"/>
-      </li>
-    </ul>
+    <div className={styles.slider}>
+      <img src={B3} alt="imagem do banner" />
+    </div>
   );
 }
 
