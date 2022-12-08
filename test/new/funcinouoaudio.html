@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>
+    djhjfdwahf
+    
+    <script>
+      var btn = document.querySelector('button'); //selecionando o botão
+      btn.addEventListener('click', function(){
+        //criando um objeto que irá executar a síntese de voz
+        var synth = window.speechSynthesis; 
+        //criando um objeto que irá conter as informações de áudio
+        var msg = new SpeechSynthesisUtterance('Olá!'); 
+        //falando o áudio
+        synth.speak(msg); 
+      });
+  </script>
+</body>
+</html>

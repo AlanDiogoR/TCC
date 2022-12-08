@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>
+    djhjfdwahf
+    
+    <script>
+      var btn = document.querySelector('button'); //selecionando o botão
+      btn.addEventListener('click', function(){
+        //criando um objeto que irá executar a síntese de voz
+        var synth = window.speechSynthesis; 
+        //criando um objeto que irá conter as informações de áudio
+        var msg = new SpeechSynthesisUtterance('Olá!'); 
+        //falando o áudio
+        synth.speak(msg); 
+      });
+
+      navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {
+        const audioContext = new AudioContext();
+        const source = audioContext.createMediaStreamSource(stream);
+        const analyser = audioContext.createAnalyser();
+
+        source.connect(analyser);
+
+        const dataArray = new Float32Array(analyser.frequencyBinCount);
+        analyser.getFloatFrequencyData(dataArray);
+
+        // Aqui você tem os dados de frequência
+        // Você pode usar esses dados para criar um gráfico de frequência
+        // ou ouvir o som para ver o que o usuário está dizendo.
+
+        console.log(`O usuário disse: ${dataArray}`);
+
+      })
+      .catch(console.error);
+      /*
+      navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {
+        const audioContext = new AudioContext();
+        const source = audioContext.createMediaStreamSource(stream);
+        const analyser = audioContext.createAnalyser();
+
+        source.connect(analyser);
+
+        const dataArray = new Float32Array(analyser.frequencyBinCount);
+        analyser.getFloatFrequencyData(dataArray);
+
+        // Aqui você tem os dados de frequência
+        // Você pode usar esses dados para criar um gráfico de frequência
+        // ou ouvir o som para ver o que o usuário está dizendo.
+      })
+      .catch(console.error);*/
+  </script>
+</body>
+</html>
