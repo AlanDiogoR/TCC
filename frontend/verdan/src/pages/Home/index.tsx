@@ -1,6 +1,6 @@
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header/Index";
-import { Produtos } from "../../components/Produtos";
+import { Container } from "../../components/Container";
 import { Banner } from "./Banner";
 
 export function Home() {
@@ -10,7 +10,7 @@ export function Home() {
 
       <Banner/>
 
-      <Produtos/>
+      <Container/>  
 
       <Footer/>
     </>

@@ -4,7 +4,26 @@ import boneca from '../../assets/images/b1.jpg';
 
 export function Produtos() {
   return (
-    <>fazer card de produto bem bonito</>
+    <div className={styles.produto}>
+      <div>
+        <img src={boneca} alt="iamgem produto" />
+      </div>
+
+      <hr className='styeles.sla' />
+      <div>
+        <h3 id={styles.hr}>Boneca</h3>
+      </div>
+
+      <div className={styles.footer}>
+        <div className={styles.price}>
+          <label>R$80,80</label>
+        </div>
+
+        <div className={styles.comprarButon}>
+          <button><a href="#ccc">Comprar</a></button>
+        </div>
+      </div>
+    </div>
     
   );
 }
