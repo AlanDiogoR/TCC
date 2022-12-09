@@ -8,12 +8,12 @@ header {
 }
 
 header > .logo {
-  width: 11.5rem;
+  width: 11rem;
   height: 5rem;
 }
 
 .logoImg {
-  width: 11.5rem;
+  width: 11rem;
   height: 5rem;
 }
 
@@ -54,8 +54,49 @@ nav ul li a:hover {
   border-radius: 4px;
 }
 
-.containerPesquisar {
+.searchBox {
+  position: relative;
   display: flex;
+  align-items: center;
+  
+  .searchTxt {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+  }
+  
+  .searchBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 9px;
+    border-radius: 5px;
+    background: none;
+  }
+  
+  i {
+    background-color: none;
+    color: black;
+    font-size: 1rem;
+  }
+}
+
+.userLogin {
+  display: flex;
+  align-items: center;
+
+  a {
+    list-style: none;
+    text-decoration: none;
+    font-size: 2rem;
+    color: var(--verde-logo);
+  }
+
+}
+// responsividade apartir de 720px
+/*.containerPesquisar {
+  display: flex;  
   gap: 1rem;
 }
 
@@ -95,12 +136,12 @@ nav ul li a:hover {
 }
 
 .pesquisar:hover > .pesquisarTxt{
-  width: 11rem;
+  width: 11em;
   padding: 0 6px;
-}
+}*/
 /*mudar o pesquisar*/
 /*
-
+r
 .search {
   --background: #ffffff;
   --text-color: #414856;

@@ -1,0 +1,70 @@
+.rodapePai {
+  display: flex;
+  background-color: var(--header);
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  color: white;
+  font-size: 1rem;
+  flex-wrap: wrap;
+
+  h2 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: var(--verde-logo);
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    border-bottom: 2px solid var(--verde-menta);
+    content: '';
+    transition: 0.1s;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .rodape {
+    display: flex;
+
+    div {
+      display: flex;
+      padding-left: 5rem;
+      flex-direction: column;
+      text-align: center;
+
+      h3 {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      label {
+        margin-bottom: 1rem;
+
+        a {
+          text-decoration: none;
+          list-style: none;
+          color: rgba(255, 255, 255, 0.726);
+        }
+
+        a:hover {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.726);
+          content: '';
+          transition: 0.1s;
+        }
+
+        
+      }
+    }
+  }
+  @media screen and (max-width: 766px) {
+    .rodape {
+      flex-direction: column;
+
+      div {
+        h3 {
+          margin-bottom: 0.6rem;
+        }
+        label {
+          margin-bottom: 0.6rem;
+        }
+      }
+    }
+  }
+}
