@@ -1,0 +1,16 @@
+.ofertasDaSemana {
+  display: flex;
+
+  h2 {
+    text-align: center;
+  }
+
+  .icon {
+    font-size: 2rem; 
+  }
+
+  .produtos {
+    display: flex;
+    flex-direction: row;
+  }
+}
