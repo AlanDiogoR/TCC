@@ -1,8 +1,14 @@
 .ofertasDaSemana {
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: white;
 
   h2 {
     text-align: center;
+    margin-bottom: 1rem;
+    color: red;
+    font-size: 2rem;
   }
 
   .icon {
@@ -12,5 +18,17 @@
   .produtos {
     display: flex;
     flex-direction: row;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media screen and (max-width: 766px) {
+    .produtos {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

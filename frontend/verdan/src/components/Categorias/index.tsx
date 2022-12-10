@@ -10,6 +10,11 @@ export function Categorias() {
         <li className={styles.hRow}><a href="#aaa">Higiene</a></li>
         <li className={styles.hRow}><a href="#aaa">Beleza</a></li>
       </ul>
+
+      <ul>
+        <li className={styles.hRow}><a href="#jjjj">Crie sua conta</a></li>
+        <li><a href="#dgdgd">Entre</a></li>
+      </ul>
     </nav>
   )
 }

@@ -40,7 +40,7 @@ nav ul li a {
   text-decoration: none;
   list-style: none;
 
-  width: 80%;
+  width: 100%;
   height: 100%;
 
   display: flex;
@@ -64,6 +64,13 @@ nav ul li a:hover {
     border-radius: 5px;
     border: 1px solid #ccc;
     outline: none;
+    width: 32rem;
+    transition: 0.2s;
+  }
+
+  .searchTxt:hover {
+    border: 1px solid var(--verde-logo);
+    outline: 1px solid var(--verde-logo);
   }
   
   .searchBtn {
@@ -72,7 +79,7 @@ nav ul li a:hover {
     right: 0;
     padding: 9px;
     border-radius: 5px;
-    background: none;
+    background: var(--verde-logo);
   }
   
   i {
@@ -90,8 +97,16 @@ nav ul li a:hover {
     list-style: none;
     text-decoration: none;
     font-size: 2rem;
-    color: var(--verde-logo);
+    color: white;
+    padding-left: 1rem;
+    transition: 0.2s;
   }
+
+  a:hover {
+    color: var(--verde-logo);
+    outline: var(--verde-logo);
+  }
+
 
 }
 // responsividade apartir de 720px
