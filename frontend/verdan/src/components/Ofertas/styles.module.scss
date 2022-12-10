@@ -1,28 +1,42 @@
 .ofertasDaSemana {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   background-color: white;
+  align-items: center;
+  text-align: center;
 
   h2 {
     text-align: center;
     margin-bottom: 1rem;
-    color: red;
+    margin-top: 1rem;
+    color: rgba(19, 18, 18, 0.863);
     font-size: 2rem;
   }
 
   .icon {
-    font-size: 2rem; 
+    text-align: center;
+    font-size: 40px;
+    color: rgba(19, 18, 18, 0.863);
+  }
+  .bannerProduto {
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    div {
+
+      .produto {
+        display: flex;
+        justify-content: space-between;
+        margin-left: 4rem;
+        margin-bottom: 4rem;
+      }
+    }
   }
 
   .produtos {
     display: flex;
     flex-direction: row;
-  }
-
-  div {
-    display: flex;
-    justify-content: space-between;
   }
 
   @media screen and (max-width: 766px) {

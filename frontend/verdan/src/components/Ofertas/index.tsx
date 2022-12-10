@@ -5,12 +5,15 @@ export function Ofertas() {
   return (
     <main className={styles.ofertasDaSemana}>
       <h2>Ofertas da semana</h2>
-      <div>
+      <div className={styles.bannerProduto}>
         <div className={styles.icon}>&lt;</div> {/*sinal de menor */}
-        <div className={styles.produtos}>
-          <Produtos/>
-          <Produtos/>
-          <Produtos/>
+        <div>
+        
+          <div className={styles.produtos}>
+            <div className={styles.produto}><Produtos/></div>
+            <div className={styles.produto}><Produtos/></div>
+            <div className={styles.produto}><Produtos/></div>
+          </div>
         </div>
         <div className={styles.icon}>&gt;</div>{/*sinal de maior */}
       </div>
