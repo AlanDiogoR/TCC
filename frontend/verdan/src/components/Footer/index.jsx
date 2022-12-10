@@ -1,9 +1,10 @@
+import logo from '../../assets/images/logoVerdan.webp';
 import styles from './styles.module.scss'
 
 export function Footer() {
   return (
     <footer className={styles.rodapePai}>
-      <h2>Verdan Shopping</h2>
+      <img src={logo} alt="logo verdan" />
 
       <div className={styles.rodape}>
         <div>

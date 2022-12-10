@@ -10,23 +10,24 @@
 }
 
 .produto:hover {
-  border: 1px solid var(--verde-menta);
-  outline: 1px solid var(--verde-menta); 
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.719);
+  
+  div {
+    img {
+      border-bottom: none;
+    }
+  }
 }
 
 .produto > div > img {
   height: 100%;
   width: 100%;
   object-fit: cover ;
-  border-bottom: 2px solid var(--verde-menta);
+  border-bottom: 2px solid var(--verde-logo);
   content: '';
   transition: 0.1s;
 }
 
-.produto > div > img:hover {
-  border-bottom: none;
-}
 
 
 h3 {

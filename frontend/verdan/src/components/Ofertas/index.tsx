@@ -5,8 +5,16 @@ export function Ofertas() {
   return (
     <main className={styles.ofertasDaSemana}>
       <h2>Ofertas da semana</h2>
-      <div className={styles.bannerProduto}>
-        <div className={styles.icon}>&lt;</div> {/*sinal de menor */}
+
+      <div className={styles.slider}>
+        &lt;
+        <div><Produtos/></div>
+        <div><Produtos/></div>
+        <div><Produtos/></div>
+        &gt;
+      </div>
+      {/* <div className={styles.bannerProduto}>
+        <div className={styles.icon}>&lt;</div> sinal de menor 
         <div>
         
           <div className={styles.produtos}>
@@ -15,8 +23,9 @@ export function Ofertas() {
             <div className={styles.produto}><Produtos/></div>
           </div>
         </div>
-        <div className={styles.icon}>&gt;</div>{/*sinal de maior */}
+        <div className={styles.icon}>&gt;</div>sinal de maior 
       </div>
+       */}
     </main>
   )
 }

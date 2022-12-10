@@ -13,6 +13,25 @@
     font-size: 2rem;
   }
 
+  
+
+  .slider {
+    height: 300px;
+    width: 100%;
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    
+    div {
+      margin: auto;
+      vertical-align: top;
+    }
+  }
+
   .icon {
     text-align: center;
     font-size: 40px;
