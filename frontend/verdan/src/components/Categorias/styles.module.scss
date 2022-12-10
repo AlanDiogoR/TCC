@@ -5,6 +5,15 @@
   padding: 0.5rem 0 0.5rem 0;
 
   background-color: var(--H-nav);
+  
+
+  @media screen and (max-width: 766px) {
+    ul {
+      li {
+        display: none;
+      }  
+    }
+  }
 }
 
 .hRow {
@@ -12,3 +21,4 @@
   content: '';
   transition: 0.1s;
 }
+
