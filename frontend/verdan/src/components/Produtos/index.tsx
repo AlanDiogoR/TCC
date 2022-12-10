@@ -1,5 +1,6 @@
 import styles from './styles.module.scss'
 import boneca from '../../assets/images/b1.jpg';
+import { FiHeart } from 'react-icons/fi';
 
 
 export function Produtos() {
@@ -19,8 +20,8 @@ export function Produtos() {
           <label>R$80,80</label>
         </div>
 
-        <div className={styles.comprarButon}>
-          <button><a href="#ccc">Comprar</a></button>
+        <div className={styles.heart}>
+          <button><FiHeart/></button>
         </div>
       </div>
     </div>

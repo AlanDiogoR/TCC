@@ -31,39 +31,43 @@
 
 
 h3 {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.4rem;
 }
 
 .footer {
   display: flex;
-  margin: 0.875rem;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .price {
+  display: flex;
   font-weight: bold;
   text-transform: uppercase;
-  padding-right: 2rem;
+
+  label {
+    margin-right: 100px;
+    padding: 0;
+  }
 }
 
-.comprarButon {
-  background-color: transparent;
-  outline: none;
-  border: none;
-  padding-left: 2rem;
-}
+.heart {
+  display: flex;
+  
 
-.comprarButon > button {
-  background-color: transparent;
-  outline: none;
-  border: none;
-}
-
-.comprarButon > button > a{
-  text-decoration: none;
-  color: red;
-  text-transform: uppercase;
-  font-weight: bold;
+  button {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--verde-logo);
+    padding-left: 0;
+    margin-left: 28px;
+    transition: 0.2s;
+    border: none;
+  }
+  
 }
 
 

@@ -7,11 +7,9 @@ export function Ofertas() {
       <h2>Ofertas da semana</h2>
 
       <div className={styles.slider}>
-        &lt;
         <div><Produtos/></div>
         <div><Produtos/></div>
         <div><Produtos/></div>
-        &gt;
       </div>
       {/* <div className={styles.bannerProduto}>
         <div className={styles.icon}>&lt;</div> sinal de menor 

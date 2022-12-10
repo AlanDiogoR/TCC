@@ -16,7 +16,7 @@
   
 
   .slider {
-    height: 300px;
+    height: 320px;
     width: 100%;
     margin: auto;
     margin-top: 2rem;
@@ -32,11 +32,28 @@
     }
   }
 
+  .slider::after {
+    content: '>';
+    font-size: 45px;
+    display: flex;
+    align-items: center;
+    text-align: cent
+  }
+
+  .slider::before {
+    content: '<';
+    font-size: 45px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+
   .icon {
     text-align: center;
     font-size: 40px;
     color: rgba(19, 18, 18, 0.863);
   }
+
   .bannerProduto {
     display: flex;
     align-items: center;
