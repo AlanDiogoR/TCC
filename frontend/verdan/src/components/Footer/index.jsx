@@ -9,7 +9,7 @@ export function Footer() {
       <div className={styles.rodape}>
         <div>
           <h3>Deixe nos ajudar você</h3>
-          <label><a href="#ss">Central de atendimento</a></label>
+          <label><a href="../../pages/atendimento/atendimento.tsx">Central de atendimento</a></label>
           <label><a href="#ss">Troca e/ou devoluções</a></label>
           <label><a href="#ss">Frete e prazo de entrega</a></label>
           <label><a href="#ss">Sua conta</a></label>
