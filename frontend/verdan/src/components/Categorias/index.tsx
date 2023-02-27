@@ -15,6 +15,7 @@ export function Categorias() {
       <ul>
         <li className={styles.hRow}><a href="#jjjj">Crie sua conta</a></li>
         <li><a href="#dgdgd">Entre</a></li>
+        <li>oi</li>
       </ul>
     </nav>
   )
