@@ -16,10 +16,13 @@
         //criando um objeto que irá executar a síntese de voz
         var synth = window.speechSynthesis; 
         //criando um objeto que irá conter as informações de áudio
-        var msg = new SpeechSynthesisUtterance('Olá!'); 
+        var msg = new SpeechSynthesisUtterance("jjdjj"); 
+        //adicionando o atributo de voz
+        msg.voice = window.speechSynthesis.getVoices()[4]; 
         //falando o áudio
         synth.speak(msg); 
       });
+
   </script>
 </body>
 </html>
