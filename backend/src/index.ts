@@ -6,11 +6,13 @@ import express from 'express';
 
 import mongoose from 'mongoose';
 
+import { router } from './router';
 
 import { Server } from 'socket.io';
 
 const app = express();
 const server = http.createServer(app);
+
 export const io = new Server(server);
 
 mongoose.connect('mongodb://localhost:27017')
@@ -27,6 +29,7 @@ mongoose.connect('mongodb://localhost:27017')
     });
 
     app.use(express.json());
+    app.use(router);
 
     app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 
