@@ -18,7 +18,7 @@ export default function Home() {
         <Research>
           pesquise aqui
         </Research>
-        
+
         <NavIcons>
           <FaHeart/>
         </NavIcons>
@@ -26,7 +26,14 @@ export default function Home() {
       </NavSearch>
 
       <NavCategories>
-        Boneca
+        <ul>
+          <li>Eletronico</li>
+          <li>Pet</li>
+          <li>Bonecas</li>
+          <li>Brinquedos</li>
+          <li>Utilidades</li>
+          <li>Jardinagem</li>
+        </ul>
       </NavCategories>
     </>
   );

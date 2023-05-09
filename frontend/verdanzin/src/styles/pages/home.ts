@@ -9,6 +9,14 @@ export const NavSearch = styled('div', {
 });
 
 export const NavCategories = styled('nav', {
+  display: 'flex',
+
+  ul: {
+    display: 'flex',
+    flexDirection: 'row',
+
+
+  }
 
 });
 
