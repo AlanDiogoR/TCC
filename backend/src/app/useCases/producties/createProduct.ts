@@ -8,8 +8,9 @@ export async function crateProduct(req: Request, res: Response) {
     const imagePath = req.file?.filename;
 
     const product = await Product.create({
-      name, 
-      description, 
+      name,
+      description,
+      imagePath,
       price: Number(price),
       category,
       ingredients: ingredients ? JSON.parse(ingredients) : [],
