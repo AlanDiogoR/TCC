@@ -1,6 +1,9 @@
 import logo from '../../assets/images/logoVerdan.webp';
 import { FaSearch } from 'react-icons/fa';
-import { FaShoppingBag, FaHeart } from 'react-icons/fa';
+
+import { FaShoppingBag, FaHeart, FaUserAlt, FaRegUser, FaRegHeart} from 'react-icons/fa';
+
+import { FiShoppingCart } from 'react-icons/fi'
 
 
 import styles from './Header.module.scss';
@@ -24,9 +27,14 @@ export function Header() {
         </a>
       </div>
 
+
       <div className={styles.userLogin}>
+        {/*<a href="ldjsadjfws"><FaUserAlt/></a>
         <a href="#js" id={styles.heart}><FaHeart/></a>
-        <a href="#jjj"><FaShoppingBag/></a>
+        <a href="#jjj"><FaShoppingBag/></a>*/}
+        <a href="ldjsadjfws"><FaRegUser/></a>
+        <a href="ldjsadjfws"><FaRegHeart/></a>
+        <a href="ldjsadjfws"><FiShoppingCart/></a>
       </div>
 
     </header>
