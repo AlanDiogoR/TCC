@@ -6,6 +6,12 @@ export async function listProducts(req: Request, res: Response) {
   try {
     const products = await Product.find();
 
+    if (!products) {
+      return res.status(400).json({
+        error: 'Products is required',
+      });
+    }
+
     res.json(products);
   } catch (error) {
     console.log(error);
