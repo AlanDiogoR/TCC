@@ -12,6 +12,18 @@ export async function listProductByCategory(req: Request, res: Response) {
       .equals(categoryId)
     ;
 
+    if (!categoryId) {
+      return res.status(400).json({
+        error: 'CategoryId is required',
+      });
+    }
+
+    if (!products) {
+      return res.status(400).json({
+        error: 'Products is required',
+      });
+    }
+
     res.json(products);
   } catch (error) {
     console.log(error);

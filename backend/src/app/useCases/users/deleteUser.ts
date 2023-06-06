@@ -4,9 +4,15 @@ import { User } from '../../models/User';
 
 export async function deleteUser(req: Request, res: Response) {
   try {
-    const { UserId } = req.params;
+    const { userId } = req.params;
 
-    await User.findByIdAndDelete(UserId);
+    await User.findByIdAndDelete(userId);
+
+    if (!userId) {
+      return res.status(400).json({
+        error: 'UserId is required',
+      });
+    }
 
     res.sendStatus(204);
   } catch (error) {

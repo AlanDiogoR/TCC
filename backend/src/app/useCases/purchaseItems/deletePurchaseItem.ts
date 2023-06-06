@@ -8,6 +8,12 @@ export async function deletePurchaseItem(req: Request, res: Response) {
 
     await PurchaseItem.findByIdAndDelete(PurchaseItemId);
 
+    if (!PurchaseItemId) {
+      return res.status(400).json({
+        error: 'PurchaseItemId is required',
+      });
+    }
+
     res.sendStatus(204);
   } catch (error) {
     console.log(error);

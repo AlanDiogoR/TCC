@@ -12,6 +12,12 @@ export async function createCategory(req: Request, res: Response) {
       });
     }
 
+    if (!icon) {
+      return res.status(400).json({
+        error: 'Icon is required',
+      });
+    }
+
     const category = await Category.create({icon, name});
 
     res.status(201).json(category);
