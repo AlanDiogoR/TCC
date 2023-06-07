@@ -9,13 +9,6 @@ export function Home() {
     <>
       <Header/>
 
-      <Categorias/>
-
-      <Banner/> 
-
-      <Ofertas />
-
-      <Footer/>
     </>
     
   )

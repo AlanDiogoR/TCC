@@ -1,7 +1,7 @@
 import logo from '../../assets/images/logoVerdan.webp';
 import { FaSearch } from 'react-icons/fa';
 
-import { FaShoppingBag, FaHeart, FaUserAlt, FaRegUser, FaRegHeart} from 'react-icons/fa';
+import { FaRegUser, FaRegHeart, FaSortDown } from 'react-icons/fa';
 
 import { FiShoppingCart } from 'react-icons/fi'
 
@@ -19,6 +19,10 @@ export function Header() {
 
 
       <div className={styles.searchBox}>
+        <button>
+          todos 
+          <FaSortDown/>
+        </button>
         <input type="text" className={styles.searchTxt} placeholder="Pesquise aqui"/>
         <a className={styles.searchBtn} href="#ff">
           <i className={styles.searchBtn}>
@@ -29,9 +33,6 @@ export function Header() {
 
 
       <div className={styles.userLogin}>
-        {/*<a href="ldjsadjfws"><FaUserAlt/></a>
-        <a href="#js" id={styles.heart}><FaHeart/></a>
-        <a href="#jjj"><FaShoppingBag/></a>*/}
         <a href="ldjsadjfws"><FaRegUser/></a>
         <a href="ldjsadjfws"><FaRegHeart/></a>
         <a href="ldjsadjfws"><FiShoppingCart/></a>
