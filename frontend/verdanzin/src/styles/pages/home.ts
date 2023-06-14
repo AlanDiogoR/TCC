@@ -37,7 +37,7 @@ export const Research = styled('div', {
         border: '1px solid $green500',
         outline: '1px solid $green500',
       }
-    },
+    },,
 
     button: {
       position: 'absolute',
@@ -45,6 +45,7 @@ export const Research = styled('div', {
       right: '0',
       padding: '9px',
       borderRadius: '5px',
+      background: '$gray100',
     }
 
 
