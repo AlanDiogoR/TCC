@@ -25,32 +25,33 @@ export const Research = styled('div', {
 
     transition: '0.2s',
 
-    input: {
-      padding: '10.5px',
-      borderRadius: '5px',
-      border: '1px solid #ccc',
-      outline: 'none',
-      width: '30rem',
-      transition: '0.2s',
+  },
 
-      '&:hover': {
-        border: '1px solid $green500',
-        outline: '1px solid $green500',
-      }
-    },
+  input: {
+    padding: '10.5px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+    outline: 'none',
+    width: '30rem',
+    transition: '0.2s',
 
-    button: {
-      position: 'absolute',
-      top: '0',
-      right: '0',
-      padding: '9px',
-      borderRadius: '5px',
-      background: '$gray100',
+    '&:hover': {
+      border: '1px solid $green500',
+      outline: '1px solid $green500',
     }
+  },
 
+});
 
-  }
-
+export const IconSearch = styled('button', {
+  position: 'absolute',
+  top: '0',
+  right: '0',
+  padding: '9px',/*
+  borderTopRigth
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;*/
+  background: '$gray100',
 });
 
 export const NavIcons = styled('div', {

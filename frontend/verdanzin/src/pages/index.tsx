@@ -1,5 +1,5 @@
-import LOGO  from '@/assets/logo/verdan_logo.png';
-import { NavCategories, NavIcons, NavSearch, Research } from '@/styles/pages/home';
+import logo  from '@/assets/logo/verdan_logo.png';
+import { NavCategories, NavIcons, NavSearch, Research, IconSearch } from '@/styles/pages/home';
 import { FaSortDown, FaHeart, FaSearch, FaRegUser } from 'react-icons/fa';
 import { FiShoppingCart } from 'react-icons/fi';
 import Image from 'next/image';
@@ -10,7 +10,7 @@ export default function Home() {
       <NavSearch>
 
         <Image
-          src={LOGO}
+          src={logo}
           width={160}
           height={80}
           alt=''
@@ -23,9 +23,9 @@ export default function Home() {
             <FaSortDown/>
           </button>
           <input type="text"  placeholder="Pesquise aqui"/>
-          <button>
+          <IconSearch>
             <FaSearch/>
-          </button>
+          </IconSearch>
 
         </Research>
 
