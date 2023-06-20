@@ -37,7 +37,7 @@ export const Research = styled('div', {
         border: '1px solid $green500',
         outline: '1px solid $green500',
       }
-    },,
+    },
 
     button: {
       position: 'absolute',
