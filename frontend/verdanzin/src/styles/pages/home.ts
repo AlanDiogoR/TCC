@@ -52,6 +52,10 @@ export const Research = styled('div', {
     },
   },
 
+  '@media (max-width: 1000px)': {
+    display: 'none',
+  },
+
 });
 
 export const IconSearch = styled('button', {
@@ -79,17 +83,43 @@ export const NavIcons = styled('div', {
     '&:hover': {
       color: '$greenMenta300',
     }
-  }
+  },
+
+  '@media (max-width: 1000px)': {
+    display: 'none',
+  },
 });
 
-export const NavCategories = styled('nav', {
+export const MenuHamburguer = styled('div', {
+  width: '30px',
+  height: '20px',
   display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  cursor: 'pointer',
 
-  ul: {
-    display: 'flex',
-    flexDirection: 'row',
+  span: {
+    width: '100%',
+    height: '3px',
+    backgroundColor: '$gray100',
+    transition: 'transform 0.2s, opacity 0.2s',
+  },
 
+  '&.open': {
+    span: {
+      '&:first-child': {
+        transform: 'rotate(45deg) translate(0px, 12px)',
+      },
+      '&:nth-child(2)': {
+        opacity: '0',
+      },
+      '&:last-child': {
+        transform: 'rotate(-45deg) translate(0px, -12px)',
+      },
+    },
+  },
 
-  }
-
+  '@media (min-width: 1001px)': {
+    display: 'none',
+  },
 });

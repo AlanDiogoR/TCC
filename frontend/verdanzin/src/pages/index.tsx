@@ -1,10 +1,17 @@
+import { useState } from 'react';
+
 import logo  from '@/assets/logo/verdan_logo.png';
-import { NavCategories, NavIcons, NavSearch, Research, IconSearch, ButtonAll } from '@/styles/pages/home';
+import { NavIcons, NavSearch, Research, IconSearch, ButtonAll, MenuHamburguer } from '@/styles/pages/home';
 import { FaSortDown, FaHeart, FaSearch, FaRegUser } from 'react-icons/fa';
 import { FiShoppingCart } from 'react-icons/fi';
 import Image from 'next/image';
 
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <>
       <NavSearch>
@@ -35,18 +42,13 @@ export default function Home() {
           <a href=""><FiShoppingCart/></a>
         </NavIcons>
 
-      </NavSearch>
+        <MenuHamburguer className={isOpen ? 'open' : ''} onClick={handleClick}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </MenuHamburguer>
 
-      <NavCategories>
-        <ul>
-          <li>Eletronico</li>
-          <li>Pet</li>
-          <li>Bonecas</li>
-          <li>Brinquedos</li>
-          <li>Utilidades</li>
-          <li>Jardinagem</li>
-        </ul>
-      </NavCategories>
+      </NavSearch>
     </>
   );
 }
