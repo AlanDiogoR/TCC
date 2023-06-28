@@ -20,7 +20,6 @@ mongoose.connect('mongodb://localhost:27017')
     const port = 3001;
 
 
-
     app.use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Methods', '*');

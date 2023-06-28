@@ -1,18 +1,18 @@
 import { Request, Response } from 'express';
 
-import { Category } from '../../models/Category';
+import { Product } from '../../models/Product';
 
-export async function deleteCategory(req: Request, res: Response) {
+export async function deleteProduct(req: Request, res: Response) {
   try {
-    const { categoryId } = req.params;
+    const { productId } = req.params;
 
-    if (!categoryId) {
+    if (!productId) {
       return res.status(400).json({
-        error: 'CategoryId is required',
+        error: 'ProductId is required',
       });
     }
 
-    await Category.findByIdAndDelete(categoryId);
+    await Product.findByIdAndDelete(productId);
 
     res.sendStatus(204);
   } catch (error) {

@@ -11,7 +11,6 @@ export async function listAddress(req: Request, res: Response) {
         error: 'address is required',
       });
     }
-    }
 
     res.json(Address);
   } catch (error) {

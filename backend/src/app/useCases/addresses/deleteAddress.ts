@@ -10,7 +10,6 @@ export async function deleteAddress(req: Request, res: Response) {
         error: 'addressId is required',
       });
     }
-    }
 
     await Address.findByIdAndDelete(addressId);
 
