@@ -9,15 +9,18 @@ export const Product = model('Product', new Schema({
     type: String,
     required: true,
   },
-  imagePath: {
+  details: {
     type: String,
+    required: true,
+  },
+  imagePaths: {
+    type: [String],
     required: true,
   },
   price: {
     type: Number,
     required: true,
   },
-
   category: {
     type: Schema.Types.ObjectId,
     required: true,
