@@ -4,13 +4,14 @@ import { Product } from '../../models/Product';
 
 export async function createProduct(req: Request, res: Response) {
   try {
-    const { name, description, price, category} = req.body;
+    const { name, description, details, price, category } = req.body;
     const imagePath = req.file?.filename;
 
     const product = await Product.create({
       name,
       description,
       imagePath,
+      details,
       price: Number(price),
       category,
     });
@@ -22,6 +23,13 @@ export async function createProduct(req: Request, res: Response) {
     }
 
     if (!description) {
+      return res.status(400).json({
+        error: 'Description is required',
+      });
+    }
+
+
+    if (!details) {
       return res.status(400).json({
         error: 'Description is required',
       });
