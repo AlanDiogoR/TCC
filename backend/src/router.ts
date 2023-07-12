@@ -1,29 +1,42 @@
-
+import path from 'node:path';
 
 import { Router } from 'express';
+
+import multer from 'multer';
 
 import { createCategory } from './app/useCases/categories/createCategory';
 import { listCategories } from './app/useCases/categories/listCategories';
 import { listProductByCategory } from './app/useCases/categories/listProductByCategory';
 import { deleteCategory } from './app/useCases/categories/deleteCategory';
-import { listProducts } from './app/useCases/producties/listProduct';
+import { listProducts } from './app/useCases/products/listProduct';
 import { listAddress } from './app/useCases/addresses/listAddress';
 import { listPurchaseItem } from './app/useCases/purchaseItems/listPurchaseItem';
 import { listPurchase } from './app/useCases/purchases/listPurchase';
 import { listUser } from './app/useCases/users/listUser';
 import { createAddress } from './app/useCases/addresses/createAddress';
-import { crateProduct } from './app/useCases/producties/createProduct';
+import { createProduct } from './app/useCases/products/createProduct';
 import { createPurchase } from './app/useCases/purchases/createPurchase';
 import { createPurchaseItem } from './app/useCases/purchaseItems/createPurchaseItem';
 import { createUser } from './app/useCases/users/createUser';
 import { deleteAddress } from './app/useCases/addresses/deleteAddress';
-import { deleteProduct } from './app/useCases/producties/deleteProduct';
+import { deleteProduct } from './app/useCases/products/deleteProduct';
 import { deletePurchaseItem } from './app/useCases/purchaseItems/deletePurchaseItem';
 import { deletePurchase } from './app/useCases/purchases/deletePurchase';
 import { deleteUser } from './app/useCases/users/deleteUser';
 
-
 export const router = Router();
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, callback) {
+      callback(null, path.resolve(__dirname, '..', 'uploads'));
+    },
+    filename(req, file, callback) {
+      callback(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+});
+
 
 
 
@@ -31,7 +44,7 @@ export const router = Router();
 
 router.get('/categories', listCategories);
 
-router.get('/producties', listProducts);
+router.get('/products', listProducts);
 
 router.get('/addresses', listAddress);
 
@@ -48,7 +61,7 @@ router.post('/categories', createCategory);
 
 router.post('/addresses', createAddress);
 
-router.post('/producties', crateProduct);
+router.post('/products', upload.single('image'), createProduct);
 
 router.post('/purchaseItems', createPurchaseItem);
 
@@ -69,7 +82,7 @@ router.delete('/addresses/:addressId', deleteAddress);
 
 router.delete('/categories/:categoryId', deleteCategory);
 
-router.delete('/producties/:productId', deleteProduct);
+router.delete('/products/:productId', deleteProduct);
 
 router.delete('/purchaseItems/:PurchaseItemId', deletePurchaseItem);
 

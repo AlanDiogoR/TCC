@@ -15,7 +15,7 @@ const server = http.createServer(app);
 
 export const io = new Server(server);
 
-mongoose.connect('mongodb://localhost:27017')
+mongoose.connect('mongodb://localhost:27017/local')
   .then( () => {
     const port = 3001;
 

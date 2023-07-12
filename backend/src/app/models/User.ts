@@ -14,7 +14,7 @@ export const User = model('User', new Schema({
     required: true,
   },
   createAt: {
-    type: Number,
-    required: true,
+    type: Date,
+    default: Date.now,
   },
 }));

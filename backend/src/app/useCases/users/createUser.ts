@@ -27,12 +27,6 @@ export async function createUser(req: Request, res: Response) {
       });
     }
 
-    if (!createAt) {
-      return res.status(400).json({
-        error: 'CreateAt is required',
-      });
-    }
-
     res.status(201).json(user);
   } catch (error) {
     console.log(error);
