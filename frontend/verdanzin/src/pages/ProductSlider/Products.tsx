@@ -2,15 +2,18 @@ import Image from 'next/image';
 
 import { useKeenSlider } from 'keen-slider/react';
 
-
 import 'keen-slider/keen-slider.min.css';
 import Link from 'next/link';
-import { HomeContainer, Product } from '@/styles/pages/ProductSlider';
+import { HomeContainer, ProductSLider } from '@/styles/pages/ProductSlider';
 
-import logo  from '@/assets/logo/verdan_logo.png';
+import { Product } from '@/types/Product';
 
+interface MenuProps {
+  products: Product[];
+}
 
-export default function ProductSlider() {
+export default function ProductSlider({ products }:MenuProps) {
+
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
@@ -20,19 +23,22 @@ export default function ProductSlider() {
 
   return (
     <HomeContainer ref={sliderRef} className='keen-slider'>
-      return (
-        <Link key={'fsmkljf'} href={'sfmsk'} prefetch={false}>
-          <Product className='keen-slider__slide' >
-            <Image src={logo} width={520} height={480} alt='' />
+      <h1>Ofertas da semana</h1>
+      {products.map(product => {
+        return (
+          <Link key={product._id} href={'SDLSD'} prefetch={true}>
+            <ProductSLider className='keen-slider__slide' >
+              <Image src={product.imagePath} width={520} height={480} alt='' />
 
-            <footer>
-              <strong>La ele mo=ço</strong>
-              <span>vai pagar mesmo</span>
-            </footer>
-          </Product>
-        </Link>
-      );
-
+              <footer>
+                <strong>{product.name}</strong>
+                <span>{product.price}</span>
+              </footer>
+            </ProductSLider>
+          </Link>
+        );
+      })}
     </HomeContainer>
   );
 }
+
