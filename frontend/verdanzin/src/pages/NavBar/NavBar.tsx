@@ -5,8 +5,15 @@ import { NavIcons, NavSearch, Research, IconSearch, ButtonAll, MenuHamburguer, M
 import { FaHeart, FaSearch, FaRegUser } from 'react-icons/fa';
 import { FiShoppingCart } from 'react-icons/fi';
 import Image from 'next/image';
+import { Category } from '@/types/Category';
 
-export default function NavBar() {
+interface CategoriesProps {
+  categories: Category[];
+  onSelectCategory: (categoryId: string) => Promise<void>;
+}
+
+export default function NavBar({ categories, onSelectCategory }:CategoriesProps) {
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -16,6 +23,13 @@ export default function NavBar() {
   const handleItemClick = () => {
     setIsOpen(false);
   };
+
+  function handleSelectCategory( categoryId: string) {
+    const category = selectedCategory === categoryId ? '' : categoryId;
+    onSelectCategory(category);
+    setSelectedCategory(category);
+  }
+
   return (
     <>
       <NavSearch>
@@ -30,13 +44,11 @@ export default function NavBar() {
         <Research>
 
           <ButtonAll>
-            <option value="">Todos</option>
-            <option value="">Eletrônicos</option>
-            <option value="">Pets</option>
-            <option value="">Bonecas</option>
-            <option value="">Brinquedos</option>
-            <option value="">Utilidades</option>
-            <option value="">Jardinagem</option>
+            {categories.map(categorie => {
+              return (
+                <option key={categorie._id}>{categorie.name}</option>
+              );
+            })}
           </ButtonAll>
           <input type="text"  placeholder="Pesquise aqui"/>
           <IconSearch>
@@ -66,13 +78,11 @@ export default function NavBar() {
                 </section>
               </MenuItem>
               <ul>
-                <MenuItem onClick={handleItemClick}>Eletrônicos</MenuItem>
-                <MenuItem onClick={handleItemClick}>Pets</MenuItem>
-                <MenuItem onClick={handleItemClick}>Bonecas</MenuItem>
-                <MenuItem onClick={handleItemClick}>Brinquedos</MenuItem>
-                <MenuItem onClick={handleItemClick}>Utilidades</MenuItem>
-                <MenuItem onClick={handleItemClick}>Jardinagem</MenuItem>
-                <MenuItem onClick={handleItemClick}>Sair</MenuItem>
+                {categories.map(categorie => {
+                  return (
+                    <MenuItem onClick={handleItemClick} key={categorie._id}>{categorie.name}</MenuItem>
+                  );
+                })}
               </ul>
             </ListHamburguer>
           )}

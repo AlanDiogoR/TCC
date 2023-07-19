@@ -1,16 +1,38 @@
 import { styled } from '..';
 
+export const MainContainer = styled('div', {
+  display: 'flex',
+  margin: '1rem',
+
+  h1: {
+    display: 'flex',
+    alignItems: 'center',
+    fontFamily: 'monospace',
+    fontSize: '$2xl',
+    color: 'Black',
+    margin: 'auto'
+  }
+
+});
+
 export const HomeContainer = styled('main', {
   display: 'flex',
   //gap: '3rem',
   width: '100%',
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
   marginLeft: 'auto',
+  marginTop: '3rem',
   minHeight: 656,
+
+  h1: {
+    color: 'Black',
+  }
 });
 
 export const ProductSLider = styled('a', {
-  background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
+  display: 'flex',
+  flexDirection: 'row',
+  background: '$gray100',
   borderRadius: 8,
   //padding: '0.25rem',
   cursor: 'pointer',
@@ -18,7 +40,6 @@ export const ProductSLider = styled('a', {
   overflow: 'hidden',
   minWidth: 540,
 
-  display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
 

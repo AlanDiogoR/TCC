@@ -4,7 +4,7 @@ module.exports = {
       {
         protocol: 'http',
         hostname: '192.168.0.108',
-        port: '3000',
+        port: '3001',
         pathname: '/uploads/**',
       },
     ],
