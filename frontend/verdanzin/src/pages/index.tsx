@@ -7,6 +7,7 @@ import { api } from '@/utils/api';
 import { Category } from '@/types/Category';
 import { Product } from '@/types/Product';
 import { CenteredContainer } from '@/styles/pages/app';
+import { Footer } from '@/components/Footer';
 
 
 export default function Home() {
@@ -70,7 +71,7 @@ export default function Home() {
             </>
           )}
 
-
+          <Footer/>
         </>
       )}
 
