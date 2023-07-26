@@ -4,7 +4,7 @@ import { styled } from '..';
 export const Container = styled('div', {
   marginTop: '0',
   flex: 1,
-  background: '#fafafa',
+  background: '$gray100',
 });
 
 export const CategoriesContainer = styled('div', {

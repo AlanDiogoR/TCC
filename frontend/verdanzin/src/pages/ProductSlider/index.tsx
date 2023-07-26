@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { HomeContainer, MainContainer, ProductSLider } from '@/styles/pages/ProductSlider';
 
 import { Product } from '@/types/Product';
+import { GetStaticProps } from 'next';
 
 interface MenuProps {
   products: Product[];
@@ -31,7 +32,9 @@ export default function ProductSlider({ products }:MenuProps) {
             return (
               <Link key={product._id} href={`/product/${product._id}`} prefetch={false}>
                 <ProductSLider className='keen-slider__slide' >
-                  <Image src={`/${product.imagePath}`} width={520} height={480} alt={product.name} />
+                  <Image src={`/uploads/${product.imagePath}`} width={520} height={480} alt={product.name} />
+
+
 
                   <footer>
                     <strong>{product.name}</strong>
@@ -46,4 +49,23 @@ export default function ProductSlider({ products }:MenuProps) {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps  = async () => {
+
+  const goiaba = products.map(product => {
+    return {
+      id: product._id,
+      name: product.name,
+      imageUrl: product.imagePath,
+      price: product.price,
+    };
+  });
+
+  return {
+    props: {
+      goiaba,
+    },
+    revalidate: 60 * 60 * 2,
+  };
+};
 

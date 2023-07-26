@@ -3,6 +3,7 @@ import { styled } from '..';
 export const MainContainer = styled('div', {
   display: 'flex',
   margin: '1rem',
+  background: '$gray100',
 
   h1: {
     display: 'flex',
@@ -17,7 +18,7 @@ export const MainContainer = styled('div', {
 
 export const HomeContainer = styled('main', {
   display: 'flex',
-  //gap: '3rem',
+  gap: '3rem',
   width: '100%',
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
   marginLeft: 'auto',
@@ -32,7 +33,7 @@ export const HomeContainer = styled('main', {
 export const ProductSLider = styled('a', {
   display: 'flex',
   flexDirection: 'row',
-  background: '$gray100',
+  background: 'white',
   borderRadius: 8,
   //padding: '0.25rem',
   cursor: 'pointer',
@@ -60,7 +61,6 @@ export const ProductSLider = styled('a', {
     alignItems: 'center',
     justifyContent: 'space-between',
 
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
 
     transform: 'translateY(110%)',
     opacity: 0,
@@ -68,7 +68,7 @@ export const ProductSLider = styled('a', {
 
     strong: {
       fontSize: '$lg',
-      color: '$gray100',
+      color: 'Black',
     },
 
     span: {
