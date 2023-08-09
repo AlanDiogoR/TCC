@@ -6,6 +6,8 @@ import { FaHeart, FaSearch, FaRegUser } from 'react-icons/fa';
 import { FiShoppingCart } from 'react-icons/fi';
 import Image from 'next/image';
 import { Category } from '@/types/Category';
+import Link from 'next/link';
+
 
 interface CategoriesProps {
   categories: Category[];
@@ -58,7 +60,10 @@ export default function NavBar({ categories, onSelectCategory }:CategoriesProps)
         </Research>
 
         <NavIcons>
-          <a href=""><FaRegUser/></a>
+
+          <Link href={'../Login'}>
+            <FaRegUser/>
+          </Link>
           <a href=""><FaHeart/></a>
           <a href=""><FiShoppingCart/></a>
         </NavIcons>
