@@ -1,69 +1,74 @@
 import React from 'react';
 import logo  from '@/assets/imagesLogin/icone_verdan_fundo.png';
 import Image from 'next/image';
+import { ContainerLogin } from './userLogin';
 
 
 
 export default function UserLogin() {
   return (
-    <main>
-      <header>
-        <Image
-          src={logo}
-          width={160}
-          height={80}
-          alt=''
-        />
-      </header>
+    <ContainerLogin>
 
-      <form>
-        <div className="title">
+      <main>
+        <header>
           <Image
             src={logo}
             width={160}
             height={80}
             alt=''
           />
-          <h1>Faça seu login</h1>
-        </div>
+        </header>
 
-        <p className="text-info" id="subtitle">
-          Entre com suas informações de cadastro
-        </p>
+        <form>
+          <div className="title">
+            <Image
+              src={logo}
+              width={160}
+              height={80}
+              alt=''
+            />
+            <h1>Faça seu login</h1>
+          </div>
 
-        <div className="input">
-          <label className="text-info">E-mail</label>
-          <input type="email" id="email" placeholder="Digite seu email" className="text-info" />
-        </div>
+          <p className="text-info" id="subtitle">
+            Entre com suas informações de cadastro
+          </p>
 
-        <div className="input">
-          <label className="text-info">Senha</label>
-          <input type="password" id="password" placeholder="Digite sua senha" className="text-info" />
-          <Image
-            src={logo}
-            width={160}
-            height={80}
-            alt=''
-          />
-        </div>
+          <div className="input">
+            <label className="text-info">E-mail</label>
+            <input type="email" id="email" placeholder="Digite seu email" className="text-info" />
+          </div>
 
-        <div className="input-check">
-          <label>
-            <div></div>
-            <input type="checkbox" id="check" />
-            <span  className="text-info">
-              Lembre-me
-            </span>
-          </label>
-          <span>Esqueci minha senha</span>
-        </div>
+          <div className="input">
+            <label className="text-info">Senha</label>
+            <input type="password" id="password" placeholder="Digite sua senha" className="text-info" />
+            <Image
+              src={logo}
+              width={160}
+              height={80}
+              alt=''
+            />
+          </div>
 
-        <button type="submit">Entrar</button>
-        <p>
-          Não tenho conta? <a href="#">Registre-se</a>
-        </p>
-      </form>
-    </main>
+          <div className="input-check">
+            <label>
+              <div></div>
+              <input type="checkbox" id="check" />
+              <span  className="text-info">
+                Lembre-me
+              </span>
+            </label>
+            <span>Esqueci minha senha</span>
+          </div>
+
+          <button type="submit">Entrar</button>
+          <p>
+            Não tenho conta? <a href="#">Registre-se</a>
+          </p>
+        </form>
+      </main>
+
+    </ContainerLogin>
   );
 }
 
