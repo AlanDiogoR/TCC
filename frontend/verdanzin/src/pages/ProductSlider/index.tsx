@@ -50,22 +50,15 @@ export default function ProductSlider({ products }:MenuProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps  = async () => {
 
-  const goiaba = products.map(product => {
-    return {
-      id: product._id,
-      name: product.name,
-      imageUrl: product.imagePath,
-      price: product.price,
-    };
-  });
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await fetch('http://localhost:3001/products');
+  const products = await response.json();
 
   return {
     props: {
-      goiaba,
+      products,
     },
-    revalidate: 60 * 60 * 2,
+    revalidate: 60 * 60 * 2, // Adjust revalidation time as needed
   };
 };
-

@@ -1,12 +1,15 @@
-import { SliderContainer } from '@/styles/pages/slider';
+import { SliderContainer } from '@/styles/pages/Slider';
 import Image from 'next/legacy/image';
-import briquedos from '@/assets/baners/Utilidades domesticas.png';
-import pet from '@/assets/baners/pet.png';
-import eletronicos from '@/assets/baners/eletrônicos.png';
+import briquedos from '@/assets/banners/brinquedos_banner1.png';
+import pet from '@/assets/banners/pet_banner.png';
+import eletronicos from '@/assets/banners/eletronicos_banner.png';
+import utilidades from '@/assets/banners/Utilidades_domesticas_banner.png';
+import brinquedos2 from '@/assets/banners/brinquedos_banner2.png';
+import jardinagem from '@/assets/banners/jardinagem_banner.png';
 import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
 
-const sliderImages = [briquedos, pet, eletronicos];
+const sliderImages = [briquedos, pet, eletronicos, utilidades, brinquedos2, jardinagem];
 
 export function Slider() {
   const [sliderRef] = useKeenSlider({
