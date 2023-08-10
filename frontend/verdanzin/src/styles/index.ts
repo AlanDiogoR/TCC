@@ -24,6 +24,13 @@ export const {
       greenMenta300: '#a8ce46'
     },
 
+    fonts: {
+      poppins:
+        'Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
+      roboto:
+        'Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
+    },
+
     fontSizes: {
       md: '1.125rem',
       lg: '1.25rem',
