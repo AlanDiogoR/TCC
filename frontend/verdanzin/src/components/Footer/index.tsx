@@ -1,12 +1,17 @@
 import Image from 'next/image';
 import logo  from '@/assets/logo/verdan_logo.png';
-import { FooterBar, FooterRodape } from '@/styles/pages/footer';
+import { ButtonHome, FooterBar, FooterRodape } from '@/styles/pages/footer';
 
 
 export function Footer() {
   return (
     <>
       <FooterBar>
+
+        <ButtonHome>
+          Voltar ao inicio
+        </ButtonHome>
+
         <Image
           src={logo}
           width={'160'}

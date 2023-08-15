@@ -9,8 +9,25 @@ export const FooterBar = styled('footer', {
   color: 'white',
   fontSize: '1rem',
   flexWrap: 'wrap',
-  gap: '1rem'
+  gap: '1rem',
 });
+
+export const ButtonHome = styled('button', {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '2rem',
+  background: '$gray800',
+  color: '$gray100',
+  width: '100%',
+  border: 'none',
+  transition: 'all 0.1s',
+
+  '&:hover': {
+    border: '1px solid $gray100'
+  }
+});
+
 
 export const FooterRodape = styled('div', {
   display: 'flex',
@@ -18,7 +35,7 @@ export const FooterRodape = styled('div', {
 
   div:{
     display: 'flex',
-    paddingLeft: '5rem',
+    paddingRight: '5rem',
     flexDirection: 'column',
     textAlign: 'center',
     gap: '0.500rem',
