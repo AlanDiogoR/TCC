@@ -9,8 +9,8 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: '100%',
+    height: '100%',
     webPreferences: { nodeIntegration: true, contextIsolation: false },
   });
   // and load the index.html of the app.
