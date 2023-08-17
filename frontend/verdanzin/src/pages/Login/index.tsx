@@ -54,11 +54,6 @@ export default function UserLogin() {
           </InputContainer>
 
           <div className="input-check">
-            <label>
-              <div></div>
-              <input type="checkbox" id="check" />
-              <span className="text-info">Lembre-me</span>
-            </label>
             <span>Esqueci minha senha</span>
           </div>
 
