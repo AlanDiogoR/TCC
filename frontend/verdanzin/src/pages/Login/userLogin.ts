@@ -54,6 +54,18 @@ export const FormContainer = styled('form', {
     '&:focus': {
       boxShadow: '0 0 0 2px rgba(255, 198, 50, 0.5)',
     },
+  },
+
+  div: {
+    margin: '0.5rem'
+  },
+
+  p: {
+    margin: '0.5rem',
+
+    a: {
+      display: 'none'
+    }
   }
 });
 

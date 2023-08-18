@@ -40,20 +40,9 @@ export default function UserLogin() {
           <InputContainer className="input">
             <label className="text-info">Senha</label>
             <input type="password" id="password" placeholder="Digite sua senha" className="text-info" />
-            <Image
-              src={eye}
-              style={{
-                height: 'auto',
-                backgroundRepeat: 'no-repeat',
-                backgroundOrigin: 'padding-box',
-                backgroundSize: '20px',
-                backgroundPosition: 'left center',
-              }}
-              alt=''
-            />
           </InputContainer>
 
-          <div className="input-check">
+          <div >
             <span>Esqueci minha senha</span>
           </div>
 
