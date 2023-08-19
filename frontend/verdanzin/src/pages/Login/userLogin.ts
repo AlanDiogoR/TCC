@@ -125,7 +125,6 @@ export const InputContainer = styled('div', {
   }
 });
 
-
 export const PasswordImage = styled('img', {
   position: 'absolute',
   margin: '35px 0 0 90%',

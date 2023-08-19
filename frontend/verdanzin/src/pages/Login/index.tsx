@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { ContainerLogin, MainContainer, FormContainer, ContainerTitle, TextInfo, InputContainer, VerdanSection } from './userLogin';
 
 import login from './images/log-in.svg';
-import eye from './images/eye.svg';
 
 
 export default function UserLogin() {
@@ -28,13 +27,13 @@ export default function UserLogin() {
             <h1>Faça seu login</h1>
           </ContainerTitle>
 
-          <TextInfo className="text-info" id="subtitle">
+          <TextInfo >
             Entre com suas informações de cadastro
           </TextInfo>
 
           <InputContainer className="input">
             <label className="text-info">E-mail</label>
-            <input type="email" id="email" placeholder="Digite seu email" className="text-info" />
+            <input type="email" id="email" placeholder="Digite seu email" className="text-info"/>
           </InputContainer>
 
           <InputContainer className="input">
@@ -42,7 +41,7 @@ export default function UserLogin() {
             <input type="password" id="password" placeholder="Digite sua senha" className="text-info" />
           </InputContainer>
 
-          <div >
+          <div>
             <span>Esqueci minha senha</span>
           </div>
 
