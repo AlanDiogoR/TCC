@@ -64,7 +64,10 @@ export default function NavBar({ categories, onSelectCategory }:CategoriesProps)
           <Link href={'../Login'}>
             <FaRegUser/>
           </Link>
-          <a href=""><FaHeart/></a>
+          <Link href={'../Favorite'}>
+            <FaHeart/>
+          </Link>
+
           <a href=""><FiShoppingCart/></a>
         </NavIcons>
 
