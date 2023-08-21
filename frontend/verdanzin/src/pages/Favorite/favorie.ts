@@ -19,8 +19,10 @@ export const FavoriteContainer = styled('div', {
 });
 
 export const ProductDetailsHeart = styled('div', {
+  marginTop: '1rem',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  gap: '0.875rem'
 });
 
