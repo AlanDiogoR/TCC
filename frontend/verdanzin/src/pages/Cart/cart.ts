@@ -1,6 +1,6 @@
 import { styled } from '@/styles';
 
-export const FavoriteContainer = styled('div', {
+export const ContainerCart = styled('div', {
   background: '$gray100',
   color: '$gray900',
   display: 'flex',
@@ -15,15 +15,15 @@ export const FavoriteContainer = styled('div', {
 
   div: {
     display: 'flex',
-    width: '100%'
+    width: '90%',
+    justifyContent: 'space-around',
   }
 });
 
-export const ProductDetailsHeart = styled('div', {
+export const ProductDetailsCart = styled('div', {
   marginTop: '1rem',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
   gap: '0.875rem'
 });
-

@@ -68,7 +68,9 @@ export default function NavBar({ categories, onSelectCategory }:CategoriesProps)
             <FaHeart/>
           </Link>
 
-          <a href=""><FiShoppingCart/></a>
+          <Link href={'../Cart'}>
+            <FiShoppingCart/>
+          </Link>
         </NavIcons>
 
         <MenuHamburguer className={isOpen ? 'open' : ''} onClick={handleClick}>

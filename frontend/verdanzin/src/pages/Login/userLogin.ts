@@ -5,6 +5,7 @@ export const ContainerLogin = styled('div', {
   display: 'flex',
   height: '100vh',
   width: '100vw',
+  marginTop: '1rem'
 });
 
 export const MainContainer = styled('main', {
