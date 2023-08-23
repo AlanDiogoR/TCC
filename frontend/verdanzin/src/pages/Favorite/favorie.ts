@@ -15,7 +15,8 @@ export const FavoriteContainer = styled('div', {
 
   div: {
     display: 'flex',
-    width: '100%'
+    width: '90%',
+    justifyContent: 'space-around'
   }
 });
 
