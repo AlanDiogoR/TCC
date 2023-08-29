@@ -17,6 +17,7 @@ export const ContainerAbout = styled('div', {
     fontFamily: '$poppins',
     fontSize: '$2xl',
     marginRight: '3rem',
+    color: '$greenMenta300',
   },
 
   div:{
