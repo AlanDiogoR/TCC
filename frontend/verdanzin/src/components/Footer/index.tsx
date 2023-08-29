@@ -27,14 +27,11 @@ export function Footer() {
           </div>
           <div>
             <h3>Institcional</h3>
-            <Link href={'../WhoWeAre'} style={{
-              fontSize: '0.875rem',
-              textDecoration: 'none',
-              listStyle: 'none',
-              color: 'rgba(255, 255, 255, 0.726)',
-            }}>
-              Quem somos?
-            </Link>
+            <label>
+              <Link href={'../WhoWeAre'}>
+                Quem somos?
+              </Link>
+            </label>
           </div>
           <div>
             <h3>Privacidade de dados</h3>
