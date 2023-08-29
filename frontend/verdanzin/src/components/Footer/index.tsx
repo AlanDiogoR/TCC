@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import logo  from '@/assets/logo/verdan_logo.png';
 import { ButtonHome, FooterBar, FooterRodape } from '@/styles/pages/footer';
+import Link from 'next/link';
 
 
 export function Footer() {
@@ -21,15 +22,19 @@ export function Footer() {
         <FooterRodape>
           <div>
             <h3>Deixe nos ajudar você</h3>
-            <label><a href="../../pages/atendimento/atendimento.tsx">Central de atendimento</a></label>
-            <label><a href="#ss">Troca e/ou devoluções</a></label>
             <label><a href="#ss">Frete e prazo de entrega</a></label>
             <label><a href="#ss">Sua conta</a></label>
           </div>
           <div>
             <h3>Institcional</h3>
-            <label><a href="#ss">Quem somos?</a></label>
-            <label><a href="#ss">Trabalhe conosco</a></label>
+            <Link href={'../WhoWeAre'} style={{
+              fontSize: '0.875rem',
+              textDecoration: 'none',
+              listStyle: 'none',
+              color: 'rgba(255, 255, 255, 0.726)',
+            }}>
+              Quem somos?
+            </Link>
           </div>
           <div>
             <h3>Privacidade de dados</h3>
