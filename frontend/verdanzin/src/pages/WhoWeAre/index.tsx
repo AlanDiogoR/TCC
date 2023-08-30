@@ -1,3 +1,4 @@
+import { Footer } from '@/components/Footer';
 import { ContainerAbout, ContainerWhoIs } from './styles';
 
 export default function WhoWeAre(){
@@ -5,7 +6,7 @@ export default function WhoWeAre(){
     <ContainerWhoIs>
       <ContainerAbout>
         <h1>
-          Sobre Nós:
+          Sobre Nós
         </h1>
         <div>
           Bem-vindo á Verdan Shopping, o seu refúgio urbano de compras, entretenimento e experiências inesquecíveis. Desde a nossa inauguração, nos dedicamos a proporcionar a todos os nossos visitantes uma atmosfera única e vibrante, onde diversão e conveniência se unem para criar momentos memoráveis. Estamos presentes em Itararé, Fartura, Itapeva e Itaporanga, venha nos fazer uma visita.
@@ -31,6 +32,8 @@ export default function WhoWeAre(){
         </p>
 
       </div>
+
+      <Footer/>
     </ContainerWhoIs>
   );
 }

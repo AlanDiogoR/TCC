@@ -11,7 +11,15 @@ export const ContainerWhoIs = styled('div', {
 export const ContainerAbout = styled('div', {
   display: 'flex',
   margin: '3rem 3rem 3rem 3rem',
-  justifyContent: 'space-between',
+  paddingTop: '1rem',
+  justifyContent: 'space-around',
+  background: '$gray200',
+  height: '20%',
+  width: '80%',
+  borderRadius: '5px',
+  border: '2px solid black',
+  boxShadow: '1px  1px 1px black',
+  textAlign: 'justify',
 
   h1: {
     fontFamily: '$poppins',
@@ -22,7 +30,8 @@ export const ContainerAbout = styled('div', {
 
   div:{
     fontFamily: '$poppins',
-    width: '50%'
+    width: '50%',
+    fontSize: '$md'
   }
 });
 
