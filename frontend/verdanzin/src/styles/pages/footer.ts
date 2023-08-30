@@ -12,7 +12,7 @@ export const FooterBar = styled('footer', {
   gap: '1rem',
 });
 
-export const ButtonHome = styled('button', {
+export const ButtonHome = styled('div', {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -23,9 +23,17 @@ export const ButtonHome = styled('button', {
   border: 'none',
   transition: 'all 0.1s',
 
-  '&:hover': {
-    border: '1px solid $gray100'
-  }
+  a: {
+    textDecoration: 'none',
+    listStyle: 'none',
+    color: 'rgba(255, 255, 255, 0.726)',
+  },
+
+  'a:hover': {
+    borderBottom: '1px solid rgba(255, 255, 255, 0.726)',
+    content: '',
+    transition: '0.1s',
+  },
 });
 
 

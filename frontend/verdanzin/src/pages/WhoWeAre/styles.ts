@@ -11,7 +11,7 @@ export const ContainerWhoIs = styled('div', {
 export const ContainerAbout = styled('div', {
   display: 'flex',
   margin: '3rem 3rem 3rem 3rem',
-  paddingTop: '1rem',
+  padding: '2rem',
   justifyContent: 'space-around',
   background: '$gray200',
   height: '20%',
@@ -34,4 +34,32 @@ export const ContainerAbout = styled('div', {
     fontSize: '$md'
   }
 });
+
+export const ContainerHistory = styled('div', {
+  display: 'flex',
+  margin: '3rem 3rem 3rem 3rem',
+  padding: '2rem',
+  justifyContent: 'space-around',
+  background: '$gray200',
+  height: '50%',
+  width: '80%',
+  borderRadius: '5px',
+  border: '2px solid black',
+  boxShadow: '1px  1px 1px black',
+  textAlign: 'justify',
+
+  h1: {
+    fontFamily: '$poppins',
+    fontSize: '$2xl',
+    marginRight: '3rem',
+    color: '$greenMenta300',
+  },
+
+  div:{
+    fontFamily: '$poppins',
+    width: '50%',
+    fontSize: '$md'
+  }
+});
+
 

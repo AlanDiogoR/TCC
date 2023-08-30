@@ -36,12 +36,15 @@ export default function NavBar({ categories, onSelectCategory }:CategoriesProps)
     <>
       <NavSearch>
 
-        <Image
-          src={logo}
-          width={160}
-          height={80}
-          alt=''
-        />
+        <Link href={'/'}>
+          <Image
+            src={logo}
+            width={160}
+            height={80}
+            alt=''
+          />
+        </Link>
+
 
         <Research>
 

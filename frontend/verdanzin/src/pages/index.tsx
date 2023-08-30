@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Slider } from './Banners/Slider';
-import NavBar from './NavBar/NavBar';
+import NavBar from '../components/NavBar/NavBar';
 import ProductSlider from './ProductSlider';
 
 import { api } from '@/utils/api';

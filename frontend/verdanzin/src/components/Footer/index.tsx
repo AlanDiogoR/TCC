@@ -10,7 +10,9 @@ export function Footer() {
       <FooterBar>
 
         <ButtonHome>
-          Voltar ao inicio
+          <Link href={'#'}>
+            Voltar ao inicio
+          </Link>
         </ButtonHome>
 
         <Image
