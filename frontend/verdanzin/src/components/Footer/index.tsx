@@ -25,7 +25,11 @@ export function Footer() {
           <div>
             <h3>Deixe nos ajudar você</h3>
             <label><a href="#ss">Frete e prazo de entrega</a></label>
-            <label><a href="#ss">Sua conta</a></label>
+            <label>
+              <Link href={'../YourAccount'}>
+                Sua conta
+              </Link>
+              </label>
           </div>
           <div>
             <h3>Institcional</h3>

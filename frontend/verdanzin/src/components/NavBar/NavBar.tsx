@@ -48,13 +48,13 @@ export default function NavBar({ categories, onSelectCategory }:CategoriesProps)
 
         <Research>
 
-          <ButtonAll>
+          {/*<ButtonAll>
             {categories.map(categorie => {
               return (
                 <option key={categorie._id}>{categorie.name}</option>
               );
             })}
-          </ButtonAll>
+          </ButtonAll>*/}
           <input type="text"  placeholder="Pesquise aqui"/>
           <IconSearch>
             <FaSearch/>
