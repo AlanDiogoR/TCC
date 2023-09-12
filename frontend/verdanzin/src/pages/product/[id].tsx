@@ -122,8 +122,6 @@ export const getStaticProps: GetStaticProps<ProductProps> = async ({ params }) =
     };
   }
 };
-
-
 /*
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const productId = String(params.id);
@@ -171,6 +169,8 @@ export const getStaticProps: GetStaticProps<ProductProps, Params> = async ({ par
     revalidate: 60 * 60 * 1,
   };
 };
+
+
 
 
 
