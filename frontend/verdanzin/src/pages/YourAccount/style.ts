@@ -16,15 +16,22 @@ export const AccountConatiner = styled('div', {
 
 export const NavAccount = styled('div', {
   display: 'flex',
+  width: '80%',
   flexDirection: 'row',
   justifyContent: 'space-between',
+  margin: 'auto',
 
   h2: {
     fontSize: '$lg',
     fontFamily: '$poppins'
   },
-
-  div: {
-
-  }
 });
+
+
+export const DivOptions = styled('div', {
+  width: '25%',
+  padding: '0.875rem',
+  border: '1px solid black',
+  borderRadius: '8px',
+});
+
