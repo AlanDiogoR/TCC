@@ -1,0 +1,6 @@
+nav bar {
+    caixa(valores de entrada e saida)
+    relatorio(saidas de produtos) via site 
+    fornecedores ()
+    estoque 
+}
