@@ -1,13 +1,12 @@
-import NavBar from '@/components/NavBar/NavBar';
 import { AccountConatiner, DivOptions, NavAccount } from './style';
-import { Footer } from '@/components/Footer';
-import slates from './assets/acompanhamento-de-pedidos.png'
+import slates from './assets/acompanhamento-de-pedidos.png';
 import Image from 'next/image';
+import NavBHome from '@/components/NavBHome/NavBHome';
 
 export default function YourAccount() {
   return (
     <>
-      <NavBar/>
+      <NavBHome/>
 
       <AccountConatiner>
         <h1>Sua conta</h1>

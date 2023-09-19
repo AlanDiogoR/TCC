@@ -69,6 +69,26 @@ export const ButtonAll = styled('select', {
   },
 });
 
+export const ButtonHome = styled('button', {
+  height: '2.437rem',
+  border: 'none',
+  outline: 'none',
+  padding: '0.75rem',
+  display: 'flex',
+  background: '$gray100',
+  width: '6rem',
+  borderRadius: '5px 0 0 5px',
+  transition: '.2s',
+
+  option: {
+    background: '$gray100',
+  },
+
+  '&:hover': {
+    opacity: '0.8',
+  },
+});
+
 export const IconSearch = styled('button', {
   position: 'absolute',
   top: '0',
@@ -147,7 +167,7 @@ export const MenuHamburguer = styled('div', {
 
 export const ListHamburguer = styled('div', {
   display: 'fixed',
-  
+
   background: 'Yellow',
 });
 
