@@ -71,13 +71,13 @@ export const ButtonAll = styled('select', {
 
 export const ButtonHome = styled('button', {
   height: '2.437rem',
-  border: 'none',
+  border: '1px solid $greenMenta300',
+  borderRadius: '5px 0 0 5px',
+  background: '$gray100',
   outline: 'none',
   padding: '0.75rem',
   display: 'flex',
-  background: '$gray100',
-  width: '6rem',
-  borderRadius: '5px 0 0 5px',
+  width: '3rem',
   transition: '.2s',
 
   option: {

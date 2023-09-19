@@ -1,5 +1,7 @@
-import { AccountConatiner, DivOptions, NavAccount } from './style';
-import slates from './assets/acompanhamento-de-pedidos.png';
+import { AccountConatiner, DivImage, DivLabelText, DivOptions, NavAccount } from './style';
+import endereco from './assets/endereco_logo3.png';
+import seguranca from './assets/seguranxa.png';
+import pedidos from './assets/pedidos2.png';
 import Image from 'next/image';
 import NavBHome from '@/components/NavBHome/NavBHome';
 
@@ -14,24 +16,57 @@ export default function YourAccount() {
         <NavAccount>
 
           <DivOptions>
-            <div>
+            <DivImage>
+              <Image
+                src={pedidos}
+                width={50}
+                height={50}
+                alt=''
+              />
+            </DivImage>
+
+            <DivLabelText>
               <h2>Seus pedidos</h2>
               <label>Ver pedidos, devolver ou comprar produtos novamente</label>
-            </div>
+            </DivLabelText>
 
-            <div>
-              <Image src={slates} alt=''/>
-            </div>
           </DivOptions>
 
           <DivOptions>
-            <h2>Segurança</h2>
-            <label>Gerenciar senha e e-mail</label>
+
+            <DivImage>
+              <Image
+                src={seguranca}
+                width={50}
+                height={50}
+                alt=''
+              />
+            </DivImage>
+
+            <DivLabelText>
+              <h2>Segurança</h2>
+              <label>Gerenciar senha e e-mail</label>
+            </DivLabelText>
+
           </DivOptions>
 
           <DivOptions>
-            <h2>Endereços</h2>
-            <label>Alterar endereços para pedidos</label>
+
+            <DivImage>
+              <Image
+                src={endereco}
+                width={50}
+                height={48}
+                style={{ marginTop: '2px'}}
+                alt=''
+              />
+            </DivImage>
+
+            <DivLabelText>
+              <h2>Endereços</h2>
+              <label>Alterar endereços para pedidos</label>
+            </DivLabelText>
+
           </DivOptions>
 
         </NavAccount>

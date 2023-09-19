@@ -16,7 +16,7 @@ export const AccountConatiner = styled('div', {
 
 export const NavAccount = styled('div', {
   display: 'flex',
-  width: '80%',
+  width: '90%',
   flexDirection: 'row',
   justifyContent: 'space-between',
   margin: 'auto',
@@ -29,9 +29,42 @@ export const NavAccount = styled('div', {
 
 
 export const DivOptions = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
   width: '25%',
+  height: '80px',
   padding: '0.875rem',
   border: '1px solid black',
   borderRadius: '8px',
+  alignItems: 'center',
+
+});
+
+export const DivImage = styled('div', {
+  background: '$greenMenta300',
+  borderRadius: '50%',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginRight: '12%'
+});
+
+export const DivLabelText = styled('div', {
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  textAlign: 'justify',
+
+  h2: {
+    fontFamily: '$poppins',
+    fontSize: '$xl',
+    height: '50%',
+  },
+
+  label: {
+    height: '50%',
+    color: '$gray900',
+    opacity: '0.8'
+  }
 });
 
