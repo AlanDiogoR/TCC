@@ -1,4 +1,5 @@
 import logo  from '@/assets/logo/verdan_logo.png';
+import casa  from '@/assets/logo/casa.png';
 import { NavIcons, NavSearch, Research, IconSearch, MenuHamburguer, MenuItem, ListHamburguer, ButtonHome } from '@/styles/pages/NavBar';
 import { FaHeart, FaSearch, FaRegUser } from 'react-icons/fa';
 import { FiShoppingCart } from 'react-icons/fi';
@@ -35,7 +36,12 @@ export default function NavBHome() {
         <Research>
           <Link href={'/'}>
             <ButtonHome>
-              🏠
+              <Image
+                src={casa}
+                width={25}
+                height={25}
+                alt=''
+              />
             </ButtonHome>
           </Link>
 

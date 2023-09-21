@@ -9,7 +9,7 @@ import jardinagem from '@/assets/banners/jardinagem_banner.png';
 import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
 
-const sliderImages = [briquedos, pet, eletronicos, utilidades, brinquedos2, jardinagem];
+const sliderImages = [briquedos, pet, eletronicos, utilidades, jardinagem];
 
 export function Slider() {
   const [sliderRef] = useKeenSlider({

@@ -1,11 +1,11 @@
 import { Footer } from '@/components/Footer';
 import { ContainerAbout, ContainerHistory, ContainerWhoIs } from './styles';
-import NavBar from '@/components/NavBar/NavBar';
+import NavBHome from '@/components/NavBHome/NavBHome';
 
 export default function WhoWeAre(){
   return (
     <>
-      <NavBar/>
+      <NavBHome/>
 
       <ContainerWhoIs>
         <ContainerAbout>

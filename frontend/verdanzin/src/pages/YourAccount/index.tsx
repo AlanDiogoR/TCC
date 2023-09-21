@@ -4,6 +4,7 @@ import seguranca from './assets/seguranxa.png';
 import pedidos from './assets/pedidos2.png';
 import Image from 'next/image';
 import NavBHome from '@/components/NavBHome/NavBHome';
+import Link from 'next/link';
 
 export default function YourAccount() {
   return (
@@ -15,7 +16,9 @@ export default function YourAccount() {
 
         <NavAccount>
 
-          <DivOptions>
+          <Link
+            href={'/'}
+          >
             <DivImage>
               <Image
                 src={pedidos}
@@ -30,7 +33,7 @@ export default function YourAccount() {
               <label>Ver pedidos, devolver ou comprar produtos novamente</label>
             </DivLabelText>
 
-          </DivOptions>
+          </Link>
 
           <DivOptions>
 

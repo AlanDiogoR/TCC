@@ -25,6 +25,29 @@ export const NavAccount = styled('div', {
     fontSize: '$lg',
     fontFamily: '$poppins'
   },
+
+  a: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '25%',
+    height: '80px',
+    padding: '0.875rem',
+    border: '1px solid black',
+    borderRadius: '8px',
+    alignItems: 'center',
+    textDecoration: 'none',
+    listStyle: 'none',
+    color: '$gray900',
+
+    '&:hover': {
+      h2: {
+        marginBottom: '10px',
+        borderBottom: '1px solid $gray900',
+        content: '',
+        transition: '0.1s',
+      }
+    },
+  }
 });
 
 
@@ -37,6 +60,7 @@ export const DivOptions = styled('div', {
   border: '1px solid black',
   borderRadius: '8px',
   alignItems: 'center',
+  listStyle: 'none'
 
 });
 
@@ -59,6 +83,7 @@ export const DivLabelText = styled('div', {
     fontFamily: '$poppins',
     fontSize: '$xl',
     height: '50%',
+    width: '60%'
   },
 
   label: {
