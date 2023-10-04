@@ -1,15 +1,11 @@
 import React from 'react';
-import { CreateAccountContainer, CreateContainer } from './styles';
+import { ContainerAccount } from './styles';
 
 
 export default function CreateAccount() {
   return (
-    <CreateContainer>
+    <ContainerAccount>
       
-      <CreateAccountContainer>
-        <h1>Criar conta</h1>
-      </CreateAccountContainer>
-
-    </CreateContainer>
+    </ContainerAccount>
   )
 }
