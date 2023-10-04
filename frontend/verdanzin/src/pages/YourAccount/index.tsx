@@ -35,8 +35,9 @@ export default function YourAccount() {
 
           </Link>
 
-          <DivOptions>
-
+          <Link
+            href={'/'}
+          >
             <DivImage>
               <Image
                 src={seguranca}
@@ -50,10 +51,11 @@ export default function YourAccount() {
               <h2>Segurança</h2>
               <label>Gerenciar senha e e-mail</label>
             </DivLabelText>
+          </Link>  
 
-          </DivOptions>
-
-          <DivOptions>
+          <Link
+            href={'/'}
+          >
 
             <DivImage>
               <Image
@@ -70,7 +72,7 @@ export default function YourAccount() {
               <label>Alterar endereços para pedidos</label>
             </DivLabelText>
 
-          </DivOptions>
+          </Link>
 
         </NavAccount>
 

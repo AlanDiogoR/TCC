@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { ContainerLogin, MainContainer, FormContainer, ContainerTitle, TextInfo, InputContainer, VerdanSection } from './userLogin';
 
 import login from './images/log-in.svg';
+import Link from 'next/link';
 
 
 export default function UserLogin() {
@@ -46,9 +47,14 @@ export default function UserLogin() {
           </div>
 
           <button type="submit">Entrar</button>
-          <p>
-            Não tenho conta? <a href="#">Registre-se</a>
-          </p>
+          
+          <Link
+            href={'./CreateAccount'}
+          >
+            <p>
+              Não tem conta?
+            </p>
+          </Link>
 
         </FormContainer>
 

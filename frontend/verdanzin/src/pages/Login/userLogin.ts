@@ -3,9 +3,8 @@ import { styled } from '@/styles';
 export const ContainerLogin = styled('div', {
   background: '$gray900',
   display: 'flex',
-  height: '100vh',
-  width: '100vw',
-  marginTop: '1rem'
+  height: '100%',
+  width: '100%',
 });
 
 export const MainContainer = styled('main', {
@@ -57,12 +56,24 @@ export const FormContainer = styled('form', {
     },
   },
 
+  a: {
+    textDecoration: 'none',
+    listStyle: 'none',
+    color: 'rgba(255, 255, 255, 0.726)',
+  },
+
+  'a:hover': {
+    borderBottom: '1px solid rgba(255, 255, 255, 0.726)',
+    content: '',
+    transition: '0.1s',
+  },
+
   div: {
     margin: '0.5rem'
   },
 
   p: {
-    margin: '0.5rem',
+    marginTop: '0.5rem',
 
     a: {
       display: 'none'
