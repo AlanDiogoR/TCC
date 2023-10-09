@@ -29,7 +29,7 @@ export function Footer() {
               <Link href={'../YourAccount'}>
                 Sua conta
               </Link>
-              </label>
+            </label>
           </div>
           <div>
             <h3>Institcional</h3>
@@ -46,8 +46,11 @@ export function Footer() {
           </div>
           <div>
             <h3>Pagamentos</h3>
-            <label><a href="#ss">Cartão de crédito</a></label>
-            <label><a href="#ss">Cartão de débito</a></label>
+            <label>
+              <Link href={'../YourCard'}>
+                Cartões
+              </Link>
+            </label>
             <label><a href="#ss">Boleto</a></label>
           </div>
         </FooterRodape>

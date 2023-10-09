@@ -10,7 +10,7 @@ export default function CreateAccount() {
       <NavBHome/>
 
       <ContainerAccount>
-        
+
         <ContainerForm>
           <h1>Criar conta</h1>
 
@@ -45,7 +45,7 @@ export default function CreateAccount() {
           <ButtonCreate>
             Criar Conta
           </ButtonCreate>
-    
+
         </ContainerForm>
 
       </ContainerAccount>
@@ -53,5 +53,5 @@ export default function CreateAccount() {
       <Footer/>
 
     </>
-  )
+  );
 }

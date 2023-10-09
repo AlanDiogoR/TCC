@@ -23,6 +23,7 @@ export const {
       green300: '#00b37e',
 
       greenMenta300: '#a8ce46',
+      greenMenta3002: '#D1E06C',
     },
 
     fonts: {

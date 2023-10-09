@@ -8,9 +8,9 @@ export const ContainerAccount = styled('div', {
   gap: '16px',
   color: '$gray900',
   flexDirection: 'column',
-  height: '700px',
+  height: '650px',
   margin: 'auto'
-  
+
 });
 
 export const ContainerForm = styled('form', {
@@ -21,13 +21,22 @@ export const ContainerForm = styled('form', {
   alignItems: 'center',
   border: '2px solid #868686',
   borderRadius: '4px',
-  padding: '16px'
+  padding: '16px',
+
+  h1: {
+    fontFamily: '$poppins',
+
+  },
+
+  label: {
+    fontFamily: '$roboto',
+  }
 
 });
 
 export const ContainerInputs = styled('div', {
   display: 'flex',
-  flexDirection: 'column', 
+  flexDirection: 'column',
   marginTop: '20px'
 });
 
@@ -75,7 +84,7 @@ export const ButtonCreate = styled('button', {
 
   '&:hover': {
     opacity: '0.8',
-    border: '2px solid $greenMenta3002',
+    border: '2px solid #868686',
   },
 
   '&:focus': {
