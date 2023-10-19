@@ -36,7 +36,7 @@ export default function YourAccount() {
           </Link>
 
           <Link
-            href={'/'}
+            href={'/ResetPassword'}
           >
             <DivImage>
               <Image
@@ -51,7 +51,7 @@ export default function YourAccount() {
               <h2>Segurança</h2>
               <label>Gerenciar senha e e-mail</label>
             </DivLabelText>
-          </Link>  
+          </Link>
 
           <Link
             href={'/'}
