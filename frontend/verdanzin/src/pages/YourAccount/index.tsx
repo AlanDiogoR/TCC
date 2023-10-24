@@ -1,4 +1,4 @@
-import { AccountConatiner, DivImage, DivLabelText, DivOptions, NavAccount } from './style';
+import { AccountConatiner, DivImage, DivLabelText, NavAccount } from './style';
 import endereco from './assets/endereco_logo3.png';
 import seguranca from './assets/seguranxa.png';
 import pedidos from './assets/pedidos2.png';
@@ -36,7 +36,7 @@ export default function YourAccount() {
           </Link>
 
           <Link
-            href={'/ResetPassword'}
+            href={'/SecurityAccount'}
           >
             <DivImage>
               <Image

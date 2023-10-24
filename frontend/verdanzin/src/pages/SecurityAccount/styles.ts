@@ -68,32 +68,35 @@ export const ContainerForm = styled('form', {
 
 export const ContainerInputs = styled('div', {
   display: 'flex',
-  flexDirection: 'column',
-  marginTop: '20px'
+  marginTop: '20px',
+  justifyContent: 'space-between',
+  border: '1px solid #868686',
+  padding: '10px',
+  borderRadius: '8px',
+
+  div: {
+    p: {
+      marginTop: '5px',
+    }
+  }
 });
 
-export const Input = styled('input', {
-  padding: '3px 6px 3px 26px',
-  marginTop: '4px',
-  height: '34px',
-  width: '335px',
-  border: '2px solid #868686',
-  borderRadius: '4px',
-  outline: '0',
-  transition: 'all .1s ease-out',
+export const ButtonEdit = styled('button', {
+  border: '1px solid black',
+  padding: '8px 20px 8px 20px',
+  background: '$gray100',
+  borderRadius: '10px',
 
   '&:hover': {
-    border: '2px solid $greenMenta300',
-  },
+    boxShadow: '0px 0.5px 10px 0.5px #737373',
+  }, 
 
-  '&:focus':{
-    border: '2px solid $greenMenta300',
-  },
-
-  '&::placeholder': {
-    fontSize: '16px',
-  },
-
+  a: {
+    textDecoration: 'none',
+    listStyle: 'none',
+    color: '$gray900',
+    fontWeight: 'bold',
+  }
 });
 
 export const ButtonCreate = styled('button', {

@@ -1,6 +1,5 @@
 import NavBHome from '@/components/NavBHome/NavBHome';
-import { Container, ContainerPassword } from './styles';
-import { ContainerInputs, Input } from '../CreateAccount/styles';
+import { ButtonCreate, ContainerInputs, Input, Container, ContainerPassword } from './styles';
 
 export default function ResetPassword() {
   return (
@@ -28,7 +27,7 @@ export default function ResetPassword() {
             <Input type="text" />
           </ContainerInputs>
 
-          <button>Salvar</button>
+          <ButtonCreate>Salvar</ButtonCreate>
 
         </ContainerPassword>
       </Container>
