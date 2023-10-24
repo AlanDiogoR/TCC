@@ -1,34 +1,37 @@
 import NavBHome from '@/components/NavBHome/NavBHome';
-import { ContainerPassword } from './styles';
+import { Container, ContainerPassword } from './styles';
+import { ContainerInputs, Input } from '../CreateAccount/styles';
 
 export default function ResetPassword() {
   return (
     <>
       <NavBHome/>
 
-      <ContainerPassword>
-        <h1>Alterar senha</h1>
+      <Container>
+        <ContainerPassword>
+          <h1>Alterar senha</h1>
 
-        <label>Use este formulário para alterar a senha da verdan</label>
+          <label>Use este formulário para alterar a senha da verdan</label>
 
-        <>
-          <p>Senha atual:</p>
-          <input type="text" />
-        </>
+          <ContainerInputs>
+            <p>Senha atual:</p>
+            <Input type="text" />
+          </ContainerInputs>
 
-        <>
-          <p>Senha nova:</p>
-          <input type="text" />
-        </>
+          <ContainerInputs>
+            <p>Senha nova:</p>
+            <Input type="text" />
+          </ContainerInputs>
 
-        <>
-          <p>Reinsira a nova senha:</p>
-          <input type="text" />
-        </>
+          <ContainerInputs>
+            <p>Reinsira a nova senha:</p>
+            <Input type="text" />
+          </ContainerInputs>
 
-        <button>Salvar</button>
+          <button>Salvar</button>
 
-      </ContainerPassword>
+        </ContainerPassword>
+      </Container>
     </>
   );
 }

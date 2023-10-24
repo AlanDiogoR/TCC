@@ -1,15 +1,33 @@
 import { styled } from '@/styles';
 
-export const ContainerPassword = styled('div', {
+export const Container = styled('div', {
   display: 'flex',
-  flexDirection: 'column',
+  flex: '1',
   justifyContent: 'center',
-  width: '50%',
-  minWidth: '375px',
+  alignItems: 'center',
+  gap: '16px',
   color: '$gray900',
+  flexDirection: 'column',
+  height: '650px',
+  margin: 'auto'
+});
 
-  header: {
-    margin: '24px 0 0 24px',
-    cursor: 'pointer',
+export const ContainerPassword = styled('div', {
+  width: '25%',
+  height: '70%',
+  margin:   'auto',
+  justifyContent: 'center',
+  alignItems: 'center',
+  border: '2px solid #868686',
+  borderRadius: '4px',
+  padding: '16px',
+
+  h1: {
+    fontFamily: '$poppins',
+
   },
+
+  label: {
+    fontFamily: '$roboto',
+  }
 });
