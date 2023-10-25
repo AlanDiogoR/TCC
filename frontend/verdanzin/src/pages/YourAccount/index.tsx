@@ -54,7 +54,7 @@ export default function YourAccount() {
           </Link>
 
           <Link
-            href={'/'}
+            href={'/YourAdress'}
           >
 
             <DivImage>
