@@ -21,7 +21,7 @@ export default function YourAdress() {
           <p>08 Jardim da Serra III</p>
           <p>Fartura, São Paulo 18873432</p>
           <p>Brasil</p>
-          <p>telefone: 14998931883</p>
+          <p>Telefone: 14998931883</p>
 
           <div>
             <button>Alterar</button>

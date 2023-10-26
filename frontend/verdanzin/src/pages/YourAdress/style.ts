@@ -22,7 +22,7 @@ export const ContainerAdd = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   width: '20%',
-  height: '50%',
+  height: '40%',
   justifyContent: 'center',
   alignItems: 'center',
   border: '2px dashed #868686',
@@ -47,7 +47,7 @@ export const ContainerAdd = styled('div', {
 
 export const ContainerPassword = styled('div', {
   width: '20%',
-  height: '50%',
+  height: '40%',
   margin:   'auto',
   justifyContent: 'center',
   alignItems: 'center',
@@ -59,6 +59,31 @@ export const ContainerPassword = styled('div', {
     borderBottom: '1px solid #868686',
     fontWeight: 'bold',
     marginBottom: '10px'
+  },
+
+  p: {
+    marginTop: '10px'
+  },
+
+  div: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+
+    button: {
+      marginTop: '10px',
+      border: 'none',
+      background: '$gray100',
+      color: '$greenMenta300',
+      fontWeight: 'bold',
+      fontSize: '1rem',
+
+      '&:hover': {
+        borderBottomStyle: 'dotted',
+        color: '#F03631'
+
+      }
+    }
   }
 
 });

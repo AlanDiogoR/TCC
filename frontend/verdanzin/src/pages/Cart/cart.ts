@@ -20,6 +20,15 @@ export const ContainerCart = styled('div', {
   }
 });
 
+export const ContainerCarts= styled('div', {
+  display: 'flex',
+  width: '90%',
+  justifyContent: 'space-around',
+  border: '2px solid #868686',
+  padding: '20px',
+  borderRadius: '8px'
+});
+
 export const ProductDetailsCart = styled('div', {
   marginTop: '1rem',
   display: 'flex',
