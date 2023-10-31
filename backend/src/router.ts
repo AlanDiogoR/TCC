@@ -23,6 +23,7 @@ import { deleteProduct } from './app/useCases/products/deleteProduct';
 import { deletePurchaseItem } from './app/useCases/purchaseItems/deletePurchaseItem';
 import { deletePurchase } from './app/useCases/purchases/deletePurchase';
 import { deleteUser } from './app/useCases/users/deleteUser';
+import { loginUser } from './app/useCases/users/loginUser';
 
 export const router = Router();
 
@@ -39,6 +40,11 @@ const upload = multer({
 
 
 
+
+//public route
+router.get('/', (req, res) => {
+  res.status(200).json({ msg : 'Bem vindo a pagina publica'});
+});
 
 //list
 
@@ -68,6 +74,8 @@ router.post('/purchaseItems', createPurchaseItem);
 router.post('/purchases', createPurchase);
 
 router.post('/users', createUser);
+
+router.post('/auth/login', loginUser);
 
 
 //get product by category

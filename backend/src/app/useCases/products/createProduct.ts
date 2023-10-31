@@ -4,12 +4,13 @@ import { Product } from '../../models/Product';
 
 export async function createProduct(req: Request, res: Response) {
   try {
-    const { name, description, details, price, category } = req.body;
+    const { name, description, quantity, details, price, category } = req.body;
     const imagePath = req.file?.filename;
 
     const product = await Product.create({
       name,
       description,
+      quantity,
       imagePath,
       details,
       price: Number(price),
@@ -19,6 +20,12 @@ export async function createProduct(req: Request, res: Response) {
     if (!name) {
       return res.status(400).json({
         error: 'Name is required',
+      });
+    }
+
+    if (!quantity) {
+      return res.status(400).json({
+        error: 'Quantity is required',
       });
     }
 

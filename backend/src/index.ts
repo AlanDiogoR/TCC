@@ -15,10 +15,9 @@ const server = http.createServer(app);
 
 export const io = new Server(server);
 
-mongoose.connect('mongodb://localhost:27017/local')
+mongoose.connect('mongodb+srv://Verdan:wmxgqBWVQMxtYALv@cluster0.6jyfvkh.mongodb.net/')
   .then( () => {
     const port = 3001;
-
 
     app.use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
@@ -36,4 +35,4 @@ mongoose.connect('mongodb://localhost:27017/local')
       console.log(`🚀 Server is running on http://localhost:${port}`);
     });
   })
-  .catch( () => console.log('erro ao conectar'));
+  .catch( (erro) => console.log('erro ao conectar', erro));
