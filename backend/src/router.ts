@@ -29,7 +29,6 @@ import { deletePurchaseItem } from './app/useCases/purchaseItems/deletePurchaseI
 import { deletePurchase } from './app/useCases/purchases/deletePurchase';
 import { deleteUser } from './app/useCases/users/deleteUser';
 import { loginUser } from './app/useCases/users/loginUser';
-import { privateRoute } from './app/useCases/users/privateRoute';
 import { User } from './app/models/User';
 
 export const router = Router();
@@ -53,7 +52,7 @@ router.get('/', (req, res) => {
   res.status(200).json({ msg : 'Bem vindo a pagina publica'});
 });
 
-router.get('/users/:id', chechToken, async function (req: Request, res: Response, next: NextFunction ) {
+router.get('/users/:id', chechToken, async function (req: Request, res: Response) {
   const id = req.params.id;
 
   const user = await User.findById(id, '-password');

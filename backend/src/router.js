@@ -53,7 +53,7 @@ const upload = (0, multer_1.default)({
 exports.router.get('/', (req, res) => {
     res.status(200).json({ msg: 'Bem vindo a pagina publica' });
 });
-exports.router.get('/users/:id', chechToken, function (req, res, NextFunction) {
+exports.router.get('/users/:id', chechToken, function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const id = req.params.id;
         const user = yield User_1.User.findById(id, '-password');
@@ -75,7 +75,7 @@ function chechToken(req, res, next) {
         next();
     }
     catch (error) {
-        res.status(400).json({ msg: 'tonke invalid' });
+        res.status(400).json({ msg: 'tonken invalid' });
     }
 }
 //list
