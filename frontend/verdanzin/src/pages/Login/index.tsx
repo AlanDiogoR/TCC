@@ -6,9 +6,12 @@ import { ContainerLogin, MainContainer, FormContainer, ContainerTitle, TextInfo,
 
 import login from './images/log-in.svg';
 import Link from 'next/link';
+import { useLoginController } from './useLoginController';
 
 
 export default function UserLogin() {
+  const { handleSubmit, register } =useLoginController();
+
   return (
     <ContainerLogin>
       <MainContainer>
@@ -16,7 +19,9 @@ export default function UserLogin() {
           <Image src={logo} width={100} height={50} alt='Logo verdan(um certo verde)' />
         </header>
 
-        <FormContainer>
+        <FormContainer
+          onSubmit={handleSubmit}
+        >
           <ContainerTitle>
             <Image
               src={login}
@@ -34,12 +39,22 @@ export default function UserLogin() {
 
           <InputContainer className="input">
             <label className="text-info">E-mail</label>
-            <input type="email" id="email" placeholder="Digite seu email" className="text-info"/>
+            <input
+              type="email"
+              placeholder="Digite seu email"
+              {...register('email')}
+              required
+            />
           </InputContainer>
 
           <InputContainer className="input">
             <label className="text-info">Senha</label>
-            <input type="password" id="password" placeholder="Digite sua senha" className="text-info" />
+            <input
+              type="password"
+              placeholder="Digite sua senha"
+              {...register('password')}
+              required
+            />
           </InputContainer>
 
           <div>
