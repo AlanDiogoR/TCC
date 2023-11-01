@@ -3,6 +3,11 @@ import path from 'node:path';
 import { Router } from 'express';
 
 import multer from 'multer';
+import jwt from 'jsonwebtoken';
+
+
+import { NextFunction, Request, Response } from 'express';
+
 
 import { createCategory } from './app/useCases/categories/createCategory';
 import { listCategories } from './app/useCases/categories/listCategories';
@@ -24,6 +29,8 @@ import { deletePurchaseItem } from './app/useCases/purchaseItems/deletePurchaseI
 import { deletePurchase } from './app/useCases/purchases/deletePurchase';
 import { deleteUser } from './app/useCases/users/deleteUser';
 import { loginUser } from './app/useCases/users/loginUser';
+import { privateRoute } from './app/useCases/users/privateRoute';
+import { User } from './app/models/User';
 
 export const router = Router();
 
@@ -45,6 +52,40 @@ const upload = multer({
 router.get('/', (req, res) => {
   res.status(200).json({ msg : 'Bem vindo a pagina publica'});
 });
+
+router.get('/users/:id', chechToken, async function (req: Request, res: Response, next: NextFunction ) {
+  const id = req.params.id;
+
+  const user = await User.findById(id, '-password');
+
+  if (!user) {
+    return res.status(404).json({ msg: 'user undefined'});
+  }
+
+
+
+  res.status(200).json({user});
+});
+
+function chechToken(req: Request, res: Response, next: NextFunction) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({msg: 'acesso negado'});
+  }
+
+  try {
+
+    const secret = 'ldsdjlsmfklmjdsj$%%@$367824848*156548*498765';
+    jwt.verify(token, secret);
+
+    next();
+
+  } catch (error) {
+    res.status(400).json({msg: 'tonken invalid'});
+  }
+}
 
 //list
 

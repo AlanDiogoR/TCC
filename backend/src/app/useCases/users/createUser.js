@@ -21,9 +21,10 @@ function createUser(req, res) {
             const { name, password, email, createAt, } = req.body;
             const salt = yield bcrypt_1.default.genSalt(12);
             const passwordHash = yield bcrypt_1.default.hash(password, salt);
+            const nameHash = yield bcrypt_1.default.hash(name, salt);
             //const user = await User.create({ name, password, email, createAt });
             const usern = new User_1.User({
-                name,
+                name: nameHash,
                 password: passwordHash,
                 email,
                 createAt
@@ -49,6 +50,7 @@ function createUser(req, res) {
                     error: 'Email is required',
                 });
             }
+            yield usern.save();
             res.status(201).json(usern);
         }
         catch (error) {

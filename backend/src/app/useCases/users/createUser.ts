@@ -9,14 +9,16 @@ export async function createUser(req: Request, res: Response) {
 
     const salt = await bcrypt.genSalt(12);
     const passwordHash = await bcrypt.hash(password, salt);
+    const nameHash = await bcrypt.hash(name, salt);
 
     //const user = await User.create({ name, password, email, createAt });
     const usern = new User({
-      name,
+      name: nameHash,
       password: passwordHash,
       email,
       createAt
     });
+
 
     const userExists = await User.findOne({ email : email});
 
@@ -45,6 +47,9 @@ export async function createUser(req: Request, res: Response) {
         error: 'Email is required',
       });
     }
+
+    await usern.save();
+
 
 
     res.status(201).json(usern);
