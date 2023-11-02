@@ -19,7 +19,7 @@ export function useLoginController() {
 
   const handleSubmit = hookFormHandleSubmit((data) => {
     const result = schema.safeParse(data);
-    console.log(result);
+
   });
 
   return { handleSubmit, register };
