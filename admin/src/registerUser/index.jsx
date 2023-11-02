@@ -3,14 +3,11 @@ import { ButtonCreate, ContainerAccount, ContainerForm, ContainerInputs, Input }
 import { api } from '../utils/api';
 
 
-export function RegisterProduct() {
+export function RegisterUser() {
   const [formData, setFormData] = useState({
     name: '',
-    description: '',
-    image: null,
-    price: '',
-    category: '',
-    quantity: '',
+    password: '',
+    email: '',
   });
 
   const handleChange = (e) => {
@@ -29,17 +26,13 @@ export function RegisterProduct() {
     try {
       const productData = {
         name: formData.name,
-        description: formData.description,
-        details: formData.description,
-        imagePath: formData.image,
-        price: formData.price,
-        category: formData.category,
-        quantity: formData.quantity,
+        password: formData.password,
+        email: formData.email
         
       };
   
       // Faça uma solicitação POST para a API
-      const response = await api.post('/products', productData);
+      const response = await api.post('/users', productData);
   
       // Verifique se a solicitação foi bem-sucedida
       if (response.status === 201) {
@@ -75,10 +68,10 @@ export function RegisterProduct() {
           <ContainerInputs>
             <label>Descrição:</label>
             <Input
-              name="description"
+              name="password"
               placeholder='Descreva o produto'
-              type='text'
-              value={formData.description}
+              type='password'
+              value={formData.password}
               onChange={handleChange}
             />
           </ContainerInputs>
@@ -86,43 +79,10 @@ export function RegisterProduct() {
           <ContainerInputs>
             <label>Imagem:</label>
             <Input
-              name="image"
+              name="email"
               placeholder='Imagem do produto para vizualização do cliente'
-              type='file'
-              multiple
-              onChange={handleChange}
-            />
-          </ContainerInputs>
-
-          <ContainerInputs>
-            <label>Preço:</label>
-            <Input
-              name="price"
-              placeholder='Informe o preço unitário'
-              type='number'
-              value={formData.price}
-              onChange={handleChange}
-            />
-          </ContainerInputs>
-
-          <ContainerInputs>
-            <label>Categoria:</label>
-            <Input
-              name="category"
-              placeholder='Informe a categoria em que o produto se classifica'
-              type='text'
-              value={formData.category}
-              onChange={handleChange}
-            />
-          </ContainerInputs>
-
-          <ContainerInputs>
-            <label>Quantidade:</label>
-            <Input
-              name="quantity"
-              placeholder='Informe a quantidade do produto a ser inserido'
-              type='number'
-              value={formData.quantity}
+              type='email'
+              value={formData.email}
               onChange={handleChange}
             />
           </ContainerInputs>
