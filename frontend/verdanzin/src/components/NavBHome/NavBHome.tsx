@@ -1,4 +1,4 @@
-import logo  from '@/assets/logo/verdan_logo.png';
+import logo  from '@/assets/logo/verdan_logo_org.png';
 import casa  from '@/assets/logo/casa.png';
 import { NavIcons, NavSearch, Research, IconSearch, MenuHamburguer, MenuItem, ListHamburguer, ButtonHome } from '@/styles/pages/NavBar';
 import { FaHeart, FaSearch, FaRegUser } from 'react-icons/fa';

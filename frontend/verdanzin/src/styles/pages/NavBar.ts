@@ -145,9 +145,12 @@ export const MenuHamburguer = styled('div', {
 
 
     '&.open': {
-      margin: 'auto',
       display: 'flex',
       flexDirection: 'column',
+      height: '300px',
+      width: '300px',
+      background: 'purple',
+
       div: {
         span: {
           '&:first-child': {
@@ -166,9 +169,8 @@ export const MenuHamburguer = styled('div', {
 });
 
 export const ListHamburguer = styled('div', {
-  display: 'fixed',
-
-  background: 'Yellow',
+  display: 'flex',
+  background: 'Yellow'
 });
 
 export const MenuItem = styled('li', {

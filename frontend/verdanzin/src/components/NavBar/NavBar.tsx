@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import logo  from '@/assets/logo/verdan_logo.png';
+import logo  from '@/assets/logo/verdan_logo_org.png';
 import { NavIcons, NavSearch, Research, IconSearch, ButtonAll, MenuHamburguer, MenuItem, ListHamburguer } from '@/styles/pages/NavBar';
 import { FaHeart, FaSearch, FaRegUser } from 'react-icons/fa';
 import { FiShoppingCart } from 'react-icons/fi';
@@ -16,7 +16,7 @@ interface CategoriesProps {
 
 export default function NavBar({ categories, onSelectCategory }:CategoriesProps) {
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -85,11 +85,7 @@ export default function NavBar({ categories, onSelectCategory }:CategoriesProps)
 
           {isOpen && (
             <ListHamburguer>
-              <MenuItem onClick={handleItemClick}>
-                <section>
-
-                </section>
-              </MenuItem>
+              
               <ul>
                 {categories.map(categorie => {
                   return (
@@ -105,4 +101,11 @@ export default function NavBar({ categories, onSelectCategory }:CategoriesProps)
     </>
   );
 }
+
+{/*
+<MenuItem onClick={handleItemClick}>
+                <section>
+
+                </section>
+              </MenuItem> */}
 
