@@ -134,7 +134,18 @@ export const InputContainer = styled('div', {
     '&::placeholder': {
       fontSize: '16px',
     },
+
+
+  },
+
+  div: {
+    color: '#F53827',
+
+    span: {
+      marginLeft: '8px',
+    }
   }
+
 });
 
 export const PasswordImage = styled('img', {

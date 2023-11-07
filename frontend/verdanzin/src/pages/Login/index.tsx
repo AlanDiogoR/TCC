@@ -3,6 +3,7 @@ import logo from '@/assets/imagesLogin/icone_verdan_fundo.png';
 import verdan from '@/assets/imagesLogin/verdanItapeva.jpg';
 import Image from 'next/image';
 import { ContainerLogin, MainContainer, FormContainer, ContainerTitle, TextInfo, InputContainer, VerdanSection } from './userLogin';
+import { CrossCircledIcon } from '@radix-ui/react-icons';
 
 import login from './images/log-in.svg';
 import Link from 'next/link';
@@ -10,7 +11,7 @@ import { useLoginController } from './useLoginController';
 
 
 export default function UserLogin() {
-  const { handleSubmit, register } =useLoginController();
+  const { handleSubmit, register, errors } = useLoginController();
 
   return (
     <ContainerLogin>
@@ -43,8 +44,14 @@ export default function UserLogin() {
               type="email"
               placeholder="Digite seu email"
               {...register('email')}
-              required
             />
+            {errors.email && (
+              <div>
+                <CrossCircledIcon />
+                <span>{errors.email.message}</span>
+              </div>
+            )}
+
           </InputContainer>
 
           <InputContainer className="input">
@@ -53,8 +60,15 @@ export default function UserLogin() {
               type="password"
               placeholder="Digite sua senha"
               {...register('password')}
-              required
             />
+
+            {errors.password && (
+              <div>
+                <CrossCircledIcon />
+                <span>{errors.password.message}</span>
+              </div>
+            )}
+
           </InputContainer>
 
           <div>
