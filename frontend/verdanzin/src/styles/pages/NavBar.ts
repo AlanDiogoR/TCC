@@ -149,7 +149,6 @@ export const MenuHamburguer = styled('div', {
       flexDirection: 'column',
       height: '300px',
       width: '300px',
-      background: 'purple',
 
       div: {
         span: {
@@ -168,9 +167,17 @@ export const MenuHamburguer = styled('div', {
   },
 });
 
-export const ListHamburguer = styled('div', {
+export const ListHamburguer = styled('aside', {
   display: 'flex',
-  background: 'Yellow'
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+  marginTop: '16px',
+
+  ul: {
+    listStyle: 'none'
+  }
+
+  
 });
 
 export const MenuItem = styled('li', {
