@@ -8,6 +8,7 @@ import { HomeContainer, MainContainer, ProductSLider } from '@/styles/pages/Prod
 
 import { Product } from '@/types/Product';
 import { GetStaticProps } from 'next';
+import Products from '../product/[id]';
 
 interface MenuProps {
   products: Product[];
