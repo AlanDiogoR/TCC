@@ -1,25 +1,30 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import Image from 'next/image';
 import { api } from '@/utils/api';
 import { Product } from '@/types/Product';
 import { ImageContainer, ProductContainer, ProductDetails } from '@/styles/pages/product';
-import { GetServerSidePropsContext } from 'next';
-import { ParsedUrlQuery } from 'querystring';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 interface ProductProps {
-  product?: Product;
-}
-
-interface Params {
-  id: string;
+  product: Product;
 }
 
 export default function ProductPage({ product }: ProductProps) {
+  useEffect(() => {
+    if (!product) {
+      alert('produto não encontrado');
+    }
+  }, [product]);
+
   return (
     <ProductContainer>
       <ImageContainer>
-        <Image src={`/uploads/${product.imagePath}`} width={520} height={480} alt='' />
+        <Image
+          src={`/uploads/${product.imagePath}`}
+          width={520}
+          height={480}
+          alt={`${product.name}`}
+        />
       </ImageContainer>
 
       <ProductDetails>
@@ -33,19 +38,27 @@ export default function ProductPage({ product }: ProductProps) {
   );
 }
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  };
+};
 
-export async function getServerSideProps(context: GetServerSidePropsContext<ParsedUrlQuery>): Promise<{ props: ProductProps }> {
-  const { id } = context.params || {};
-
-  if (!id) {
-    return {
-      notFound: true,
-    };
-  }
-
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const productId = String(params?.id);
   try {
-    const response = await api.get(`/products/${id}`);
-    const product = response.data;
+    const response = await api.get(`/products/${productId}`);
+    const productData = response.data;
+
+    const product: Product = {
+      _id: productData.id,
+      name: productData.name,
+      imagePath: productData.imagePath,
+      price: productData.price,
+      description: productData.description,
+      details: productData.details,
+    };
 
     return {
       props: {
@@ -53,72 +66,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext<Pars
       },
     };
   } catch (error) {
-    console.error('Erro ao buscar o produto:', error);
-
+    console.log(`Error fetching product: ${error}`);
     return {
       notFound: true,
     };
   }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { api } from '@/utils/api';
-import { Product } from '@/types/Product';
-import { ImageContainer, ProductContainer, ProductDetails } from '@/styles/pages/product';
-
-
-interface ProductProps {
-  id: string;
-}
-
-export default function Products({ id }: ProductProps) {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.get(`/products/${id}`);
-        setProducts([response.data]);
-      } catch (error) {
-        console.error('Erro ao buscar o produto:', error);
-      }
-    };
-
-    fetchData();
-  }, [id]);
-
-
-
-  return (
-    <ProductContainer>
-      <ImageContainer>
-        <Image src={`/uploads/${products.imagePath}`} width={520} height={480} alt='' />
-      </ImageContainer>
-
-      <ProductDetails>
-        <h1>{products.name}</h1>
-        <span>{products.price}</span>
-        <p>{products.description}</p>
-
-        <button>
-          Comprar agora
-        </button>
-      </ProductDetails>
-    </ProductContainer>
-  );
-}
-*/
+};

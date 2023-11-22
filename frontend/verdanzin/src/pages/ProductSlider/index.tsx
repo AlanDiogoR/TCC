@@ -8,7 +8,6 @@ import { HomeContainer, MainContainer, ProductSLider } from '@/styles/pages/Prod
 
 import { Product } from '@/types/Product';
 import { GetStaticProps } from 'next';
-import Products from '../product/[id]';
 
 interface MenuProps {
   products: Product[];
@@ -51,15 +50,23 @@ export default function ProductSlider({ products }:MenuProps) {
   );
 }
 
-
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await fetch('http://localhost:3001/products');
-  const products = await response.json();
+  // Fetch products from your data source (e.g., API, database)
+  const response = await fetch('/api/products'); // Replace with your API endpoint
+  const productsData = await response.json();
+  const products = productsData.map((product: Product) => {
+    return {
+      _id: product._id,
+      name: product.name,
+      imagePath: product.imagePath,
+      price: product.price,
+    };
+  });
 
   return {
     props: {
       products,
     },
-    revalidate: 60 * 60 * 2, // Adjust revalidation time as needed
+    revalidate: 60 * 60 * 2, // Revalidate data every 2 hours
   };
 };
