@@ -30,6 +30,7 @@ import { deletePurchase } from './app/useCases/purchases/deletePurchase';
 import { deleteUser } from './app/useCases/users/deleteUser';
 import { loginUser } from './app/useCases/users/loginUser';
 import { User } from './app/models/User';
+import { listProductById } from './app/useCases/products/listProductById';
 
 export const router = Router();
 
@@ -121,6 +122,8 @@ router.post('/auth/login', loginUser);
 //get product by category
 
 router.get('/categories/:categoryId/products', listProductByCategory);
+router.get('/products/:productId', listProductById);
+
 
 //delete
 
