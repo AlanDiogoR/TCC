@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Slider } from './Banners/Slider';
 import NavBar from '../components/NavBar/NavBar';
 import ProductSlider from './ProductSlider';
 
@@ -15,6 +14,7 @@ export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [ isLoading, setIsLoading] = useState(false);
   const [isLoadingProducts, setIsLoadingProducts ] = useState(false);
+  const categoryId = '';
 
 
   useEffect(() => {
@@ -51,6 +51,7 @@ export default function Home() {
           <NavBar
             categories={categories}
             onSelectCategory={handleSelectCategory}
+            categoryId={categoryId}
           />
 
 

@@ -15,9 +15,10 @@ import { Slider } from '@/pages/Banners/Slider';
 interface CategoriesProps {
   categories: Category[];
   onSelectCategory: (categoryId: string) => Promise<void>;
+  categoryId: string;
 }
 
-export default function NavBar({ categories, onSelectCategory }:CategoriesProps) {
+export default function NavBar({ categories, onSelectCategory, categoryId }:CategoriesProps) {
   const [isOpen, setIsOpen] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -31,7 +32,7 @@ export default function NavBar({ categories, onSelectCategory }:CategoriesProps)
   };
 
   const handleSelectChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const categoryId = event.target.value;
+    categoryId = event.target.value;
     onSelectCategory(categoryId);
 
     const route = !categoryId
@@ -86,6 +87,7 @@ export default function NavBar({ categories, onSelectCategory }:CategoriesProps)
           <Link href={'../Cart'}>
             <FiShoppingCart/>
           </Link>
+
         </NavIcons>
 
         <MenuHamburguer className={isOpen ? 'open' : ''} onClick={handleClick}>

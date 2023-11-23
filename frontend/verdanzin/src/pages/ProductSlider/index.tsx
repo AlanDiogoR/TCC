@@ -18,14 +18,13 @@ export default function ProductSlider({ products }:MenuProps) {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
-      spacing: 48,
+      spacing: 52,
     }
   });
 
   return (
     <>
       <MainContainer>
-        <h1>Ofertas da semana </h1>
 
         <HomeContainer ref={sliderRef} className='keen-slider'>
           {products.map(product => {
