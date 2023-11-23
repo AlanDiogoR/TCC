@@ -7,6 +7,9 @@ import { FiShoppingCart } from 'react-icons/fi';
 import Image from 'next/image';
 import { Category } from '@/types/Category';
 import Link from 'next/link';
+import { api } from '@/utils/api';
+import { Product } from '@/types/Product';
+import { Slider } from '@/pages/Banners/Slider';
 
 
 interface CategoriesProps {
@@ -15,8 +18,9 @@ interface CategoriesProps {
 }
 
 export default function NavBar({ categories, onSelectCategory }:CategoriesProps) {
-  const [selectedCategory, setSelectedCategory] = useState('');
   const [isOpen, setIsOpen] = useState(true);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -26,11 +30,19 @@ export default function NavBar({ categories, onSelectCategory }:CategoriesProps)
     setIsOpen(false);
   };
 
-  function handleSelectCategory( categoryId: string) {
-    const category = selectedCategory === categoryId ? '' : categoryId;
-    onSelectCategory(category);
-    setSelectedCategory(category);
-  }
+  const handleSelectChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const categoryId = event.target.value;
+    onSelectCategory(categoryId);
+
+    const route = !categoryId
+      ? '/products'
+      : `/categories/${categoryId}/products`
+    ;
+    const { data } = await api.get(route);
+    setProducts(data);
+    setSelectedCategory(categoryId);
+
+  };
 
   return (
     <>
@@ -48,10 +60,10 @@ export default function NavBar({ categories, onSelectCategory }:CategoriesProps)
 
         <Research>
 
-          <ButtonAll>
+          <ButtonAll onChange={handleSelectChange} defaultValue="">
             {categories.map(categorie => {
               return (
-                <option key={categorie._id}>{categorie.name}</option>
+                <option key={categorie._id} value={categorie._id}>{categorie.name}</option>
               );
             })}
           </ButtonAll>
@@ -85,7 +97,7 @@ export default function NavBar({ categories, onSelectCategory }:CategoriesProps)
 
           {isOpen && (
             <ListHamburguer>
-              
+
               <ul>
                 {categories.map(categorie => {
                   return (
@@ -98,14 +110,12 @@ export default function NavBar({ categories, onSelectCategory }:CategoriesProps)
         </MenuHamburguer>
 
       </NavSearch>
+
+      {selectedCategory ? (
+        null
+      ) : (
+        <Slider/>
+      )}
     </>
   );
 }
-
-{/*
-<MenuItem onClick={handleItemClick}>
-                <section>
-
-                </section>
-              </MenuItem> */}
-

@@ -53,7 +53,7 @@ export default function Home() {
             onSelectCategory={handleSelectCategory}
           />
 
-          <Slider/>
+
 
           {isLoadingProducts ? (
             <CenteredContainer>
