@@ -50,8 +50,7 @@ export default function ProductSlider({ products }:MenuProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  // Fetch products from your data source (e.g., API, database)
-  const response = await fetch('/api/products'); // Replace with your API endpoint
+  const response = await fetch('/api/products');
   const productsData = await response.json();
   const products = productsData.map((product: Product) => {
     return {
@@ -66,6 +65,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       products,
     },
-    revalidate: 60 * 60 * 2, // Revalidate data every 2 hours
+    revalidate: 60 * 60 * 2,
   };
 };

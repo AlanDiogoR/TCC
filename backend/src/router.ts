@@ -122,6 +122,8 @@ router.post('/auth/login', loginUser);
 //get product by category
 
 router.get('/categories/:categoryId/products', listProductByCategory);
+router.get('/products/:productId', listProductById);
+
 
 
 
