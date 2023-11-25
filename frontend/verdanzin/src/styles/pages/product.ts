@@ -19,11 +19,53 @@ export const ProductContainer = styled('main', {
 
 });
 
-export const ContainerInput = styled('input', {
-  width: '30px',
+export const ContainerInput = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
   height: '20px',
-  background: '$gray100',
-  borderRadius: '3px'
+
+  h2: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '150px',
+    alignItems: 'center'
+
+  },
+
+  div: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '1px',
+    width: '1px',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    margin: '8px',
+    padding: '0',
+  },
+
+});
+
+export const Buttons = styled('span', {
+  height: '1px',
+  width: '1px',
+  color: '$greenMenta300',
+  borderRadius: 8,
+  cursor: 'pointer',
+  fontWeight: 'bold',
+  fontSize: '$md',
+
+  '&:disabled': {
+    opacity: 0.6,
+    cursor: 'not-allowed'
+  },
+
+  '&:not(:disabled):hover': {
+    cursor: 'pointer'
+  }
+
 });
 
 export const ImageContainer = styled('div', {

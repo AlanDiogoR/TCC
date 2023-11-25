@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { api } from '@/utils/api';
 import { Product } from '@/types/Product';
-import { Container, ContainerInput, ImageContainer, ProductContainer, ProductDetails } from '@/styles/pages/product';
+import { Buttons, Container, ContainerInput, ImageContainer, ProductContainer, ProductDetails } from '@/styles/pages/product';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { formatCurrency } from '@/utils/formatCurrency';
 import { CartItem } from '@/types/CartItem';
-import { number } from 'zod';
+import { CaretUpIcon } from '@radix-ui/react-icons';
+import { CaretDownIcon } from '@radix-ui/react-icons';
+
 
 interface ProductProps {
   product: Product;
@@ -48,9 +50,20 @@ export default function ProductPage({ product }: ProductProps) {
     });
   };
 
-  const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuantity = parseInt(event.target.value, 10) || 0;
-    setInputQuantity(newQuantity);
+  const handleAddQuantity = () => {
+    setInputQuantity(inputQuantity + 1 );
+
+    if (inputQuantity > (product.quantity - 1)) {
+      alert('not');
+    }
+  };
+
+  const handleRemoveQuantity = () => {
+    setInputQuantity(inputQuantity - 1);
+
+    if (inputQuantity < 1 ) {
+      alert('not');
+    }
   };
 
   return (
@@ -72,14 +85,19 @@ export default function ProductPage({ product }: ProductProps) {
           <p>{product.description}</p>
           <h2>Detalhes:</h2>
           <p>{product.details}</p>
-          <h2>Quantidade:</h2>
-          <ContainerInput
-            type='number'
-            value={inputQuantity}
-            onChange={handleQuantityChange}
-            disabled={inputQuantity > (product.quantity - 1)}
-          />
-          <h3>{product.quantity ? 'Em estoque' : 'Sem estoque'}</h3>
+          <ContainerInput>
+            <h2>
+              Quantidade: {inputQuantity}
+              <div>
+                <Buttons onClick={handleAddQuantity}><CaretUpIcon/></Buttons>
+                <Buttons onClick={handleRemoveQuantity}><CaretDownIcon/></Buttons>
+              </div>
+            </h2>
+
+            <h3>{product.quantity ? 'Em estoque' : 'Sem estoque'}: {product.quantity}</h3>
+          </ContainerInput>
+
+
 
           <div>
             <button
