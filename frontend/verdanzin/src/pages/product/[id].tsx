@@ -8,8 +8,8 @@ import { formatCurrency } from '@/utils/formatCurrency';
 import { CartItem } from '@/types/CartItem';
 import { CaretUpIcon } from '@radix-ui/react-icons';
 import { CaretDownIcon } from '@radix-ui/react-icons';
-import NavBHome from '@/components/NavBHome/NavBHome';
 import { Footer } from '@/components/Footer';
+import NavBar from '@/components/NavBar/NavBar';
 
 
 interface ProductProps {
@@ -70,7 +70,7 @@ export default function ProductPage({ product }: ProductProps) {
 
   return (
     <>
-      <NavBHome/>
+      <NavBar/>
 
       <Container>
         <ProductContainer>
