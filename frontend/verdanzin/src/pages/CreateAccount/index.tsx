@@ -5,8 +5,10 @@ import { Footer } from '@/components/Footer';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NavBar from '@/components/NavBar/NavBar';
+import { useAuth } from '@/auth/authContex';
 
 export default function CreateAccount() {
+  const { state, dispatch } = useAuth();
   const [newUser, setNewUser] = useState({
     name: '',
     email: '',
@@ -21,6 +23,10 @@ export default function CreateAccount() {
       ...newUser,
       [name]: value,
     });
+  };
+
+  const logein = (user: string) => {
+    dispatch({ type: 'LOGIN', payload: user });
   };
 
   const handleCreateAccount = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,6 +51,9 @@ export default function CreateAccount() {
 
       if (response.status >= 200 && response.status < 300) {
         toast.success('Usuário cadastrado com sucesso');
+
+        logein(newUser.email);
+
         setNewUser({
           name: '',
           email: '',
@@ -63,7 +72,7 @@ export default function CreateAccount() {
   return (
     <>
       <NavBar/>
-
+      <button onClick={() => alert(state)}>clic</button>
       <ContainerAccount>
         <ContainerForm method='POST' onSubmit={handleCreateAccount}>
           <h1>Criar conta</h1>

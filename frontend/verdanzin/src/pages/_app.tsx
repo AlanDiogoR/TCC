@@ -4,17 +4,21 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Container } from '../styles/pages/app';
+import { AuthProvider } from '@/auth/authContex';
 
 
 globalStyles();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Container>
-      <Component {...pageProps} />
-      <ToastContainer
-        position='bottom-center'
-      />
-    </Container>
+    <AuthProvider>
+      <Container>
+        <Component {...pageProps} />
+        <ToastContainer
+          position='bottom-center'
+        />
+      </Container>
+    </AuthProvider>
+
   );
 }
