@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import NavBar from '../components/NavBar/NavBar';
 import ProductSlider from './ProductSlider';
 

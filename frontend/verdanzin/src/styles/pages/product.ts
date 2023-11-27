@@ -1,9 +1,9 @@
 import { styled } from '..';
 
 export const Container = styled('section', {
-  width: '100vw',
-  height: '100vh',
-  background: '$gray900',
+  width: '100%',
+  height: '100%',
+  background: '$gray100',
 
 });
 
@@ -24,47 +24,39 @@ export const ContainerInput = styled('div', {
   flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'center',
-  height: '20px',
+  width: 'auto',
+
+  div: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    div: {
+      display: 'flex',
+      flexDirection: 'column',
+    }
+  },
 
   h2: {
     display: 'flex',
     flexDirection: 'row',
-    width: '150px',
-    alignItems: 'center'
-
-  },
-
-  div: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '1px',
-    width: '1px',
-    justifyContent: 'center',
     alignItems: 'center',
-    alignContent: 'center',
-    margin: '8px',
-    padding: '0',
+    width: '50%',
+    marginLeft: '0',
+    marginRight: '0',
+    paddingLeft: '0',
+    paddingRight:'0'
   },
 
-});
-
-export const Buttons = styled('span', {
-  height: '1px',
-  width: '1px',
-  color: '$greenMenta300',
-  borderRadius: 8,
-  cursor: 'pointer',
-  fontWeight: 'bold',
-  fontSize: '$md',
-
-  '&:disabled': {
-    opacity: 0.6,
-    cursor: 'not-allowed'
+  h3: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '30%',
+    color: '$gray900',
   },
 
-  '&:not(:disabled):hover': {
-    cursor: 'pointer'
-  }
 
 });
 
@@ -91,7 +83,7 @@ export const ProductDetails = styled('div', {
 
   h1: {
     fontSize: '$2xl',
-    color: '$gray100',
+    color: '$gray900',
   },
 
   span: {
@@ -105,6 +97,7 @@ export const ProductDetails = styled('div', {
     fontWeight: 'bold',
     marginTop: '2.5rem',
     fontSize: '$lg',
+    color: '$gray900'
   },
 
   h3: {
@@ -118,7 +111,7 @@ export const ProductDetails = styled('div', {
     marginTop: '1rem',
     fontSize: '$md',
     lineHeight: 1.6,
-    color: '$gray300',
+    color: '$gray800',
   },
 
   div: {

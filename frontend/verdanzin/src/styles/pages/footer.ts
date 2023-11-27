@@ -10,6 +10,7 @@ export const FooterBar = styled('footer', {
   fontSize: '1rem',
   flexWrap: 'wrap',
   gap: '1rem',
+  marginTop: '32px'
 });
 
 export const ButtonHome = styled('div', {

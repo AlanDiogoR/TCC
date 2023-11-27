@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { ButtonCreate, ContainerAccount, ContainerForm, ContainerInputs, Input } from './styles';
 import { api } from '@/utils/api';
-import NavBHome from '@/components/NavBHome/NavBHome';
 import { Footer } from '@/components/Footer';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import NavBar from '@/components/NavBar/NavBar';
 
 export default function CreateAccount() {
   const [newUser, setNewUser] = useState({
@@ -23,7 +23,9 @@ export default function CreateAccount() {
     });
   };
 
-  const handleCreateAccount = async () => {
+  const handleCreateAccount = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     try {
       if (newUser.password !== newUser.confirmPassword) {
         toast.error('A senha e a confirmação de senha não coincidem');
@@ -41,7 +43,7 @@ export default function CreateAccount() {
         password: newUser.password,
       });
 
-      if (response.status === 201) {
+      if (response.status >= 200 && response.status < 300) {
         toast.success('Usuário cadastrado com sucesso');
         setNewUser({
           name: '',
@@ -60,7 +62,7 @@ export default function CreateAccount() {
 
   return (
     <>
-      <NavBHome />
+      <NavBar/>
 
       <ContainerAccount>
         <ContainerForm method='POST' onSubmit={handleCreateAccount}>

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
+import casa  from '@/assets/logo/casa.png';
 import logo  from '@/assets/logo/verdan_logo_org.png';
-import { NavIcons, NavSearch, Research, IconSearch, ButtonAll, MenuHamburguer, MenuItem, ListHamburguer } from '@/styles/pages/NavBar';
+import { NavIcons, NavSearch, Research, IconSearch, ButtonAll, MenuHamburguer, MenuItem, ListHamburguer, ButtonHome } from '@/styles/pages/NavBar';
 import { FaHeart, FaSearch, FaRegUser } from 'react-icons/fa';
 import { FiShoppingCart } from 'react-icons/fi';
 import Image from 'next/image';
@@ -13,9 +14,9 @@ import { Slider } from '@/pages/Banners/Slider';
 
 
 interface CategoriesProps {
-  categories: Category[];
-  onSelectCategory: (categoryId: string) => Promise<void>;
-  categoryId: string;
+  categories?: Category[];
+  onSelectCategory?: (categoryId: string) => Promise<void>;
+  categoryId?: string;
 }
 
 export default function NavBar({ categories, onSelectCategory, categoryId }:CategoriesProps) {
@@ -33,7 +34,9 @@ export default function NavBar({ categories, onSelectCategory, categoryId }:Cate
 
   const handleSelectChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
     categoryId = event.target.value;
-    onSelectCategory(categoryId);
+    if (onSelectCategory) {
+      onSelectCategory(categoryId ?? '6541a3bed7de0e00c7c7986a');
+    }
 
     const route = !categoryId
       ? '/products'
@@ -60,14 +63,26 @@ export default function NavBar({ categories, onSelectCategory, categoryId }:Cate
 
 
         <Research>
-
-          <ButtonAll onChange={handleSelectChange} defaultValue="">
-            {categories.map(categorie => {
-              return (
-                <option key={categorie._id} value={categorie._id}>{categorie.name}</option>
-              );
-            })}
-          </ButtonAll>
+          {categories?.length ? (
+            <ButtonAll onChange={handleSelectChange}>
+              {categories.map(categorie => (
+                <option key={categorie._id} value={categorie._id}>
+                  {categorie.name}
+                </option>
+              ))}
+            </ButtonAll>
+          ) : (
+            <Link href={'/'}>
+              <ButtonHome>
+                <Image
+                  src={casa}
+                  width={25}
+                  height={25}
+                  alt=''
+                />
+              </ButtonHome>
+            </Link>
+          )}
           <input type="text"  placeholder="Pesquise aqui"/>
           <IconSearch>
             <FaSearch/>
@@ -101,7 +116,7 @@ export default function NavBar({ categories, onSelectCategory, categoryId }:Cate
             <ListHamburguer>
 
               <ul>
-                {categories.map(categorie => {
+                {categories?.map(categorie => {
                   return (
                     <MenuItem onClick={handleItemClick} key={categorie._id}>{categorie.name}</MenuItem>
                   );
@@ -113,10 +128,8 @@ export default function NavBar({ categories, onSelectCategory, categoryId }:Cate
 
       </NavSearch>
 
-      {selectedCategory ? (
-        null
-      ) : (
-        <Slider/>
+      {categories && categories.length > 0 && !selectedCategory && (
+        <Slider />
       )}
     </>
   );
