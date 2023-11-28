@@ -1,13 +1,13 @@
 import { FavoriteContainer, ProductContainer, ProductDetailsHeart } from './favorie';
 import { FaHeart } from 'react-icons/fa';
-import NavBHome from '@/components/NavBHome/NavBHome';
 import { Footer } from '@/components/Footer';
+import NavBar from '@/components/NavBar/NavBar';
 
 
 export default function Favorite() {
   return (
     <>
-      <NavBHome/>
+      <NavBar/>
 
       <FavoriteContainer>
         <h1>Meus favoritos</h1>

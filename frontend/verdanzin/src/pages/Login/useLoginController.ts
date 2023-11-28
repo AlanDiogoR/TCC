@@ -5,6 +5,8 @@ import { useMutation } from '@tanstack/react-query';
 import { authService } from '@/services/authService';
 import { SigninParams } from '@/services/authService/signin';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { useAuth } from '@/auth/authContex';
 
 const schema = z.object({
   email: z.string().nonempty('E-mail é obrigatório!').email('Informe um e-mail válido!'),
@@ -14,6 +16,8 @@ const schema = z.object({
 type FormData =   z.infer<typeof schema>;
 
 export function useLoginController() {
+  const { state, dispatch } = useAuth();
+  const router = useRouter();
   const {
     register,
     handleSubmit: hookFormHandleSubmit,
@@ -31,6 +35,9 @@ export function useLoginController() {
   const handleSubmit = hookFormHandleSubmit(async (data) => {
     try {
       await mutateAsync(data);
+      dispatch({payload: data.email, type: 'LOGIN'});
+      toast.success('Login efetuado com sucesso!');
+      router.push('/');
     } catch {
       toast.error('Credenciais inválidas!');
     }
