@@ -3,13 +3,28 @@ import endereco from './assets/endereco_logo3.png';
 import seguranca from './assets/seguranxa.png';
 import pedidos from './assets/pedidos2.png';
 import Image from 'next/image';
-import NavBHome from '@/components/NavBHome/NavBHome';
 import Link from 'next/link';
+import NavBar from '@/components/NavBar/NavBar';
+import { useAuth } from '@/auth/authContex';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function YourAccount() {
+  const { state, dispatch } = useAuth();
+  const router = useRouter();
+  const handleLogout = () => {
+    dispatch({ type: 'LOGOUT' });
+
+    if (state.user == null) {
+      toast.success('Você saiu da sua conta!');
+      router.push('Login');
+    }
+  };
+
   return (
     <>
-      <NavBHome/>
+      <NavBar/>
 
       <AccountConatiner>
         <h1>Sua conta</h1>
@@ -75,6 +90,8 @@ export default function YourAccount() {
           </Link>
 
         </NavAccount>
+
+        <button onClick={handleLogout}>Sair</button>
 
       </AccountConatiner>
     </>

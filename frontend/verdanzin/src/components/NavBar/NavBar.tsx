@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import casa  from '@/assets/logo/casa.png';
 import logo  from '@/assets/logo/verdan_logo_org.png';
@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { api } from '@/utils/api';
 import { Product } from '@/types/Product';
 import { Slider } from '@/pages/Banners/Slider';
+import { useAuth } from '@/auth/authContex';
 
 
 interface CategoriesProps {
@@ -20,6 +21,7 @@ interface CategoriesProps {
 }
 
 export default function NavBar({ categories, onSelectCategory, categoryId }:CategoriesProps) {
+  const { state, dispatch } = useAuth();
   const [isOpen, setIsOpen] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -92,9 +94,17 @@ export default function NavBar({ categories, onSelectCategory, categoryId }:Cate
 
         <NavIcons>
 
-          <Link href={'../Login'}>
-            <FaRegUser/>
-          </Link>
+          {state.user === null ? (
+            <Link href="../Login">
+              <FaRegUser />
+            </Link>
+          ) : (
+            <Link href="../YourAccount">
+              <FaRegUser />
+            </Link>
+          )}
+
+
           <Link href={'../Favorite'}>
             <FaHeart/>
           </Link>

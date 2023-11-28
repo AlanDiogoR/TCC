@@ -1,10 +1,10 @@
-import NavBHome from '@/components/NavBHome/NavBHome';
+import NavBar from '@/components/NavBar/NavBar';
 import { ButtonCreate, ContainerInputs, Input, Container, ContainerPassword } from './styles';
 
 export default function EditName() {
   return (
     <>
-      <NavBHome/>
+      <NavBar/>
 
       <Container>
         <ContainerPassword>

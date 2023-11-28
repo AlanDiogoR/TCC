@@ -16,7 +16,6 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Reducer para manipular as ações
 const authReducer = (state: State, action: Action): State => {
   switch (action.type) {
   case 'LOGIN':
@@ -28,7 +27,6 @@ const authReducer = (state: State, action: Action): State => {
   }
 };
 
-// Provedor do contexto
 // eslint-disable-next-line react/prop-types
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, { user: null });
@@ -40,7 +38,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   );
 };
 
-// Gancho personalizado para usar o contexto de autenticação
 
 export const useAuth = () => {
   const context = useContext(AuthContext);

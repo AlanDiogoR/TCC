@@ -72,7 +72,6 @@ export default function CreateAccount() {
   return (
     <>
       <NavBar/>
-      <button onClick={() => alert(state)}>clic</button>
       <ContainerAccount>
         <ContainerForm method='POST' onSubmit={handleCreateAccount}>
           <h1>Criar conta</h1>

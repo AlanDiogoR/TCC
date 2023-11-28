@@ -4,6 +4,8 @@ export const AccountConatiner = styled('div', {
   color: '$gray900',
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
   margin: 'auto',
   width: '100%',
 
@@ -12,6 +14,32 @@ export const AccountConatiner = styled('div', {
     fontSize: '$2xl',
     fontFamily: '$roboto'
   },
+
+  button: {
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: '8%',
+    width: '15%',
+    height: '8%',
+    backgroundColor: '$greenMenta300',
+    border: 0,
+    color: '$white',
+    borderRadius: 8,
+    padding: '1.25rem',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    fontSize: '$md',
+
+    '&:disabled': {
+      opacity: 0.6,
+      cursor: 'not-allowed'
+    },
+
+    '&:not(:disabled):hover': {
+      backgroundColor: '$greenMenta3002',
+      cursor: 'grab'
+    }
+  }
 });
 
 export const NavAccount = styled('div', {

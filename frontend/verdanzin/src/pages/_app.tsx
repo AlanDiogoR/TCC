@@ -5,19 +5,26 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Container } from '../styles/pages/app';
 import { AuthProvider } from '@/auth/authContex';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
 globalStyles();
 
+const queryClient = new QueryClient();
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <Container>
-        <Component {...pageProps} />
-        <ToastContainer
-          position='bottom-center'
-        />
-      </Container>
+
+      <QueryClientProvider client={queryClient}>
+        <Container>
+          <Component {...pageProps} />
+          <ToastContainer
+            position='bottom-center'
+          />
+        </Container>
+      </QueryClientProvider>
+
     </AuthProvider>
 
   );

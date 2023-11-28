@@ -4,14 +4,16 @@ import verdan from '@/assets/imagesLogin/verdanItapeva.jpg';
 import Image from 'next/image';
 import { ContainerLogin, MainContainer, FormContainer, ContainerTitle, TextInfo, InputContainer, VerdanSection } from './userLogin';
 import { CrossCircledIcon } from '@radix-ui/react-icons';
+import 'react-toastify/dist/ReactToastify.css';
 
 import login from './images/log-in.svg';
 import Link from 'next/link';
 import { useLoginController } from './useLoginController';
+import { Spinner } from '@/components/Spiner';
 
 
 export default function UserLogin() {
-  const { handleSubmit, register, errors } = useLoginController();
+  const { handleSubmit, register, errors, isPending } = useLoginController();
 
   return (
     <ContainerLogin>
@@ -75,7 +77,7 @@ export default function UserLogin() {
             <span>Esqueci minha senha</span>
           </div>
 
-          <button type="submit">Entrar</button>
+          <button type="submit">{isPending ? <Spinner/> : 'Entrar'}</button>
 
           <Link
             href={'./CreateAccount'}

@@ -1,11 +1,11 @@
-import NavBHome from '@/components/NavBHome/NavBHome';
+import NavBar from '@/components/NavBar/NavBar';
 import { ButtonCreate, ContainerInputs, Container, ContainerPassword, ButtonEdit } from './styles';
 import Link from 'next/link';
 
 export default function SecurityAccount() {
   return (
     <>
-      <NavBHome/>
+      <NavBar/>
 
       <Container>
         <ContainerPassword>
