@@ -39,6 +39,8 @@ const deleteUser_1 = require("./app/useCases/users/deleteUser");
 const loginUser_1 = require("./app/useCases/users/loginUser");
 const User_1 = require("./app/models/User");
 const listProductById_1 = require("./app/useCases/products/listProductById");
+const listUserByEmail_1 = require("./app/useCases/users/listUserByEmail");
+const changeUserPassword_1 = require("./app/useCases/users/changeUserPassword");
 exports.router = (0, express_1.Router)();
 const upload = (0, multer_1.default)({
     storage: multer_1.default.diskStorage({
@@ -97,6 +99,9 @@ exports.router.post('/auth/login', loginUser_1.loginUser);
 //get product by category
 exports.router.get('/categories/:categoryId/products', listProductByCategory_1.listProductByCategory);
 exports.router.get('/products/:productId', listProductById_1.listProductById);
+exports.router.get('/users/:userEmail', listUserByEmail_1.listUserByEmail);
+//change
+exports.router.patch('users/changePassword', changeUserPassword_1.changePassword);
 //delete
 exports.router.delete('/categories/:categoryId', deleteCategory_1.deleteCategory);
 exports.router.delete('/addresses/:addressId', deleteAddress_1.deleteAddress);

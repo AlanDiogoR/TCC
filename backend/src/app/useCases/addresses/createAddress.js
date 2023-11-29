@@ -14,7 +14,7 @@ const Address_1 = require("../../models/Address");
 function createAddress(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { zipCode, city, state, neighborhood, streets, numberHouse, userId } = req.body;
+            const { zipCode, city, state, neighborhood, street, numberHouse, userId } = req.body;
             if (!zipCode) {
                 return res.status(400).json({
                     error: 'zipCode is required',
@@ -35,7 +35,7 @@ function createAddress(req, res) {
                     error: 'Neighborhood is required',
                 });
             }
-            if (!streets) {
+            if (!street) {
                 return res.status(400).json({
                     error: 'streets is required',
                 });
@@ -50,7 +50,7 @@ function createAddress(req, res) {
                     error: 'userId is required',
                 });
             }
-            const address = yield Address_1.Address.create({ zipCode, city, state, neighborhood, streets, numberHouse, userId });
+            const address = yield Address_1.Address.create({ zipCode, city, state, neighborhood, street, numberHouse, userId });
             res.status(201).json(address);
         }
         catch (error) {

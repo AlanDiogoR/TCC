@@ -1,14 +1,12 @@
 import { createContext, ReactNode, useContext, useReducer } from 'react';
 
-// Defina as ações disponíveis para o contexto de autenticação
-type Action = { type: 'LOGIN'; payload: string } | { type: 'LOGOUT' };
+type Action = { type: 'LOGIN'; payload: { user: string; token: string } } | { type: 'LOGOUT' };
 
-// Estado inicial
 type State = {
   user: string | null;
+  token: string | null;
 };
 
-// Contexto de autenticação
 type AuthContextType = {
   state: State;
   dispatch: React.Dispatch<Action>;
@@ -19,9 +17,9 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const authReducer = (state: State, action: Action): State => {
   switch (action.type) {
   case 'LOGIN':
-    return { ...state, user: action.payload };
+    return { ...state, user: action.payload.user, token: action.payload.token };
   case 'LOGOUT':
-    return { ...state, user: null };
+    return { ...state, user: null, token: null };
   default:
     return state;
   }
@@ -29,7 +27,7 @@ const authReducer = (state: State, action: Action): State => {
 
 // eslint-disable-next-line react/prop-types
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, { user: null });
+  const [state, dispatch] = useReducer(authReducer, { user: null, token: null });
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
@@ -37,7 +35,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     </AuthContext.Provider>
   );
 };
-
 
 export const useAuth = () => {
   const context = useContext(AuthContext);

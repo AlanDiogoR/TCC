@@ -13,10 +13,10 @@ const schema = z.object({
   password: z.string().nonempty('A senha é obrigatória!').min(8, 'A senha deve conter no mínimo oito dígito!'),
 });
 
-type FormData =   z.infer<typeof schema>;
+type FormData = z.infer<typeof schema>;
 
 export function useLoginController() {
-  const { state, dispatch } = useAuth();
+  const { dispatch } = useAuth();
   const router = useRouter();
   const {
     register,
@@ -34,14 +34,13 @@ export function useLoginController() {
 
   const handleSubmit = hookFormHandleSubmit(async (data) => {
     try {
-      await mutateAsync(data);
-      dispatch({payload: data.email, type: 'LOGIN'});
+      const { token } = await mutateAsync(data);
+      dispatch({ payload: { user: data.email, token: token }, type: 'LOGIN' });
       toast.success('Login efetuado com sucesso!');
       router.push('/');
     } catch {
       toast.error('Credenciais inválidas!');
     }
-
   });
 
   return { handleSubmit, register, errors, isPending };

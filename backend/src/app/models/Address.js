@@ -4,7 +4,7 @@ exports.Address = void 0;
 const mongoose_1 = require("mongoose");
 exports.Address = (0, mongoose_1.model)('Address', new mongoose_1.Schema({
     zipCode: {
-        type: Number,
+        type: String,
         required: true,
     },
     city: {

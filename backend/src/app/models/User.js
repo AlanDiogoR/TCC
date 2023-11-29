@@ -15,6 +15,10 @@ exports.User = (0, mongoose_1.model)('User', new mongoose_1.Schema({
         type: String,
         required: true,
     },
+    adressId: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'Address',
+    },
     createAt: {
         type: Date,
         default: Date.now,

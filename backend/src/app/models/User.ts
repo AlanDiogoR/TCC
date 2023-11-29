@@ -13,6 +13,10 @@ export const User = model('User', new Schema({
     type: String,
     required: true,
   },
+  adressId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Address',
+  },
   createAt: {
     type: Date,
     default: Date.now,

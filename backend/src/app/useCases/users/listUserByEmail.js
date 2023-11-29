@@ -9,18 +9,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.listAddress = void 0;
-const Address_1 = require("../../models/Address");
-function listAddress(req, res) {
+exports.listUserByEmail = void 0;
+const User_1 = require("../../models/User");
+function listUserByEmail(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const address = yield Address_1.Address.find();
-            if (!address) {
+            const { userEmail } = req.params;
+            if (!userEmail) {
                 return res.status(400).json({
-                    error: 'address is required',
+                    error: 'userEmail is required',
                 });
             }
-            res.json(address);
+            // Use um método de consulta para encontrar o usuário por e-mail
+            const user = yield User_1.User.findOne({ email: userEmail });
+            if (!user) {
+                return res.status(404).json({
+                    error: 'user not exists',
+                });
+            }
+            res.json(user);
         }
         catch (error) {
             console.log(error);
@@ -28,4 +35,4 @@ function listAddress(req, res) {
         }
     });
 }
-exports.listAddress = listAddress;
+exports.listUserByEmail = listUserByEmail;

@@ -4,7 +4,7 @@ import { Address } from '../../models/Address';
 
 export async function createAddress(req: Request, res: Response) {
   try {
-    const { zipCode, city, state, neighborhood, streets, numberHouse, userId} = req.body;
+    const { zipCode, city, state, neighborhood, street, numberHouse, userId} = req.body;
 
     if (!zipCode) {
       return res.status(400).json({
@@ -30,7 +30,7 @@ export async function createAddress(req: Request, res: Response) {
       });
     }
 
-    if (!streets) {
+    if (!street) {
       return res.status(400).json({
         error: 'streets is required',
       });
@@ -49,7 +49,7 @@ export async function createAddress(req: Request, res: Response) {
     }
 
 
-    const address = await Address.create({zipCode, city, state, neighborhood, streets, numberHouse, userId});
+    const address = await Address.create({zipCode, city, state, neighborhood, street, numberHouse, userId});
 
     res.status(201).json(address);
   } catch (error) {

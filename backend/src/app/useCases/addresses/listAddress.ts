@@ -12,7 +12,7 @@ export async function listAddress(req: Request, res: Response) {
       });
     }
 
-    res.json(Address);
+    res.json(address);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

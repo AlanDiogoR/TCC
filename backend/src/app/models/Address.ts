@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 
 export const Address = model('Address', new Schema({
   zipCode: {
-    type: Number,
+    type: String,
     required: true,
   },
   city: {

@@ -62,7 +62,7 @@ export const ContainerPassword = styled('div', {
   },
 
   p: {
-    marginTop: '10px'
+    marginTop: '8%'
   },
 
   div: {
@@ -71,7 +71,7 @@ export const ContainerPassword = styled('div', {
     alignItems: 'center',
 
     button: {
-      marginTop: '10px',
+      marginTop: '15px',
       border: 'none',
       background: '$gray100',
       color: '$greenMenta300',

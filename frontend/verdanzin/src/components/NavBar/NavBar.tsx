@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import casa  from '@/assets/logo/casa.png';
 import logo  from '@/assets/logo/verdan_logo_org.png';
@@ -21,7 +21,7 @@ interface CategoriesProps {
 }
 
 export default function NavBar({ categories, onSelectCategory, categoryId }:CategoriesProps) {
-  const { state, dispatch } = useAuth();
+  const { state } = useAuth();
   const [isOpen, setIsOpen] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -62,7 +62,6 @@ export default function NavBar({ categories, onSelectCategory, categoryId }:Cate
             alt=''
           />
         </Link>
-
 
         <Research>
           {categories?.length ? (

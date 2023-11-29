@@ -26,7 +26,7 @@ export default function CreateAccount() {
   };
 
   const logein = (user: string) => {
-    dispatch({ type: 'LOGIN', payload: user });
+    dispatch({ type: 'LOGIN', payload: {user, token: ''}});
   };
 
   const handleCreateAccount = async (e: React.FormEvent<HTMLFormElement>) => {

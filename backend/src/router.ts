@@ -31,6 +31,8 @@ import { deleteUser } from './app/useCases/users/deleteUser';
 import { loginUser } from './app/useCases/users/loginUser';
 import { User } from './app/models/User';
 import { listProductById } from './app/useCases/products/listProductById';
+import { listUserByEmail } from './app/useCases/users/listUserByEmail';
+import { changePassword } from './app/useCases/users/changeUserPassword';
 
 export const router = Router();
 
@@ -123,9 +125,12 @@ router.post('/auth/login', loginUser);
 
 router.get('/categories/:categoryId/products', listProductByCategory);
 router.get('/products/:productId', listProductById);
+router.get('/users/:userEmail', listUserByEmail);
 
 
+//change
 
+router.patch('users/changePassword', changePassword);
 
 //delete
 
