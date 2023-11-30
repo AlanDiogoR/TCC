@@ -7,6 +7,8 @@ import { useAuth } from '@/auth/authContex';
 import { User } from '@/types/User';
 import { api } from '@/utils/api';
 import { Adress } from '@/types/Adress';
+import React from 'react';
+import { toast } from 'react-toastify';
 
 export default function YourAddressPage() {
   const [address, setAddress] = useState<Adress | null>(null);
@@ -16,6 +18,11 @@ export default function YourAddressPage() {
 
   const handleAddAddressClick = () => {
     router.push('/AddAddress');
+  };
+
+  const handleDeleteAddress = () => {
+    api.delete(`/addresses/${address?._id}`);
+    toast.success('Endereço excçuido com sucesso!');
   };
 
   const [user, setUser] = useState<User | null>(null);
@@ -87,7 +94,7 @@ export default function YourAddressPage() {
 
             <div>
               <button>Alterar</button>
-              <button>Excluir</button>
+              <button onClick={handleDeleteAddress}>Excluir</button>
             </div>
           </ContainerPassword>
         )}

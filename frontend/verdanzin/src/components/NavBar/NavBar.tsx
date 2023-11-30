@@ -1,18 +1,16 @@
 import { useState } from 'react';
-
-import casa  from '@/assets/logo/casa.png';
-import logo  from '@/assets/logo/verdan_logo_org.png';
-import { NavIcons, NavSearch, Research, IconSearch, ButtonAll, MenuHamburguer, MenuItem, ListHamburguer, ButtonHome } from '@/styles/pages/NavBar';
+import Image from 'next/image';
 import { FaHeart, FaSearch, FaRegUser } from 'react-icons/fa';
 import { FiShoppingCart } from 'react-icons/fi';
-import Image from 'next/image';
-import { Category } from '@/types/Category';
 import Link from 'next/link';
 import { api } from '@/utils/api';
 import { Product } from '@/types/Product';
-import { Slider } from '@/pages/Banners/Slider';
 import { useAuth } from '@/auth/authContex';
-
+import { NavIcons, NavSearch, Research, IconSearch, ButtonAll, MenuHamburguer, MenuItem, ListHamburguer, ButtonHome } from '@/styles/pages/NavBar';
+import { Slider } from '@/pages/Banners/Slider';
+import casa  from '@/assets/logo/casa.png';
+import logo  from '@/assets/logo/verdan_logo_org.png';
+import { Category } from '@/types/Category';
 
 interface CategoriesProps {
   categories?: Category[];
@@ -20,11 +18,12 @@ interface CategoriesProps {
   categoryId?: string;
 }
 
-export default function NavBar({ categories, onSelectCategory, categoryId }:CategoriesProps) {
+export default function NavBar({ categories, onSelectCategory, categoryId }: CategoriesProps) {
   const { state } = useAuth();
   const [isOpen, setIsOpen] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -35,25 +34,31 @@ export default function NavBar({ categories, onSelectCategory, categoryId }:Cate
   };
 
   const handleSelectChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
-    categoryId = event.target.value;
+    const selectedCategoryId = event.target.value;
     if (onSelectCategory) {
-      onSelectCategory(categoryId ?? '6541a3bed7de0e00c7c7986a');
+      onSelectCategory(selectedCategoryId ?? '6541a3bed7de0e00c7c7986a');
     }
 
-    const route = !categoryId
+    const route = !selectedCategoryId
       ? '/products'
-      : `/categories/${categoryId}/products`
-    ;
+      : `/categories/${selectedCategoryId}/products`;
+
     const { data } = await api.get(route);
     setProducts(data);
-    setSelectedCategory(categoryId);
+    setSelectedCategory(selectedCategoryId);
+  };
+
+  const handleSearch = async () => {
+    const filteredProducts = await products.filter((product: Product) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setProducts(filteredProducts);
 
   };
 
   return (
     <>
       <NavSearch>
-
         <Link href={'/'}>
           <Image
             src={logo}
@@ -66,9 +71,9 @@ export default function NavBar({ categories, onSelectCategory, categoryId }:Cate
         <Research>
           {categories?.length ? (
             <ButtonAll onChange={handleSelectChange}>
-              {categories.map(categorie => (
-                <option key={categorie._id} value={categorie._id}>
-                  {categorie.name}
+              {categories.map(category => (
+                <option key={category._id} value={category._id}>
+                  {category.name}
                 </option>
               ))}
             </ButtonAll>
@@ -84,15 +89,18 @@ export default function NavBar({ categories, onSelectCategory, categoryId }:Cate
               </ButtonHome>
             </Link>
           )}
-          <input type="text"  placeholder="Pesquise aqui"/>
-          <IconSearch>
-            <FaSearch/>
+          <input
+            type="text"
+            placeholder="Pesquise aqui"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <IconSearch onClick={handleSearch}>
+            <FaSearch />
           </IconSearch>
-
         </Research>
 
         <NavIcons>
-
           {state.user === null ? (
             <Link href="../Login">
               <FaRegUser />
@@ -103,15 +111,13 @@ export default function NavBar({ categories, onSelectCategory, categoryId }:Cate
             </Link>
           )}
 
-
           <Link href={'../Favorite'}>
-            <FaHeart/>
+            <FaHeart />
           </Link>
 
           <Link href={'../Cart'}>
-            <FiShoppingCart/>
+            <FiShoppingCart />
           </Link>
-
         </NavIcons>
 
         <MenuHamburguer className={isOpen ? 'open' : ''} onClick={handleClick}>
@@ -123,18 +129,14 @@ export default function NavBar({ categories, onSelectCategory, categoryId }:Cate
 
           {isOpen && (
             <ListHamburguer>
-
               <ul>
-                {categories?.map(categorie => {
-                  return (
-                    <MenuItem onClick={handleItemClick} key={categorie._id}>{categorie.name}</MenuItem>
-                  );
-                })}
+                {categories?.map(category => (
+                  <MenuItem onClick={handleItemClick} key={category._id}>{category.name}</MenuItem>
+                ))}
               </ul>
             </ListHamburguer>
           )}
         </MenuHamburguer>
-
       </NavSearch>
 
       {categories && categories.length > 0 && !selectedCategory && (

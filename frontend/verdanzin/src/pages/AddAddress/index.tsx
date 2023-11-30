@@ -69,24 +69,25 @@ export default function AddAddressPage() {
 
       await api.post('/addresses', fullAddressData);
 
-      toast.success('Endereço adcionado com sucesso!');
+      toast.success('Endereço adicionado com sucesso!');
 
       router.push('/YourAdress');
     } catch (error) {
       console.error('Erro ao adicionar endereço:', error);
-      toast.error('Erro ao adcionar endereço!');
+      toast.error('Erro ao adicionar endereço!');
     }
   };
 
   const fetchCepData = async (cep: string) => {
     try {
       const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+
       return {
-        city: response.data.localidade,
-        state: response.data.uf,
-        neighborhood: response.data.bairro,
-        street: response.data.logradouro,
-        zipCode: response.data.cep,
+        city: response.data.localidade || '',
+        state: response.data.uf || '',
+        neighborhood: response.data.bairro || '',
+        street: response.data.logradouro || '',
+        zipCode: response.data.cep || '',
       };
     } catch (error) {
       console.error('Erro ao buscar dados do CEP:', error);
