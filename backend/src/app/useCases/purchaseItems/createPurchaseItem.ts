@@ -4,13 +4,13 @@ import { PurchaseItem } from '../../models/PurchaseItem';
 
 export async function createPurchaseItem(req: Request, res: Response) {
   try {
-    const { products, value, productId, PurchaseId }  = req.body;
+    const { userId, value, productId, PurchaseId }  = req.body;
 
-    const purchaseItem = await PurchaseItem.create({products, value, productId, PurchaseId });
+    const purchaseItem = await PurchaseItem.create({userId, value, productId, PurchaseId });
 
-    if (!products) {
+    if (!userId) {
       return res.status(400).json({
-        error: 'Products- is required',
+        error: 'userid is required',
       });
     }
 
@@ -29,18 +29,6 @@ export async function createPurchaseItem(req: Request, res: Response) {
     if (!PurchaseId) {
       return res.status(400).json({
         error: 'PurchaseId is required',
-      });
-    }
-
-    if (!products) {
-      return res.status(400).json({
-        error: 'Products- is required',
-      });
-    }
-
-    if (!value) {
-      return res.status(400).json({
-        error: 'Value is required',
       });
     }
 
