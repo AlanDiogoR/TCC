@@ -26,7 +26,8 @@ export const ContainerCarts= styled('div', {
   justifyContent: 'space-around',
   border: '2px solid #868686',
   padding: '20px',
-  borderRadius: '8px'
+  borderRadius: '8px',
+  marginTop: '36px'
 });
 
 export const ProductDetailsCart = styled('div', {

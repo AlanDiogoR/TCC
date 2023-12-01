@@ -5,11 +5,14 @@ import { Product } from '@/types/Product';
 import { Container, ContainerInput, ImageContainer, ProductContainer, ProductDetails } from '@/styles/pages/product';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { formatCurrency } from '@/utils/formatCurrency';
-import { CartItem } from '@/types/CartItem';
 import { CaretUpIcon } from '@radix-ui/react-icons';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { Footer } from '@/components/Footer';
 import NavBar from '@/components/NavBar/NavBar';
+import { useAuth } from '@/auth/authContex';
+import { User } from '@/types/User';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 
 interface ProductProps {
@@ -17,8 +20,32 @@ interface ProductProps {
 }
 
 export default function ProductPage({ product }: ProductProps) {
-  const [ cartItems, setCartItems] = useState<CartItem[]>([]);
   const [inputQuantity, setInputQuantity] = useState<number>(1);
+  const { state } = useAuth();
+  const router = useRouter();
+
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await api.get('/users');
+        const allUsers: User[] = response.data;
+
+        const foundUser = allUsers.find(u => u.email === state.user);
+
+        if (foundUser) {
+          setUser(foundUser);
+        } else {
+          console.log(`Usuário com o email ${state.user} não encontrado.`);
+        }
+      } catch (error) {
+        console.error(`Erro ao buscar os usuários: ${error}`);
+      }
+    };
+
+    fetchUserData();
+  }, [state.user]);
 
   useEffect(() => {
     if (!product) {
@@ -26,30 +53,40 @@ export default function ProductPage({ product }: ProductProps) {
     }
   }, [product]);
 
-  const handleAddToCart = () => {
-
-    // Adiciona ao carrinho
-    setCartItems((prevState) => {
-      const itemIndex = prevState.findIndex(
-        (cartItem) => cartItem.product._id === product._id
-      );
-
-      if (itemIndex < 0) {
-        return prevState.concat({
-          quantity: 1,
-          product,
+  const handleAddToCart = async () => {
+    if (!user) {
+      toast.error('Você precisa efetuar o login antes de comprar ou adcionar um produto ao carrinho');
+      router.push('/Login');
+    } else {
+      try {
+        await api.post('/purchaseItems', {
+          productId: product._id,
+          userId: user._id
         });
-      }
 
-      const newCartItems = [...prevState];
-      const item = newCartItems[itemIndex];
-      newCartItems[itemIndex] = {
-        ...item,
-        quantity: item.quantity + 1,
-      };
-      alert('Produto adicionado ao carrinho!');
-      return newCartItems;
-    });
+        toast.success('Produto adcionado com sucesso!');
+      } catch (error) {
+        console.error('Erro ao adicionar ao carrinho:', error);
+      }
+    }
+  };
+
+  const handdleBuyProduct = async () => {
+    if (!user) {
+      toast.error('Você precisa efetuar o login antes de comprar ou adcionar um produto ao carrinho');
+      router.push('/Login');
+    } else {
+      try {
+        await api.post('/purchaseItems', {
+          productId: product._id,
+          userId: user._id
+        });
+        router.push('/Cart');
+        toast.success('Você esta sendo redirecionado para a páina do carrinho!');
+      } catch (error) {
+        console.error('Erro ao adicionar ao carrinho:', error);
+      }
+    }
   };
 
   const handleAddQuantity = () => {
@@ -108,7 +145,10 @@ export default function ProductPage({ product }: ProductProps) {
               >
                 Adcionar ao carrinho
               </button>
-              <button>Comprar agora</button>
+
+              <button onClick={handdleBuyProduct}>
+                Comprar agora
+              </button>
             </div>
           </ProductDetails>
         </ProductContainer>

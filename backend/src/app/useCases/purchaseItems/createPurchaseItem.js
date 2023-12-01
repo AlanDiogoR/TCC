@@ -14,51 +14,16 @@ const PurchaseItem_1 = require("../../models/PurchaseItem");
 function createPurchaseItem(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { products, value, productId, PurchaseId } = req.body;
-            const purchaseItem = yield PurchaseItem_1.PurchaseItem.create({ products, value, productId, PurchaseId });
-            if (!products) {
+            const { userId, productId, PurchaseId } = req.body;
+            const purchaseItem = yield PurchaseItem_1.PurchaseItem.create({ userId, productId, PurchaseId });
+            if (!userId) {
                 return res.status(400).json({
-                    error: 'Products- is required',
-                });
-            }
-            if (!value) {
-                return res.status(400).json({
-                    error: 'Value is required',
+                    error: 'userid is required',
                 });
             }
             if (!productId) {
                 return res.status(400).json({
                     error: 'ProductId is required',
-                });
-            }
-            if (!PurchaseId) {
-                return res.status(400).json({
-                    error: 'PurchaseId is required',
-                });
-            }
-            if (!products) {
-                return res.status(400).json({
-                    error: 'Products- is required',
-                });
-            }
-            if (!value) {
-                return res.status(400).json({
-                    error: 'Value is required',
-                });
-            }
-            if (!productId) {
-                return res.status(400).json({
-                    error: 'ProductId is required',
-                });
-            }
-            if (!PurchaseId) {
-                return res.status(400).json({
-                    error: 'PurchaseId is required',
-                });
-            }
-            if (!purchaseItem) {
-                return res.status(400).json({
-                    error: 'PurchaseItem is required',
                 });
             }
             res.status(201).json(purchaseItem);

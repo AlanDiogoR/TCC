@@ -91,6 +91,7 @@ export default function CreateAccount() {
             <label>E-mail:</label>
             <Input
               name="email"
+              type="email"
               placeholder="Seu e-mail aqui..."
               value={newUser.email}
               onChange={handleChange}

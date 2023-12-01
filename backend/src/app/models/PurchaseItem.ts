@@ -6,18 +6,9 @@ export const PurchaseItem = model('PurchaseItem', new Schema({
     required: true,
     ref: 'User',
   },
-  value: {
-    type: Number,
-    required: true,
-  },
   productId: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'Product',
   },
-  PurchaseId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'Purchase',
-  }
 }));
