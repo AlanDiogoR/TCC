@@ -1,5 +1,5 @@
 import NavBar from '@/components/NavBar/NavBar';
-import { ContainerCart, ContainerCarts, ProductDetailsCart } from './cart';
+import { ContainerCart, ContainerCarts, DetailsInformation, Infomrations, Main, NameProduct, ProductDetailsCart, ProductImg, Titulo } from './cart';
 import { Footer } from '@/components/Footer';
 import { useEffect, useState } from 'react';
 import { User } from '@/types/User';
@@ -9,11 +9,14 @@ import { PurchaseItems } from '@/types/PurchaseItems';
 import { Product } from '@/types/Product';
 import Image from 'next/image';
 
+type ProductIds = string[];
+
+
 export default function Cart() {
   const [user, setUser] = useState<User | null>(null);
   const { state } = useAuth();
-  const [purchaseItems, setPurchaseItems] = useState<PurchaseItems[]>([]);
-  const [product, setProduct] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [reinderizar, setReinderizar] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -33,75 +36,71 @@ export default function Cart() {
       }
     };
 
-    const fetchPurchaseItemsData = async () => {
+    const loadProducts = async () => {
       try {
         const purchaseItemsResponse = await api.get('/purchaseitems');
         const allPurchaseItems: PurchaseItems[] = purchaseItemsResponse.data;
 
-        if (Array.isArray(allPurchaseItems)) {
-          setPurchaseItems(allPurchaseItems);
-        } else {
-          console.log('Os itens de compra não são um array.');
-        }
+        const createProductsList = async () => {
+          let products = [];
+          for (const elemento of allPurchaseItems) {
+            const response = await api.get(`/products/${elemento['productId']}`);
+            products.push(response.data);
+          }
+          return products;
+        };
+
+        const newProducts = await createProductsList();
+        setProducts(newProducts);
+        setReinderizar(true);
       } catch (error) {
         console.error(error);
       }
+
     };
-
-    const fetchData = async () => {
-      try {
-        const response = await api.get(`/products/${purchaseItems.map(item => item.productId)}`);
-        const productsData: Product[] = response.data;
-
-        const products = productsData.map(productData => ({
-          _id: productData._id || '',
-          name: productData.name || '',
-          description: productData.description || '',
-          details: productData.details || '',
-          imagePath: productData.imagePath || '',
-          price: productData.price || 0,
-          quantity: productData.quantity || 0,
-        }));
-
-        setProduct(products);
-      } catch (error) {
-        console.log(`Erro ao buscar o produto: ${error}`);
-      }
-    };
-
-    fetchData();
 
     fetchUserData();
-    fetchPurchaseItemsData();
-  }, [state.user, purchaseItems]);
+    loadProducts();
+  }, []);
 
   return (
     <>
       <NavBar />
+      {reinderizar && (
+        <>
+          <Main>
+            <ContainerCart>
+              <Titulo>Meu carrinho de compras</Titulo>
+              {products.map(item => (
+                <ContainerCarts key={item._id}>
+                  <ProductDetailsCart>
+                    <NameProduct>{item.name}</NameProduct>
+                    <p>Quantidade: {item.quantity}</p>
+                    <p>Preço: {item.price}</p>
+                    <p>{item.description}</p>
+                    <p></p>
+                  </ProductDetailsCart>
+                  <ProductImg>
+                    <Image
+                      src={`/uploads/${item.imagePath}`}
+                      width={520}
+                      height={480}
+                      alt={`${item.name}`}
+                    />
+                  </ProductImg>
+                </ContainerCarts>
+              ))}
+            </ContainerCart>
+            <Infomrations>
+              <Titulo>Resumo da compra</Titulo>
+              <DetailsInformation>
 
-      <ContainerCart>
-        <h1>Carrinho de compras</h1>
-
-        {product.map(item => (
-          <ContainerCarts key={item._id}>
-            <ProductDetailsCart>
-              <p>{item.name}</p>
-              <p>{item.quantity}</p>
-              <p>{item.price}</p>
-            </ProductDetailsCart>
-            <div>
-              <Image
-                src={`/uploads/${item.imagePath}`}
-                width={520}
-                height={480}
-                alt={`${item.name}`}
-              />
-            </div>
-          </ContainerCarts>
-        ))}
-      </ContainerCart>
-
-      <Footer />
+              </DetailsInformation>
+            </Infomrations>
+          </Main>
+          <Footer />
+        </>
+      )}
     </>
   );
 }

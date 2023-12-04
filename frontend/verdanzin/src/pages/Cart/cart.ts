@@ -1,39 +1,75 @@
 import { styled } from '@/styles';
 
-export const ContainerCart = styled('div', {
-  background: '$gray100',
-  color: '$gray900',
+export const Main = styled('section', {
   display: 'flex',
-  height: '100vh',
-  width: '100vw',
+  gap: '1rem',
+  width: '80vw',
+  margin: '3rem auto',
+});
+
+export const Titulo = styled('h1', {
+  fontSize: '2rem',
+  color: '#A7CF44',
+});
+
+export const ContainerCart = styled('div', {
+  display: 'flex',
   flexDirection: 'column',
+  gap: '1rem',
+  width: '60%',
+  color: '$gray900',
+});
+
+export const ContainerCarts = styled('div', {
+  display: 'flex',
+  height: '250px',
+  justifyContent: 'space-around',
+  flexDirection: 'row-reverse',
+
+  padding: '1rem',
+
+  border: '1px solid #ccc',
+  borderRadius: '5px',
+  backgroundColor: '#F5F5F5',
+  boxShadow: '2px 3px 5px 0px #ccc',
+});
+
+export const ProductImg = styled('div', {
+  display: 'flex',
   alignItems: 'center',
+  justifyContent: 'center',
+  height: '100%',
 
-  h1: {
-    margin: '2rem'
-  },
-
-  div: {
-    display: 'flex',
-    width: '90%',
-    justifyContent: 'space-around',
+  img: {
+    height: '180px',
+    width: '180px',
   }
 });
 
-export const ContainerCarts= styled('div', {
-  display: 'flex',
-  width: '90%',
-  justifyContent: 'space-around',
-  border: '2px solid #868686',
-  padding: '20px',
-  borderRadius: '8px',
-  marginTop: '36px'
-});
-
 export const ProductDetailsCart = styled('div', {
-  marginTop: '1rem',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between',
-  gap: '0.875rem'
+  justifyContent: 'space-around',
+});
+
+export const NameProduct = styled('p', {
+  fontSize: '1.2rem',
+  fontWeight: 'bolder',
+});
+
+export const Infomrations = styled('section', {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
+  width: '40%',
+});
+
+export const DetailsInformation = styled('div', {
+  width: '100%',
+  height: '100%',
+
+  border: '1px solid #ccc',
+  borderRadius: '5px',
+  backgroundColor: '#F5F5F5',
+  boxShadow: '2px 3px 5px 0px #ccc',
 });
