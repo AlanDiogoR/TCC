@@ -11,6 +11,7 @@ import { Slider } from '@/pages/Banners/Slider';
 import casa  from '@/assets/logo/casa.png';
 import logo  from '@/assets/logo/verdan_logo_org.png';
 import { Category } from '@/types/Category';
+import { toast } from 'react-toastify';
 
 interface CategoriesProps {
   categories?: Category[];
@@ -18,7 +19,7 @@ interface CategoriesProps {
   categoryId?: string;
 }
 
-export default function NavBar({ categories, onSelectCategory, categoryId }: CategoriesProps) {
+export default function NavBar({ categories, onSelectCategory }: CategoriesProps) {
   const { state } = useAuth();
   const [isOpen, setIsOpen] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
@@ -101,7 +102,7 @@ export default function NavBar({ categories, onSelectCategory, categoryId }: Cat
         </Research>
 
         <NavIcons>
-          {state.user === null ? (
+          {state.user == null ? (
             <Link href="../Login">
               <FaRegUser />
             </Link>
@@ -115,9 +116,15 @@ export default function NavBar({ categories, onSelectCategory, categoryId }: Cat
             <FaHeart />
           </Link>
 
-          <Link href={'../Cart'}>
-            <FiShoppingCart />
-          </Link>
+          {state.user == null ? (
+            <Link href={'../Login'} onClick={() => (toast.error('Você precisa fazer login para adcionar ao carrinho!'))}>
+              <FiShoppingCart />
+            </Link>
+          ) : (
+            <Link href={'../Cart'}>
+              <FiShoppingCart />
+            </Link>
+          )}
         </NavIcons>
 
         <MenuHamburguer className={isOpen ? 'open' : ''} onClick={handleClick}>

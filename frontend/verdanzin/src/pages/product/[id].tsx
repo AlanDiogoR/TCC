@@ -21,6 +21,8 @@ interface ProductProps {
 
 export default function ProductPage({ product }: ProductProps) {
   const [inputQuantity, setInputQuantity] = useState<number>(1);
+  const [isActionEnabled, setIsActionEnabled] = useState(true);
+  const [isActionEnabledM, setIsActionEnabledM] = useState(true);
   const { state } = useAuth();
   const router = useRouter();
 
@@ -90,18 +92,28 @@ export default function ProductPage({ product }: ProductProps) {
   };
 
   const handleAddQuantity = () => {
-    setInputQuantity(inputQuantity + 1 );
+    if (isActionEnabled) {
+      setInputQuantity(inputQuantity + 1 );
 
-    if (inputQuantity > (product.quantity - 1)) {
-      alert('not');
+      if(inputQuantity  == (product.quantity - 1)) {
+        setIsActionEnabled(false);
+        toast.error('Não é possivel comprar mais do que a quantidade em estoque!');
+      }
+    } else {
+      toast.error('Não é possivel comprar mais do que a quantidade em estoque!');
     }
   };
 
   const handleRemoveQuantity = () => {
-    setInputQuantity(inputQuantity - 1);
+    if (isActionEnabledM) {
+      setInputQuantity(inputQuantity - 1 );
 
-    if (inputQuantity < 1 ) {
-      alert('not');
+      if(inputQuantity  == 1) {
+        setIsActionEnabledM(false);
+        toast.error('Não é possivel adcionar nenhum produto!');
+      }
+    } else {
+      toast.error('Não é possivel adcionar nenhum produto!');
     }
   };
 
@@ -132,7 +144,7 @@ export default function ProductPage({ product }: ProductProps) {
                   Quantidade: {inputQuantity}
                 </h2>
                 <div>
-                  <CaretUpIcon  onClick={handleAddQuantity}  color='#121214'/>
+                  <CaretUpIcon  onClick={handleAddQuantity}  color='#121214' />
                   <CaretDownIcon onClick={handleRemoveQuantity} color='#121214'/>
                 </div>
               </div>

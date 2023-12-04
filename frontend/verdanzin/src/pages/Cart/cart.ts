@@ -20,6 +20,25 @@ export const ContainerCart = styled('div', {
   color: '$gray900',
 });
 
+export const ContainerCartT = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '1rem',
+  width: '100%',
+  color: '$gray900',
+});
+
+export const Nothing = styled('p', {
+  display: 'flex',
+  flexDirection: 'column',
+
+  color: '$gray300',
+  marginTop: '16%',
+  fontSize: '$2xl'
+});
+
 export const ContainerCarts = styled('div', {
   display: 'flex',
   height: '250px',
@@ -72,4 +91,50 @@ export const DetailsInformation = styled('div', {
   borderRadius: '5px',
   backgroundColor: '#F5F5F5',
   boxShadow: '2px 3px 5px 0px #ccc',
+
+  p: {
+    fontSize: '$2xl',
+    color: 'black',
+  }
+});
+
+export const ContainerInput = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: 'auto',
+
+  div: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    div: {
+      display: 'flex',
+      flexDirection: 'column',
+    }
+  },
+
+  h2: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '50%',
+    marginLeft: '0',
+    marginRight: '0',
+    paddingLeft: '0',
+    paddingRight:'0'
+  },
+
+  h3: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '30%',
+    color: '$gray900',
+  },
+
+
 });

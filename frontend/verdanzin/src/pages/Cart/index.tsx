@@ -1,5 +1,5 @@
 import NavBar from '@/components/NavBar/NavBar';
-import { ContainerCart, ContainerCarts, DetailsInformation, Infomrations, Main, NameProduct, ProductDetailsCart, ProductImg, Titulo } from './cart';
+import { ContainerCart, ContainerCartT, ContainerCarts, ContainerInput, DetailsInformation, Infomrations, Main, NameProduct, Nothing, ProductDetailsCart, ProductImg, Titulo } from './cart';
 import { Footer } from '@/components/Footer';
 import { useEffect, useState } from 'react';
 import { User } from '@/types/User';
@@ -8,8 +8,9 @@ import { useAuth } from '@/auth/authContex';
 import { PurchaseItems } from '@/types/PurchaseItems';
 import { Product } from '@/types/Product';
 import Image from 'next/image';
+import { toast } from 'react-toastify';
+import { CaretDownIcon, CaretUpIcon } from '@radix-ui/react-icons';
 
-type ProductIds = string[];
 
 
 export default function Cart() {
@@ -17,6 +18,9 @@ export default function Cart() {
   const { state } = useAuth();
   const [products, setProducts] = useState<Product[]>([]);
   const [reinderizar, setReinderizar] = useState<boolean>(false);
+  const [inputQuantities, setInputQuantities] = useState<{ [productId: string]: number }>({});
+  const [isActionEnabled, setIsActionEnabled] = useState<{ [productId: string]: boolean | undefined }>({});
+  const [isActionEnabledM, setIsActionEnabledM] = useState<{ [productId: string]: boolean | undefined }>({});
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -28,6 +32,39 @@ export default function Cart() {
 
         if (foundUser) {
           setUser(foundUser);
+
+          const loadProducts = async () => {
+            try {
+              const purchaseItemsResponse = await api.get('/purchaseitems');
+              const allPurchaseItems: PurchaseItems[] = purchaseItemsResponse.data;
+
+              const createProductsList = async () => {
+              // eslint-disable-next-line
+                let products = [];
+                for (const elemento of allPurchaseItems) {
+
+                  if (foundUser._id == elemento.userId) {
+                    const response = await api.get(`/products/${elemento['productId']}`);
+                    products.push(response.data);
+                  }
+                }
+                return products;
+              };
+
+              const newProducts = await createProductsList();
+              setProducts(newProducts);
+              setReinderizar(true);
+
+              if (newProducts.length === 0) {
+                setReinderizar(false);
+              }
+            } catch (error) {
+              console.error(error);
+            }
+
+          };
+
+          loadProducts();
         } else {
           console.log(`Usuário com o email ${state.user} não encontrado.`);
         }
@@ -36,46 +73,57 @@ export default function Cart() {
       }
     };
 
-    const loadProducts = async () => {
-      try {
-        const purchaseItemsResponse = await api.get('/purchaseitems');
-        const allPurchaseItems: PurchaseItems[] = purchaseItemsResponse.data;
-
-        const createProductsList = async () => {
-          let products = [];
-          for (const elemento of allPurchaseItems) {
-            const response = await api.get(`/products/${elemento['productId']}`);
-            products.push(response.data);
-          }
-          return products;
-        };
-
-        const newProducts = await createProductsList();
-        setProducts(newProducts);
-        setReinderizar(true);
-      } catch (error) {
-        console.error(error);
-      }
-
-    };
 
     fetchUserData();
-    loadProducts();
-  }, []);
+  }, [state.user]);
+
+  const handleAddQuantity = (productId: string, maxQuantity: number) => {
+    setInputQuantities((prev) => ({
+      ...prev,
+      [productId]: (prev[productId] || 0) + 1,
+    }));
+
+    setIsActionEnabled((prev) => ({
+      ...prev,
+      [productId]: ((prev[productId] || 0) ) as boolean,
+    }));
+  };
+
+  const handleRemoveQuantity = (productId: string) => {
+    setInputQuantities(prev => ({
+      ...prev,
+      [productId]: (prev[productId] || 0) - 1,
+    }));
+
+    setIsActionEnabledM((prev) => ({
+      ...prev,
+      [productId]: ((prev[productId] || 0) ) as boolean,
+    }));
+  };
 
   return (
     <>
       <NavBar />
-      {reinderizar && (
+      {reinderizar ? (
         <>
           <Main>
             <ContainerCart>
               <Titulo>Meu carrinho de compras</Titulo>
               {products.map(item => (
                 <ContainerCarts key={item._id}>
-                  <ProductDetailsCart>
+                  <ProductDetailsCart key={item._id}>
                     <NameProduct>{item.name}</NameProduct>
-                    <p>Quantidade: {item.quantity}</p>
+                    <ContainerInput>
+                      <div>
+                        <h2>
+                          Quantidade: {inputQuantities[item._id] || 1}
+                        </h2>
+                        <div>
+                          <CaretUpIcon onClick={() => handleAddQuantity(item._id, item.quantity)} color='#121214' />
+                          <CaretDownIcon onClick={() => handleRemoveQuantity(item._id)} color='#121214' />
+                        </div>
+                      </div>
+                    </ContainerInput>
                     <p>Preço: {item.price}</p>
                     <p>{item.description}</p>
                     <p></p>
@@ -95,11 +143,23 @@ export default function Cart() {
               <Titulo>Resumo da compra</Titulo>
               <DetailsInformation>
 
+                <p>subtotal</p>
+
+                <p>{products.length}</p>
+
               </DetailsInformation>
             </Infomrations>
           </Main>
           <Footer />
         </>
+      ) : (
+        <Main>
+          <ContainerCartT>
+            <Titulo>Meu carrinho de compras</Titulo>
+
+            <Nothing>Não há nada aqui...</Nothing>
+          </ContainerCartT>
+        </Main>
       )}
     </>
   );
