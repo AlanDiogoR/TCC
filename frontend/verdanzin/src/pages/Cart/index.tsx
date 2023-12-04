@@ -10,6 +10,7 @@ import { Product } from '@/types/Product';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
 import { CaretDownIcon, CaretUpIcon } from '@radix-ui/react-icons';
+import { json } from 'stream/consumers';
 
 
 
@@ -19,8 +20,6 @@ export default function Cart() {
   const [products, setProducts] = useState<Product[]>([]);
   const [reinderizar, setReinderizar] = useState<boolean>(false);
   const [inputQuantities, setInputQuantities] = useState<{ [productId: string]: number }>({});
-  const [isActionEnabled, setIsActionEnabled] = useState<{ [productId: string]: boolean | undefined }>({});
-  const [isActionEnabledM, setIsActionEnabledM] = useState<{ [productId: string]: boolean | undefined }>({});
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -78,27 +77,34 @@ export default function Cart() {
   }, [state.user]);
 
   const handleAddQuantity = (productId: string, maxQuantity: number) => {
-    setInputQuantities((prev) => ({
-      ...prev,
-      [productId]: (prev[productId] || 0) + 1,
-    }));
 
-    setIsActionEnabled((prev) => ({
-      ...prev,
-      [productId]: ((prev[productId] || 0) ) as boolean,
-    }));
+
+    const valuesArray = Object.values(inputQuantities);
+    const primeiroNumero = valuesArray.find(value => typeof value === 'number') || 1;
+
+    if (primeiroNumero <= maxQuantity) {
+      setInputQuantities((prev) => ({
+        ...prev,
+        [productId]: (prev[productId] || 0) + 1,
+      }));
+    } else {
+      toast.error('Você não pode comprar mais do que a quantidade em estoque');
+    }
   };
 
   const handleRemoveQuantity = (productId: string) => {
-    setInputQuantities(prev => ({
-      ...prev,
-      [productId]: (prev[productId] || 0) - 1,
-    }));
+    const valuesArray = Object.values(inputQuantities);
+    const primeiroNumero = valuesArray.find(value => typeof value === 'number') || 1;
 
-    setIsActionEnabledM((prev) => ({
-      ...prev,
-      [productId]: ((prev[productId] || 0) ) as boolean,
-    }));
+    if (primeiroNumero == 0) {
+      setInputQuantities(prev => ({
+        ...prev,
+        [productId]: (prev[productId] || 0) - 1,
+      }));
+    } else {
+      toast.error('Você não pode comprar zero produtos');
+    }
+
   };
 
   return (
