@@ -76,7 +76,9 @@ export default function UserLogin() {
           </InputContainer>
 
           <div>
-            <span>Esqueci minha senha</span>
+            <Link href={'/Password'}>
+              Esqueci a senha!
+            </Link>
           </div>
 
           <button type="submit">{isPending ? <Spinner/> : 'Entrar'}</button>

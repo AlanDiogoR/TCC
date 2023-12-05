@@ -22,7 +22,7 @@ export default function YourAddressPage() {
 
   const handleDeleteAddress = () => {
     api.delete(`/addresses/${address?._id}`);
-    toast.success('Endereço excçuido com sucesso!');
+    toast.success('Endereço excluído com sucesso!');
   };
 
   const [user, setUser] = useState<User | null>(null);

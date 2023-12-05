@@ -94,7 +94,7 @@ export const DetailsInformation = styled('div', {
 
   p: {
     fontSize: '$2xl',
-    color: 'black',
+    color: 'Yellow',
   }
 });
 
@@ -121,20 +121,5 @@ export const ContainerInput = styled('div', {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    width: '50%',
-    marginLeft: '0',
-    marginRight: '0',
-    paddingLeft: '0',
-    paddingRight:'0'
   },
-
-  h3: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '30%',
-    color: '$gray900',
-  },
-
-
 });

@@ -31,7 +31,7 @@ export default function ProductSlider({ products }:MenuProps) {
             return (
               <Link key={product._id} href={`/product/${product._id}`} prefetch={false}>
                 <ProductSLider className='keen-slider__slide' >
-                  <Image src={`/uploads/${product.imagePath}`} width={520} height={480} alt={product.name} />
+                  <Image src={`/uploads/${product.imagePath}`} width={320} height={280} alt={product.name} />
 
 
 

@@ -59,6 +59,7 @@ export default function NavBar({ categories, onSelectCategory }: CategoriesProps
 
   return (
     <>
+      <button onClick={() => (alert(JSON.stringify(products)))}>testeettet</button>
       <NavSearch>
         <Link href={'/'}>
           <Image

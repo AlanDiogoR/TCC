@@ -1,4 +1,3 @@
-import { SliderContainer } from '@/styles/pages/Slider';
 import Image from 'next/legacy/image';
 import briquedos from '@/assets/banners/brinquedos_banner1.png';
 import pet from '@/assets/banners/pet_banner.png';
@@ -8,6 +7,7 @@ import jardinagem from '@/assets/banners/jardinagem_banner.png';
 import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
 import { useEffect } from 'react';
+import { SliderContainer } from '@/styles/pages/slider';
 
 const sliderImages = [briquedos, pet, eletronicos, utilidades, jardinagem];
 

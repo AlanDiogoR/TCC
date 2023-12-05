@@ -19,11 +19,11 @@ export const MainContainer = styled('div', {
 export const HomeContainer = styled('main', {
   display: 'flex',
   gap: '3rem',
-  width: '100%',
+  width: '50%',
   maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
   marginLeft: 'auto',
   marginTop: '3rem',
-  minHeight: 656,
+  height: '520px',
 
   h1: {
     color: 'Black',
@@ -31,21 +31,21 @@ export const HomeContainer = styled('main', {
 });
 
 export const ProductSLider = styled('a', {
+  height: '40px',
   display: 'flex',
   flexDirection: 'row',
   background: 'white',
   borderRadius: 8,
-  //padding: '0.25rem',
   cursor: 'pointer',
   position: 'relative',
-  overflow: 'hidden',
-  minWidth: 540,
 
   alignItems: 'center',
   justifyContent: 'center',
 
   img: {
-    objectFit: 'cover',
+    objectFit: 'contain',
+    aspectRatio: '16 / 9', // Substitua pelo aspect ratio desejado
+    width: '80%',
   },
 
   footer: {
@@ -53,7 +53,7 @@ export const ProductSLider = styled('a', {
     bottom: '0.25rem',
     left: '0.25rem',
     right: '0.25rem',
-    padding: '2rem',
+    padding: '1rem', // Reduzi o padding do rodapé, você pode ajustar conforme necessário
 
     borderRadius: 8,
 
@@ -61,22 +61,20 @@ export const ProductSLider = styled('a', {
     alignItems: 'center',
     justifyContent: 'space-between',
 
-
     transform: 'translateY(110%)',
     opacity: 0,
     transition: 'all 0.2s ease-in-out',
 
     strong: {
-      fontSize: '$lg',
+      fontSize: '$md', // Ajustei o tamanho da fonte para médio, você pode ajustar conforme necessário
       color: 'Black',
     },
 
     span: {
-      fontSize: '$xl',
+      fontSize: '$lg', // Ajustei o tamanho da fonte para grande, você pode ajustar conforme necessário
       fontWeight: 'bold',
-      color: '$green300',
+      color: '$greenMenta300',
     }
-
   },
 
   '&:hover': {
@@ -85,5 +83,5 @@ export const ProductSLider = styled('a', {
       opacity: 1,
     }
   }
-
 });
+

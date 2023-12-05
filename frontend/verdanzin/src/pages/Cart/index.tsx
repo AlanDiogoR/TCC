@@ -9,8 +9,7 @@ import { PurchaseItems } from '@/types/PurchaseItems';
 import { Product } from '@/types/Product';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
-import { CaretDownIcon, CaretUpIcon } from '@radix-ui/react-icons';
-import { json } from 'stream/consumers';
+import { CaretDownIcon, CaretUpIcon, TrashIcon } from '@radix-ui/react-icons';
 
 
 
@@ -20,6 +19,8 @@ export default function Cart() {
   const [products, setProducts] = useState<Product[]>([]);
   const [reinderizar, setReinderizar] = useState<boolean>(false);
   const [inputQuantities, setInputQuantities] = useState<{ [productId: string]: number }>({});
+  const [isActionEnabled, setIsActionEnabled] = useState<{ [productId: string]: boolean | undefined }>({});
+  const [isActionEnabledM, setIsActionEnabledM] = useState<{ [productId: string]: boolean | undefined }>({});
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -77,8 +78,6 @@ export default function Cart() {
   }, [state.user]);
 
   const handleAddQuantity = (productId: string, maxQuantity: number) => {
-
-
     const valuesArray = Object.values(inputQuantities);
     const primeiroNumero = valuesArray.find(value => typeof value === 'number') || 1;
 
@@ -132,7 +131,7 @@ export default function Cart() {
                     </ContainerInput>
                     <p>Preço: {item.price}</p>
                     <p>{item.description}</p>
-                    <p></p>
+                    <TrashIcon/>
                   </ProductDetailsCart>
                   <ProductImg>
                     <Image
@@ -152,6 +151,8 @@ export default function Cart() {
                 <p>subtotal</p>
 
                 <p>{products.length}</p>
+
+                <p>{}</p>
 
               </DetailsInformation>
             </Infomrations>
