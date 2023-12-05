@@ -1,5 +1,4 @@
 "use strict";
-// userChangePassword.ts
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -9,13 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.changeUserPassword = void 0;
+exports.changePassword = void 0;
 const User_1 = require("../../models/User");
-function changeUserPassword(req, res) {
+const bcrypt_1 = __importDefault(require("bcrypt"));
+function changePassword(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { userId, currentPassword, newPassword } = req.body;
+            const { userId, newPassword } = req.body;
             // Verifica se o usuário existe
             const user = yield User_1.User.findById(userId);
             if (!user) {
@@ -23,14 +26,9 @@ function changeUserPassword(req, res) {
                     error: 'Usuário não encontrado',
                 });
             }
-            // Verifica a senha atual
-            if (user.password !== currentPassword) {
-                return res.status(401).json({
-                    error: 'Senha atual incorreta',
-                });
-            }
             // Atualiza a senha do usuário
-            user.password = newPassword;
+            const newHashedPassword = yield bcrypt_1.default.hash(newPassword, 12);
+            user.password = newHashedPassword;
             yield user.save();
             res.json({
                 success: true,
@@ -43,4 +41,4 @@ function changeUserPassword(req, res) {
         }
     });
 }
-exports.changeUserPassword = changeUserPassword;
+exports.changePassword = changePassword;

@@ -1,11 +1,10 @@
-// userChangePassword.ts
-
 import { Request, Response } from 'express';
 import { User } from '../../models/User';
+import bcrypt from 'bcrypt';
 
-export async function changeUserPassword(req: Request, res: Response) {
+export async function changePassword(req: Request, res: Response) {
   try {
-    const { userId, currentPassword, newPassword } = req.body;
+    const { userId, newPassword } = req.body;
 
 
     // Verifica se o usuário existe
@@ -16,16 +15,9 @@ export async function changeUserPassword(req: Request, res: Response) {
         error: 'Usuário não encontrado',
       });
     }
-
-    // Verifica a senha atual
-    if (user.password !== currentPassword) {
-      return res.status(401).json({
-        error: 'Senha atual incorreta',
-      });
-    }
-
     // Atualiza a senha do usuário
-    user.password = newPassword;
+    const newHashedPassword = await bcrypt.hash(newPassword, 12);
+    user.password = newHashedPassword;
     await user.save();
 
     res.json({

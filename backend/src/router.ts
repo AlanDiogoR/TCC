@@ -32,7 +32,10 @@ import { loginUser } from './app/useCases/users/loginUser';
 import { User } from './app/models/User';
 import { listProductById } from './app/useCases/products/listProductById';
 import { listUserByEmail } from './app/useCases/users/listUserByEmail';
-import { changePassword } from './app/useCases/users/changeUserPassword';
+import { changeUserPassword } from './app/useCases/users/changeUserPassword';
+import { changePassword } from './app/useCases/users/changePassword';
+
+
 
 export const router = Router();
 
@@ -130,7 +133,10 @@ router.get('/users/:userEmail', listUserByEmail);
 
 //change
 
-router.patch('users/changePassword', changePassword);
+router.patch('/users/changeUserPassword', chechToken, changeUserPassword);
+
+router.patch('/users/changePassword', chechToken, changePassword);
+
 
 //delete
 
