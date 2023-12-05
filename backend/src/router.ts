@@ -135,7 +135,7 @@ router.get('/users/:userEmail', listUserByEmail);
 
 router.patch('/users/changeUserPassword', chechToken, changeUserPassword);
 
-router.patch('/users/changePassword', chechToken, changePassword);
+router.patch('/users/changePassword', changePassword);
 
 
 //delete

@@ -103,7 +103,7 @@ exports.router.get('/products/:productId', listProductById_1.listProductById);
 exports.router.get('/users/:userEmail', listUserByEmail_1.listUserByEmail);
 //change
 exports.router.patch('/users/changeUserPassword', chechToken, changeUserPassword_1.changeUserPassword);
-exports.router.patch('/users/changePassword', chechToken, changePassword_1.changePassword);
+exports.router.patch('/users/changePassword', changePassword_1.changePassword);
 //delete
 exports.router.delete('/categories/:categoryId', deleteCategory_1.deleteCategory);
 exports.router.delete('/addresses/:addressId', deleteAddress_1.deleteAddress);
