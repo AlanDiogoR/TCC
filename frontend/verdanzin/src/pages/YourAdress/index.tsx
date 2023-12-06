@@ -93,7 +93,6 @@ export default function YourAddressPage() {
             <p>{address.city}, {address.state} {address.ZipCode}</p>
 
             <div>
-              <button>Alterar</button>
               <button onClick={handleDeleteAddress}>Excluir</button>
             </div>
           </ContainerPassword>

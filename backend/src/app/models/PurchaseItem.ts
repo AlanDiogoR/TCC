@@ -11,4 +11,7 @@ export const PurchaseItem = model('PurchaseItem', new Schema({
     required: true,
     ref: 'Product',
   },
+  quantity: {
+    type: Number,
+  }
 }));

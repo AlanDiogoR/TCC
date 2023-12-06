@@ -35,6 +35,21 @@ export const ContainerAbout = styled('div', {
   }
 });
 
+
+export const ContainerIMG = styled('div', {
+  display: 'flex',
+  margin: '3rem 3rem 3rem 3rem',
+  padding: '2rem',
+  justifyContent: 'space-around',
+
+  img: {
+    border: '2px solid #ddd',
+    borderRadius: '15px',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+  }
+});
+
+
 export const ContainerHistory = styled('div', {
   display: 'flex',
   margin: '3rem 3rem 3rem 3rem',

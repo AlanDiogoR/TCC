@@ -8,10 +8,11 @@ import { Product } from '@/types/Product';
 import { useAuth } from '@/auth/authContex';
 import { NavIcons, NavSearch, Research, IconSearch, ButtonAll, MenuHamburguer, MenuItem, ListHamburguer, ButtonHome } from '@/styles/pages/NavBar';
 import { Slider } from '@/pages/Banners/Slider';
-import casa  from '@/assets/logo/casa.png';
-import logo  from '@/assets/logo/verdan_logo_org.png';
+import casa from '@/assets/logo/casa.png';
+import logo from '@/assets/logo/verdan_logo_org.png';
 import { Category } from '@/types/Category';
 import { toast } from 'react-toastify';
+import ProductSlider from '@/pages/ProductSlider';
 
 interface CategoriesProps {
   categories?: Category[];
@@ -25,6 +26,7 @@ export default function NavBar({ categories, onSelectCategory }: CategoriesProps
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -32,6 +34,16 @@ export default function NavBar({ categories, onSelectCategory }: CategoriesProps
 
   const handleItemClick = () => {
     setIsOpen(false);
+  };
+
+  const filterProductsBySearchTerm = (term: string) => {
+    // Filtra os produtos apenas se uma categoria estiver selecionada
+    if (selectedCategory) {
+      const filteredProducts = products.filter((product: Product) =>
+        product.name.toLowerCase().includes(term.toLowerCase())
+      );
+      setFilteredProducts(filteredProducts);
+    }
   };
 
   const handleSelectChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -47,19 +59,18 @@ export default function NavBar({ categories, onSelectCategory }: CategoriesProps
     const { data } = await api.get(route);
     setProducts(data);
     setSelectedCategory(selectedCategoryId);
+    setFilteredProducts(data); // Inicializa os produtos filtrados com os produtos totais
   };
 
-  const handleSearch = async () => {
-    const filteredProducts = await products.filter((product: Product) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setProducts(filteredProducts);
 
+
+  const handleSearch = () => {
+    // Utiliza a função auxiliar para filtrar os produtos de acordo com a categoria selecionada
+    filterProductsBySearchTerm(searchTerm);
   };
 
   return (
     <>
-      <button onClick={() => (alert(JSON.stringify(products)))}>testeettet</button>
       <NavSearch>
         <Link href={'/'}>
           <Image
@@ -113,12 +124,8 @@ export default function NavBar({ categories, onSelectCategory }: CategoriesProps
             </Link>
           )}
 
-          <Link href={'../Favorite'}>
-            <FaHeart />
-          </Link>
-
           {state.user == null ? (
-            <Link href={'../Login'} onClick={() => (toast.error('Você precisa fazer login para adcionar ao carrinho!'))}>
+            <Link href={'../Login'} onClick={() => (toast.error('Você precisa fazer login para adicionar ao carrinho!'))}>
               <FiShoppingCart />
             </Link>
           ) : (
@@ -149,6 +156,13 @@ export default function NavBar({ categories, onSelectCategory }: CategoriesProps
 
       {categories && categories.length > 0 && !selectedCategory && (
         <Slider />
+      )}
+
+      {filteredProducts && filteredProducts.length > 0 && (
+
+        <ProductSlider
+          products={filteredProducts}
+        />
       )}
     </>
   );

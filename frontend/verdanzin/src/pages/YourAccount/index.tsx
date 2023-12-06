@@ -32,7 +32,7 @@ export default function YourAccount() {
         <NavAccount>
 
           <Link
-            href={'/'}
+            href={'/YourPurchases'}
           >
             <DivImage>
               <Image
@@ -45,7 +45,7 @@ export default function YourAccount() {
 
             <DivLabelText>
               <h2>Seus pedidos</h2>
-              <label>Ver pedidos, devolver ou comprar produtos novamente</label>
+              <label>Ver pedidos ou comprar produtos novamente</label>
             </DivLabelText>
 
           </Link>
@@ -64,7 +64,7 @@ export default function YourAccount() {
 
             <DivLabelText>
               <h2>Segurança</h2>
-              <label>Gerenciar senha e e-mail</label>
+              <label>Gerenciar senha</label>
             </DivLabelText>
           </Link>
 

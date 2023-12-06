@@ -4,9 +4,9 @@ import { PurchaseItem } from '../../models/PurchaseItem';
 
 export async function createPurchaseItem(req: Request, res: Response) {
   try {
-    const { userId, productId, PurchaseId }  = req.body;
+    const { userId, productId, PurchaseId, quantity }  = req.body;
 
-    const purchaseItem = await PurchaseItem.create({userId, productId, PurchaseId });
+    const purchaseItem = await PurchaseItem.create({userId, productId, PurchaseId, quantity});
 
     if (!userId) {
       return res.status(400).json({

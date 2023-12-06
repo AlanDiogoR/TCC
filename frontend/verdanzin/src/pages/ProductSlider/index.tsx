@@ -8,6 +8,7 @@ import { HomeContainer, MainContainer, ProductSLider } from '@/styles/pages/Prod
 
 import { Product } from '@/types/Product';
 import { GetStaticProps } from 'next';
+import { formatCurrency } from '@/utils/formatCurrency';
 
 interface MenuProps {
   products: Product[];
@@ -37,7 +38,7 @@ export default function ProductSlider({ products }:MenuProps) {
 
                   <footer>
                     <strong>{product.name}</strong>
-                    <span>{product.price}</span>
+                    <span>{formatCurrency(product.price)}</span>
                   </footer>
                 </ProductSLider>
               </Link>

@@ -13,4 +13,7 @@ exports.PurchaseItem = (0, mongoose_1.model)('PurchaseItem', new mongoose_1.Sche
         required: true,
         ref: 'Product',
     },
+    quantity: {
+        type: Number,
+    }
 }));

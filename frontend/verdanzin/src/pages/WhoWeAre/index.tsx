@@ -1,8 +1,10 @@
 import { Footer } from '@/components/Footer';
-import { ContainerAbout, ContainerHistory, ContainerWhoIs } from './styles';
+import { ContainerAbout, ContainerHistory, ContainerIMG, ContainerWhoIs } from './styles';
 import NavBar from '@/components/NavBar/NavBar';
+import Image from 'next/image';
+import logo from '@/assets/imagesLogin/x.jpeg';
 
-export default function WhoWeAre(){
+export default function WhoWeAre() {
   return (
     <>
       <NavBar/>
@@ -16,6 +18,14 @@ export default function WhoWeAre(){
             Bem-vindo á Verdan Shopping, o seu refúgio urbano de compras, entretenimento e experiências inesquecíveis. Desde a nossa inauguração, nos dedicamos a proporcionar a todos os nossos visitantes uma atmosfera única e vibrante, onde diversão e conveniência se unem para criar momentos memoráveis. Estamos presentes em Itararé, Fartura, Itapeva e Itaporanga, venha nos fazer uma visita.
           </div>
         </ContainerAbout>
+
+        <ContainerIMG>
+          <Image
+            src={logo}
+            alt='testes'
+            title='Foto da verdan shoppingg'
+          />
+        </ContainerIMG>
 
         <ContainerHistory>
           <h1>

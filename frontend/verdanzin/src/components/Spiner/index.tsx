@@ -15,7 +15,7 @@ const StyledCircle = styled('circle', {
   cx: '12',
   cy: '12',
   r: '10',
-  stroke: 'blue',
+  stroke: '#007FFF',
   strokeWidth: '3',
   strokeLinecap: 'round',
   strokeDasharray: '50 50',

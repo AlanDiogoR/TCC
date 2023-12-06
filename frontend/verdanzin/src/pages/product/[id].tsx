@@ -63,7 +63,8 @@ export default function ProductPage({ product }: ProductProps) {
       try {
         await api.post('/purchaseItems', {
           productId: product._id,
-          userId: user._id
+          userId: user._id,
+          quantity: inputQuantity
         });
 
         toast.success('Produto adcionado com sucesso!');
@@ -81,7 +82,8 @@ export default function ProductPage({ product }: ProductProps) {
       try {
         await api.post('/purchaseItems', {
           productId: product._id,
-          userId: user._id
+          userId: user._id,
+          quantity: inputQuantity
         });
         router.push('/Cart');
         toast.success('Você esta sendo redirecionado para a páina do carrinho!');

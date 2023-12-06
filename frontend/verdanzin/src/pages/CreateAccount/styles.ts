@@ -37,7 +37,15 @@ export const ContainerForm = styled('form', {
 export const ContainerInputs = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  marginTop: '20px'
+  marginTop: '20px',
+
+  div: {
+    color: '#F53827',
+
+    span: {
+      marginLeft: '8px',
+    }
+  }
 });
 
 export const Input = styled('input', {
@@ -61,6 +69,9 @@ export const Input = styled('input', {
   '&::placeholder': {
     fontSize: '16px',
   },
+
+
+
 
 });
 

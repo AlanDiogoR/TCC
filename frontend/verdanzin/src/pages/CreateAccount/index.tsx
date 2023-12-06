@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { ButtonCreate, ContainerAccount, ContainerForm, ContainerInputs, Input } from './styles';
 import { api } from '@/utils/api';
 import { Footer } from '@/components/Footer';
@@ -6,61 +8,50 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NavBar from '@/components/NavBar/NavBar';
 import { useAuth } from '@/auth/authContex';
+import { z } from 'zod';
+import { CrossCircledIcon } from '@radix-ui/react-icons';
+import { useRouter } from 'next/router';
+
+const schema = z.object({
+  name: z.string().min(2, { message: 'O nome deve ter no mínimo 2 caracteres' }).max(255, { message: 'O nome deve ter no máximo 255 caracteres' }).nonempty({ message: 'Por favor, forneça um nome' }),
+  email: z.string().email({ message: 'Por favor, forneça um e-mail válido' }).nonempty({ message: 'Por favor, forneça um e-mail' }),
+  password: z.string().min(6, { message: 'A senha deve ter no mínimo 6 caracteres' }).max(255, { message: 'A senha deve ter no máximo 255 caracteres' }).nonempty({ message: 'Por favor, forneça uma senha' }),
+  confirmPassword: z.string().min(8, { message: 'A confirmação de senha deve ter no mínimo 6 caracteres' }).max(255, { message: 'A confirmação de senha deve ter no máximo 255 caracteres' }).nonempty({ message: 'Por favor, forneça uma confirmação de senha' }),
+});
+
+type FormData = z.infer<typeof schema>;
+
 
 export default function CreateAccount() {
   const { state, dispatch } = useAuth();
-  const [newUser, setNewUser] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(schema),
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setNewUser({
-      ...newUser,
-      [name]: value,
-    });
-  };
+  const router = useRouter();
 
   const logein = (user: string) => {
-    dispatch({ type: 'LOGIN', payload: {user, token: ''}});
+    dispatch({ type: 'LOGIN', payload: { user, token: '' } });
   };
 
-  const handleCreateAccount = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleCreateAccount = async (data: any) => {
     try {
-      if (newUser.password !== newUser.confirmPassword) {
+      if (data.password !== data.confirmPassword) {
         toast.error('A senha e a confirmação de senha não coincidem');
         return;
       }
 
-      if (!newUser.name || !newUser.email || !newUser.password || !newUser.confirmPassword) {
-        toast.error('Preencha todos os campos');
-        return;
-      }
-
       const response = await api.post('/users', {
-        name: newUser.name,
-        email: newUser.email,
-        password: newUser.password,
+        name: data.name,
+        email: data.email,
+        password: data.password,
       });
 
       if (response.status >= 200 && response.status < 300) {
         toast.success('Usuário cadastrado com sucesso');
 
-        logein(newUser.email);
-
-        setNewUser({
-          name: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-        });
-
+        logein(data.email);
+        router.push('/');
       } else {
         toast.error('Erro ao criar a conta');
       }
@@ -71,56 +62,68 @@ export default function CreateAccount() {
 
   return (
     <>
-      <NavBar/>
+      <NavBar />
       <ContainerAccount>
-        <ContainerForm method='POST' onSubmit={handleCreateAccount}>
+        <ContainerForm onSubmit={handleSubmit(handleCreateAccount)}>
           <h1>Criar conta</h1>
 
           <ContainerInputs>
             <label>Seu nome:</label>
             <Input
-              name="name"
+              {...register('name')}
               placeholder="Seu nome aqui..."
-              value={newUser.name}
-              onChange={handleChange}
-              required
             />
+            {errors.name && (
+              <div>
+                <CrossCircledIcon />
+                <span>{errors.name.message}</span>
+              </div>
+            )}
           </ContainerInputs>
 
           <ContainerInputs>
             <label>E-mail:</label>
             <Input
-              name="email"
+              {...register('email')}
               type="email"
               placeholder="Seu e-mail aqui..."
-              value={newUser.email}
-              onChange={handleChange}
-              required
             />
+            {errors.email && (
+              <div>
+                <CrossCircledIcon />
+                <span>{errors.email.message}</span>
+              </div>
+            )}
           </ContainerInputs>
 
           <ContainerInputs>
             <label>Sua senha:</label>
             <Input
-              name="password"
+              {...register('password')}
               placeholder="Sua senha aqui..."
               type="password"
-              value={newUser.password}
-              onChange={handleChange}
-              required
             />
+            {errors.password && (
+              <div>
+                <CrossCircledIcon />
+                <span>{errors.password.message}</span>
+              </div>
+            )}
           </ContainerInputs>
 
           <ContainerInputs>
             <label>Repita a senha:</label>
             <Input
-              name="confirmPassword"
+              {...register('confirmPassword')}
               placeholder="Senha informada anteriormente"
               type="password"
-              value={newUser.confirmPassword}
-              onChange={handleChange}
-              required
             />
+            {errors.confirmPassword && (
+              <div>
+                <CrossCircledIcon />
+                <span>{errors.confirmPassword.message}</span>
+              </div>
+            )}
           </ContainerInputs>
 
           <ButtonCreate type='submit'>

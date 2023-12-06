@@ -7,21 +7,6 @@ export const Main = styled('section', {
   margin: '3rem auto',
 });
 
-export const Pagaments = styled('section', {
-  display: 'flex',
-  gap: '1rem',
-  width: '80vw',
-  margin: '3rem auto',
-});
-
-export const ContainerPagaments = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '1rem',
-  width: '50%',
-  color: '$gray900',
-});
-
 export const Titulo = styled('h1', {
   fontSize: '2rem',
   color: '#A7CF44',

@@ -7,6 +7,8 @@ import { z } from 'zod';
 import { api } from '@/utils/api';
 import { useAuth } from '@/auth/authContex';
 import { User } from '@/types/User';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 // Schema para validação usando Zod
 const schema = z.object({
@@ -23,6 +25,7 @@ export default function ResetPassword() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
     resolver: zodResolver(schema),
   });
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -47,16 +50,20 @@ export default function ResetPassword() {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      // Faz a requisição para alterar a senha
-      await api.post('/change-password', {
+      await api.patch('/users/changeUserPassword', {
         userId: user?._id,
         currentPassword: data.currentPassword,
         newPassword: data.newPassword,
+      }, {
+        headers: {
+          Authorization: `Bearer ${state.token}`
+        },
       });
 
-      console.log('Senha alterada com sucesso!');
+      toast.success('Senha alterada com sucesso!');
+      router.push('SecurityAccount');
     } catch (error) {
-      console.error(`Erro ao alterar a senha: ${error}`);
+      toast.error('Erro ao alterar a senha' );
     }
   };
 

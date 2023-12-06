@@ -4,19 +4,17 @@ import {
   ContainerCartT,
   ContainerCarts,
   ContainerInput,
-  ContainerPagaments,
   DetailsInformation,
   Infomrations,
   Main,
   NameProduct,
   Nothing,
-  Pagaments,
   ProductDetailsCart,
   ProductImg,
   Titulo,
   TrashButton,
   Value
-} from './cart';
+} from './styles';
 import { Footer } from '@/components/Footer';
 import { useEffect, useState } from 'react';
 import { User } from '@/types/User';
@@ -26,15 +24,11 @@ import { PurchaseItems } from '@/types/PurchaseItems';
 import { Product } from '@/types/Product';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
-import { CaretDownIcon, CaretUpIcon, TrashIcon } from '@radix-ui/react-icons';
+import { CaretDownIcon, CaretUpIcon } from '@radix-ui/react-icons';
 import { formatCurrency } from '@/utils/formatCurrency';
 import { Adress } from '@/types/Adress';
-import { ButtonCreate } from '../AddAddress/styles';
-import PixPayment from '../Pix';
-import StripeCheckout, { Token } from 'react-stripe-checkout';
-import { useRouter } from 'next/router';
 
-export default function Cart() {
+export default function YourPurchases() {
   const [address, setAddress] = useState<Adress | null>(null);
   const { state } = useAuth();
   const [user, setUser] = useState<User | null>(null);
@@ -43,7 +37,6 @@ export default function Cart() {
   const [inputQuantities, setInputQuantities] = useState<{ [productId: string]: number }>({});
   const [value, setValue] = useState(12);
   const [dia, setDia] = useState(5);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -164,28 +157,6 @@ export default function Cart() {
     }
   };
 
-  const handleDeleteProduct = async (purchaseItemId: string) => {
-    try {
-      const { products, allPurchaseItems } = await loadProducts();
-
-      for (const elemento of allPurchaseItems) {
-
-        if (purchaseItemId === elemento.productId) {
-          await api.delete(`/purchaseItems/${elemento._id}`);
-          toast.success('Produto removido do carrinho com sucesso!');
-        }
-
-        const { products: newProductsArray } = await loadProducts();
-        setProducts(newProductsArray);
-        setReinderizar(newProductsArray.length > 0);
-      }
-
-    } catch (error) {
-      console.error('Erro ao remover o produto do carrinho', error);
-      toast.error('Erro ao remover o produto do carrinho');
-    }
-  };
-
   const calculateTotal = () => {
     let total = 0;
 
@@ -207,17 +178,6 @@ export default function Cart() {
     setDia(tested);
   }
 
-  const handleToken = async (token: any) => {
-    try {
-      await api.post('/payment', { token, amount: calculateTotal() + value });
-      toast.success('Pagamento efetuado com sucesso!');
-      router.push('YourPurchases');
-    } catch (error) {
-      toast.success('Pagamento efetuado com sucesso!');
-      router.push('YourPurchases');
-    }
-  };
-
   return (
     <>
       <NavBar />
@@ -225,12 +185,9 @@ export default function Cart() {
         <>
           <Main>
             <ContainerCart>
-              <Titulo>Meu carrinho de compras</Titulo>
+              <Titulo>Seus pedidos!</Titulo>
               {products.map(item => (
                 <ContainerCarts key={item._id}>
-                  <TrashButton onClick={() => handleDeleteProduct(item._id)} title='Excluir produto do carrinho'>
-                    <TrashIcon height={50} />
-                  </TrashButton>
                   <ProductDetailsCart key={item._id}>
                     <NameProduct>{item.name}</NameProduct>
                     <ContainerInput>
@@ -238,10 +195,6 @@ export default function Cart() {
                         <p>
                           Quantidade: {inputQuantities[item._id] || 1}
                         </p>
-                        <div>
-                          <CaretUpIcon onClick={() => handleAddQuantity(item._id, item.quantity)} color='#121214' />
-                          <CaretDownIcon onClick={() => handleRemoveQuantity(item._id)} color='#121214' />
-                        </div>
                       </div>
                     </ContainerInput>
                     <p>Preço: {formatCurrency(item.price)} </p>
@@ -263,11 +216,10 @@ export default function Cart() {
               <DetailsInformation>
                 <h1><strong>Subtotal: ({products.length} item(s))</strong>  {formatCurrency(calculateTotal())}</h1>
                 <div>
-                  <h2>Frete Verdan</h2>
-
                   <footer>
-                    <p>{address?.city === 'Fartura' ? 'Gratis' : formatCurrency(value)}</p>
-                    <p>Entrega em até: {address?.city === 'Fartura' ? '2 dia(s)' : dia}</p>
+                    <p>Entrega em até: {address?.city === 'Fartura' ? '2 dia(s)' : `${dia} dia(s)`}</p>
+                    <p>No endereço: {address?.city}, {address?.neighborhood}</p>
+                    <p>Numero: {address?.numberHouse}</p>
                   </footer>
                 </div>
 
@@ -277,51 +229,18 @@ export default function Cart() {
                 </Value>
               </DetailsInformation>
             </Infomrations>
-
           </Main>
-
-          <Pagaments>
-            <ContainerPagaments>
-              <Titulo>Pagar com PIX</Titulo>
-
-              <PixPayment
-                value={calculateTotal()} // Substitua pela lógica adequada para obter o valor total
-              />
-
-              <ol>
-                <li>Após a finalização do pedido, abra o app ou banco de sua preferência. Escolha a opção pagar com código Pix copia e cola, ou código QR. O código tem validade de 2 horas.</li>
-
-                <li>Copie e cole o código, ou escaneie o código Qr com a câmera do seu celular. Confira todas as informações e autorize o pagamento.</li>
-
-                <li>Você vai receber a confirmação de pagamento no seu e-mail e através dos nossos canais. E pronto!</li>
-              </ol>
-
-              <ButtonCreate>Finaliza com pix</ButtonCreate>
-            </ContainerPagaments>
-
-            <ContainerPagaments>
-              <Titulo>Pagar com cartão</Titulo>
-              <StripeCheckout
-                token={(token: Token) => handleToken(token)}
-                stripeKey="pk_test_51MN0ZqGeg4gURqJARSycVZWbtbAUBLHdk6ibdvvciDqSPkyS6ivCHejz32n3NC5JZIM8ZTIyM9Vtz1AlPO0vcpSN00UWqSix6E"
-                amount={(calculateTotal() + value) * 100} // O valor deve ser em centavos
-                name="Verdan Shopingg ✔"
-              />
-            </ContainerPagaments>
-          </Pagaments>
         </>
       ) : (
         <Main>
           <ContainerCartT>
-            <Titulo>Meu carrinho de compras</Titulo>
+            <Titulo>Meus pedidos</Titulo>
             <Nothing>Não há nada aqui...</Nothing>
           </ContainerCartT>
         </Main>
       )}
-      <Footer />
 
+      <Footer />
     </>
   );
 }
-
-//calculateTotal() + value

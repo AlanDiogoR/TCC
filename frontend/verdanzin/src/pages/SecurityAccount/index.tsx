@@ -5,10 +5,12 @@ import Link from 'next/link';
 import { api } from '@/utils/api';
 import { User } from '@/types/User';
 import { useAuth } from '@/auth/authContex';
+import { useRouter } from 'next/router';
 
 export default function SecurityAccount() {
   const { state } = useAuth();
   const [user, setUser] = useState<User | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -43,21 +45,6 @@ export default function SecurityAccount() {
 
           <ContainerInputs>
             <div>
-              <strong>E-mail:</strong>
-              <p>{user?.email}</p>
-            </div>
-
-            <div>
-              <ButtonEdit>
-                <Link href={'/ResetPassword'}>
-                  Editar
-                </Link>
-              </ButtonEdit>
-            </div>
-          </ContainerInputs>
-
-          <ContainerInputs>
-            <div>
               <strong>Senha:</strong>
               <p>********</p>
             </div>
@@ -71,7 +58,7 @@ export default function SecurityAccount() {
             </div>
           </ContainerInputs>
 
-          <ButtonCreate onClick={() => alert(`teste: ${JSON.stringify(state.user)}`)}>Concluído</ButtonCreate>
+          <ButtonCreate onClick={() => router.push('/')}>Concluído</ButtonCreate>
 
         </ContainerPassword>
       </Container>

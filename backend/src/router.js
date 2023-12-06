@@ -101,6 +101,7 @@ exports.router.post('/auth/login', loginUser_1.loginUser);
 exports.router.get('/categories/:categoryId/products', listProductByCategory_1.listProductByCategory);
 exports.router.get('/products/:productId', listProductById_1.listProductById);
 exports.router.get('/users/:userEmail', listUserByEmail_1.listUserByEmail);
+exports.router.get('/products/listProductsBySearch');
 //change
 exports.router.patch('/users/changeUserPassword', chechToken, changeUserPassword_1.changeUserPassword);
 exports.router.patch('/users/changePassword', changePassword_1.changePassword);

@@ -129,7 +129,7 @@ router.post('/auth/login', loginUser);
 router.get('/categories/:categoryId/products', listProductByCategory);
 router.get('/products/:productId', listProductById);
 router.get('/users/:userEmail', listUserByEmail);
-
+router.get('/products/listProductsBySearch');
 
 //change
 

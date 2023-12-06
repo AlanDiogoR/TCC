@@ -1,5 +1,4 @@
 "use strict";
-// userChangePassword.ts
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -9,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.changeUserPassword = void 0;
 const User_1 = require("../../models/User");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 function changeUserPassword(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -23,14 +26,16 @@ function changeUserPassword(req, res) {
                     error: 'Usuário não encontrado',
                 });
             }
-            // Verifica a senha atual
-            if (user.password !== currentPassword) {
+            // Verifica a senha atual usando bcrypt.compare
+            const isPasswordValid = yield bcrypt_1.default.compare(currentPassword, user.password);
+            if (!isPasswordValid) {
                 return res.status(401).json({
                     error: 'Senha atual incorreta',
                 });
             }
             // Atualiza a senha do usuário
-            user.password = newPassword;
+            const newHashedPassword = yield bcrypt_1.default.hash(newPassword, 12);
+            user.password = newHashedPassword;
             yield user.save();
             res.json({
                 success: true,

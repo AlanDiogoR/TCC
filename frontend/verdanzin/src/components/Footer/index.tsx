@@ -15,16 +15,20 @@ export function Footer() {
           </Link>
         </ButtonHome>
 
-        <Image
-          src={logo}
-          width={'160'}
-          height={'80'}
-          alt='logo verdan'
-        />
+        <Link href={'/'}>
+          <Image
+            src={logo}
+            width={'160'}
+            height={'80'}
+            alt='logo verdan'
+          />
+        </Link>
         <FooterRodape>
           <div>
             <h3>Deixe nos ajudar você</h3>
-            <label><a href="#ss">Frete e prazo de entrega</a></label>
+            <label>
+              <Link href={'../YourPurchases'}>Frete e Prazo de entrega</Link>
+            </label>
             <label>
               <Link href={'../YourAccount'}>
                 Sua conta
@@ -32,7 +36,7 @@ export function Footer() {
             </label>
           </div>
           <div>
-            <h3>Institcional</h3>
+            <h3>Institucional</h3>
             <label>
               <Link href={'../WhoWeAre'}>
                 Quem somos?
@@ -41,17 +45,18 @@ export function Footer() {
           </div>
           <div>
             <h3>Privacidade de dados</h3>
-            <label><a href="#ss">Política de privacidade</a></label>
-            <label><a href="#ss">Termos de uso</a></label>
+            <label>
+              <Link href={'../PrivacyP'}>Política de privacidade</Link>
+            </label>
+            <label>
+              <Link href={'../Therms'}>Termos de uso</Link>
+            </label>
           </div>
           <div>
             <h3>Pagamentos</h3>
             <label>
-              <Link href={'../YourCard'}>
-                Cartões
-              </Link>
+              <a title='Você pode pagar com seus cartões' >Cartoes</a>
             </label>
-            <label><a href="#ss">Boleto</a></label>
           </div>
         </FooterRodape>
       </FooterBar>
