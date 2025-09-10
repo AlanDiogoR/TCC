@@ -1,7 +1,7 @@
 # 🎓 TCC – Trabalho de Conclusão de Curso  
 
 <p align="center">
-  <img src="frontend/verdanzin/src/assets/verdan_logo_org.png" alt="TCC Logo" height="100"/>
+  <img src="frontend/verdanzin/src/assets/Logo/verdan_logo_org.png" alt="TCC Logo" height="100"/>
 </p>
 
 ---
@@ -70,3 +70,4 @@ TCC/
    cd backend && npm run dev
    cd ../frontend && npm run dev
    cd ../frontend && npm install
+
