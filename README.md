@@ -3,6 +3,7 @@
 <p align="center">
   <img src="frontend/verdanzin/src/assets/logo/verdan_logo_org.png" alt="TCC Logo" height="100"/>
 </p>
+terminando
 
 ---
 
@@ -70,5 +71,6 @@ TCC/
    cd backend && npm run dev
    cd ../frontend && npm run dev
    cd ../frontend && npm install
+
 
 
