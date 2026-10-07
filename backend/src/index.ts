@@ -2,6 +2,7 @@ import path from 'node:path';
 
 import http from 'node:http';
 
+import dotenv from 'dotenv';
 import express from 'express';
 
 import mongoose from 'mongoose';
@@ -10,14 +11,23 @@ import { router } from './router';
 
 import { Server } from 'socket.io';
 
+dotenv.config();
+
 const app = express();
 const server = http.createServer(app);
 
 export const io = new Server(server);
 
-mongoose.connect('mongodb+srv://Verdan:wmxgqBWVQMxtYALv@cluster0.6jyfvkh.mongodb.net/')
+const mongoUri = process.env.MONGODB_URI;
+
+if (!mongoUri) {
+  console.error('FATAL: defina MONGODB_URI no arquivo .env (veja .env.example).');
+  process.exit(1);
+}
+
+mongoose.connect(mongoUri)
   .then( () => {
-    const port = 3001;
+    const port = Number(process.env.PORT) || 3001;
 
     app.use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
