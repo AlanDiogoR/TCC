@@ -21,7 +21,10 @@ function loginUser(req, res) {
         try {
             const { password, email, } = req.body;
             const user = yield User_1.User.findOne({ email: email });
-            const secret = 'ldsdjlsmfklmjdsj$%%@$367824848*156548*498765';
+            const secret = process.env.JWT_SECRET;
+            if (!secret) {
+                throw new Error('JWT_SECRET não definida. Veja .env.example.');
+            }
             const token = jsonwebtoken_1.default.sign({
                 id: user === null || user === void 0 ? void 0 : user._id,
             }, secret);

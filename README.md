@@ -47,21 +47,41 @@ Pré-requisitos: Node.js 18+ e uma instância do MongoDB.
 
 ```bash
 cd backend
+cp .env.example .env   # preencha as variáveis abaixo
 npm install
-npm run dev        # nodemon src/index.ts → http://localhost:3001
+npm run dev            # nodemon src/index.ts → http://localhost:3001
 ```
 
-O projeto **não tem `.env.example`**: a URI de conexão do MongoDB está definida diretamente em `backend/src/index.ts`. Para rodar localmente, troque-a pela URI do seu banco.
+Variáveis em `backend/.env.example`:
+
+| Variável | Uso |
+|---|---|
+| `MONGODB_URI` | URI de conexão do MongoDB (obrigatória) |
+| `JWT_SECRET` | Segredo para assinar e validar tokens JWT (obrigatória para login) |
+| `PORT` | Porta da API (opcional; padrão `3001`) |
 
 ### 2. Loja virtual
 
 ```bash
 cd frontend/verdanzin
+cp .env.example .env.local   # preencha se for usar Stripe ou EmailJS
 npm install
-npm run dev        # http://localhost:3000
+npm run dev                  # http://localhost:3000
 ```
 
 A loja consome a API em `http://localhost:3001` (configurado em `src/utils/api.ts`).
+
+Variáveis em `frontend/verdanzin/.env.example`:
+
+| Variável | Uso |
+|---|---|
+| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Chave publicável do Stripe (checkout com cartão) |
+| `STRIPE_SECRET_KEY` | Chave secreta do Stripe (somente servidor; não use prefixo `NEXT_PUBLIC_`) |
+| `NEXT_PUBLIC_EMAILJS_SERVICE_ID` | Service ID do EmailJS (recuperação de senha) |
+| `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` | Template ID do EmailJS |
+| `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` | Public key do EmailJS |
+
+Sem essas variáveis, a loja sobe normalmente; Stripe Checkout e o envio de e-mail de recuperação ficam inativos até você preenchê-las.
 
 ### 3. Admin desktop (opcional)
 

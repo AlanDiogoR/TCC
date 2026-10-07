@@ -35,7 +35,12 @@ export default function Password() {
       cod: number,
     };
 
-    emailjs.send('service_tnvf2j4', 'template_xpqak8b', template, 'aquZ5jG5q0zefWn3d');
+    emailjs.send(
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? '',
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? '',
+      template,
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? '',
+    );
 
     toast.success('Email enviado');
 

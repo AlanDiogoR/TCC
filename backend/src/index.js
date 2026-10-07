@@ -8,14 +8,21 @@ const node_path_1 = __importDefault(require("node:path"));
 const node_http_1 = __importDefault(require("node:http"));
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const router_1 = require("./router");
 const socket_io_1 = require("socket.io");
 const app = (0, express_1.default)();
 const server = node_http_1.default.createServer(app);
 exports.io = new socket_io_1.Server(server);
-mongoose_1.default.connect('mongodb+srv://Verdan:wmxgqBWVQMxtYALv@cluster0.6jyfvkh.mongodb.net/')
+const mongoUri = process.env.MONGODB_URI;
+if (!mongoUri) {
+    console.error('FATAL: defina MONGODB_URI no arquivo .env (veja .env.example).');
+    process.exit(1);
+}
+mongoose_1.default.connect(mongoUri)
     .then(() => {
-    const port = 3001;
+    const port = Number(process.env.PORT) || 3001;
     app.use((req, res, next) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Methods', '*');

@@ -74,7 +74,10 @@ function chechToken(req, res, next) {
         return res.status(401).json({ msg: 'acesso negado' });
     }
     try {
-        const secret = 'ldsdjlsmfklmjdsj$%%@$367824848*156548*498765';
+        const secret = process.env.JWT_SECRET;
+        if (!secret) {
+            throw new Error('JWT_SECRET não definida. Veja .env.example.');
+        }
         jsonwebtoken_1.default.verify(token, secret);
         next();
     }

@@ -303,7 +303,7 @@ export default function Cart() {
               <Titulo>Pagar com cartão</Titulo>
               <StripeCheckout
                 token={(token: Token) => handleToken(token)}
-                stripeKey="pk_test_51MN0ZqGeg4gURqJARSycVZWbtbAUBLHdk6ibdvvciDqSPkyS6ivCHejz32n3NC5JZIM8ZTIyM9Vtz1AlPO0vcpSN00UWqSix6E"
+                stripeKey={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? ''}
                 amount={(calculateTotal() + value) * 100} // O valor deve ser em centavos
                 name="Verdan Shopingg ✔"
               />

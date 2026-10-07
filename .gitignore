@@ -1,2 +1,6 @@
 *node_modules
 erro
+.env
+.env.local
+**/.env
+**/.env.local

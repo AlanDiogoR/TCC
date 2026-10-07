@@ -82,7 +82,10 @@ function chechToken(req: Request, res: Response, next: NextFunction) {
 
   try {
 
-    const secret = 'ldsdjlsmfklmjdsj$%%@$367824848*156548*498765';
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+      throw new Error('JWT_SECRET não definida. Veja .env.example.');
+    }
     jwt.verify(token, secret);
 
     next();
