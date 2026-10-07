@@ -1,76 +1,92 @@
-# 🎓 TCC – Trabalho de Conclusão de Curso  
+# Verdan — E-commerce (TCC)
 
 <p align="center">
-  <img src="frontend/verdanzin/src/assets/logo/verdan_logo_org.png" alt="TCC Logo" height="100"/>
+  <img src="frontend/verdanzin/src/assets/logo/verdan_logo_org.png" alt="Logo Verdan" height="100"/>
 </p>
-terminando
 
----
+Trabalho de Conclusão de Curso (TCC) em **Desenvolvimento de Sistemas**: um e-commerce para a loja **Verdan**, com loja virtual em Next.js, API REST em Node.js/Express com MongoDB e um app desktop (Electron) para cadastrar produtos.
 
-## 📖 Sobre o Projeto  
+> Projeto acadêmico desenvolvido entre o fim de 2022 e 2023. O código reflete esse momento de aprendizado e é mantido aqui como registro do TCC.
 
-Este repositório contém o meu **Trabalho de Conclusão de Curso (TCC)** em **Desenvolvimento de Sistemas**.  
-O projeto é uma aplicação **full-stack**, desenvolvida com foco em **modularização, boas práticas de engenharia, escalabilidade e experiência do usuário**.  
+## Stack
 
----
+| Parte | Pasta | Tecnologias |
+|---|---|---|
+| **Loja virtual** | `frontend/verdanzin` | Next.js 13 (Pages Router), React 18, TypeScript, Stitches (CSS-in-JS), TanStack React Query, React Hook Form + Zod, Axios, Keen Slider, React Toastify, `react-stripe-checkout`, `qrcode.react` |
+| **API REST** | `backend` | Node.js, Express, TypeScript, Mongoose (MongoDB), JSON Web Token, bcrypt, Multer (upload de imagens) |
+| **Admin desktop** | `admin` | Electron + React (Create React App com CRACO), styled-components, Axios |
+| **Protótipos** | `frontend/verdan`, `my_electron_react_application`, `testElectron`, `test` | Primeira versão da loja (CRA + Sass) e testes de Electron e de voz |
 
-## 🚀 Funcionalidades  
+## Funcionalidades
 
-- 🔐 Autenticação e gerenciamento de usuários  
-- 📊 Painel administrativo para controle de dados  
-- ⚙️ API REST robusta integrada ao front-end  
-- 🎨 Interface intuitiva e responsiva  
-- 🛠️ Estrutura modularizada (front-end, back-end e recursos compartilhados)  
-- 🧪 Testes automatizados para garantir qualidade  
+Verificadas nas rotas de `backend/src/router.ts` e nas páginas de `frontend/verdanzin/src/pages`:
 
----
+**API (porta 3001)**
+- CRUD de **categorias**, **produtos** (com upload de imagem), **endereços**, **compras** e **itens de compra**
+- Listagem de produtos por categoria e busca de produto por id
+- Cadastro de usuário com senha criptografada (bcrypt), **login com JWT** e rota protegida por token
+- Troca de senha (autenticada e via fluxo de recuperação)
+- Imagens servidas estaticamente em `/uploads`
 
-## 🛠️ Tecnologias Utilizadas  
+**Loja virtual**
+- Home com banners em carrossel, categorias e vitrine de produtos filtrada por categoria
+- Página de produto com adição ao carrinho
+- Carrinho com cálculo de total, botão de checkout com Stripe e tela de pagamento com QR Code Pix (o checkout é só de interface: o backend não tem a rota de pagamento)
+- Cadastro e login (validação com Zod e React Hook Form, estado de autenticação via Context + `useReducer`)
+- Área "Sua conta": compras realizadas, endereços (cadastro com busca de CEP e exclusão), segurança da conta, edição de nome e troca/recuperação de senha
+- Páginas institucionais: Quem somos, Termos de uso e Política de privacidade
 
-### ⚙️ Back-end & APIs  
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![REST API](https://img.shields.io/badge/REST-02569B?style=for-the-badge&logo=rest&logoColor=white)
+**Admin desktop (Electron)**
+- Formulário de cadastro de produto com imagem, enviado para a API
 
-### 🗄️ Banco de Dados  
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+## Como rodar localmente
 
-### 🎨 Front-end  
-![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=for-the-badge&logo=sass&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+Pré-requisitos: Node.js 18+ e uma instância do MongoDB.
 
-### 🛠️ Outros Recursos  
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+### 1. API
 
----
+```bash
+cd backend
+npm install
+npm run dev        # nodemon src/index.ts → http://localhost:3001
+```
 
-## 📂 Estrutura do Projeto  
+O projeto **não tem `.env.example`**: a URI de conexão do MongoDB está definida diretamente em `backend/src/index.ts`. Para rodar localmente, troque-a pela URI do seu banco.
 
-TCC/  
-│── backend/   → API REST em Node.js + TypeScript  
-│── frontend/  → Aplicação em React/Next.js com SCSS  
-│── shared/    → Módulos/componentes reutilizáveis  
-│── docs/      → Documentação e materiais de apoio  
-│── assets/    → Recursos estáticos (logos, ícones, etc.)  
+### 2. Loja virtual
 
----
+```bash
+cd frontend/verdanzin
+npm install
+npm run dev        # http://localhost:3000
+```
 
-## ▶️ Como Executar  
+A loja consome a API em `http://localhost:3001` (configurado em `src/utils/api.ts`).
 
-1. Clone o repositório:  
-   ```bash
-   git clone https://github.com/AlanDiogoR/TCC.git
-   cd TCC
-   cd backend && npm install
-   cd backend && npm run dev
-   cd ../frontend && npm run dev
-   cd ../frontend && npm install
+### 3. Admin desktop (opcional)
 
+```bash
+cd admin
+npm install
+npm run build      # craco build
+npm start          # electron .
+```
 
+## Estrutura
 
+```
+TCC/
+├── backend/                 # API Express + Mongoose
+│   ├── src/router.ts        # Definição das rotas
+│   ├── src/app/models/      # Schemas: User, Product, Category, Address, Purchase, PurchaseItem
+│   └── src/app/useCases/    # Um arquivo por caso de uso (create, list, delete...)
+├── frontend/
+│   ├── verdanzin/           # Loja virtual em Next.js (versão principal)
+│   └── verdan/              # Protótipo inicial em Create React App
+├── admin/                   # App desktop Electron para cadastro de produtos
+└── my_electron_react_application/, testElectron/, test/   # Experimentos
+```
+
+## Licença
+
+Distribuído sob a licença MIT. Veja [LICENSE](LICENSE).
