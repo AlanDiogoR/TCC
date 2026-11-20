@@ -86,9 +86,30 @@ A PoC foi desenvolvida de forma estritamente modular e isolada, sem reescrever o
 
 ---
 
-## 4. Verificação Completa dos Resultados
+## 4. Mudanças fora do PoC Necessárias para o Build
 
-### 4.1 Execução dos Testes Unitários da Máquina (`npm test`)
+Na branch `main`, a execução de `npm run build` falha em ambiente Linux porque a configuração original do ESLint impunha `linebreak-style: ["error", "windows"]` (terminadores CRLF), rejeitando arquivos em sistemas Unix/Linux cujo terminador padrão é LF. Além disso, a estrutura de pastas e componentes legados continha inconformidades que impediam a compilação do Next.js.
+
+Para viabilizar a compilação do projeto e a integração com o XState v6, foram necessárias as seguintes adaptações:
+
+1. **ESLint (`linebreak-style: off`):**
+   * Desativação da regra `linebreak-style` no [frontend/verdanzin/.eslintrc.json](file:///workspace/TCC/frontend/verdanzin/.eslintrc.json), permitindo builds consistentes em plataformas Linux/CI sem falsos erros de lint relacionados a quebras de linha CRLF.
+2. **`next.config.js` (`pageExtensions: ['tsx']`):**
+   * Configuração de `pageExtensions: ['tsx']` no [frontend/verdanzin/next.config.js](file:///workspace/TCC/frontend/verdanzin/next.config.js) para restringir o roteador de páginas do Next.js apenas a arquivos `.tsx`. Anteriormente, arquivos auxiliares como `styles.ts` ou `cart.ts` dentro da pasta `src/pages` eram indevidamente processados como rotas, falhando na pré-renderização por ausência de `export default`.
+3. **TypeScript 4.9 → 5.9 (5.9.3):**
+   * Atualização do compilador TypeScript (`typescript` de 4.9.4 para 5.9.3 no `package.json`), requisito técnico mandatório do XState v6 Beta devido ao uso intensivo de *const type parameters* (`<const T>`).
+4. **`export default` no `Slider` (`src/pages/Banners/Slider.tsx`):**
+   * Inclusão de `export default` no componente `Slider` em [frontend/verdanzin/src/pages/Banners/Slider.tsx](file:///workspace/TCC/frontend/verdanzin/src/pages/Banners/Slider.tsx), sanando o erro de módulo Next.js sem componente padrão exportado.
+5. **`useEffect` no `YourCard` (`src/pages/YourCard/index.tsx`):**
+   * Encapsulamento da leitura direta de `localStorage` dentro de um hook `useEffect` em [frontend/verdanzin/src/pages/YourCard/index.tsx](file:///workspace/TCC/frontend/verdanzin/src/pages/YourCard/index.tsx), evitando que a renderização estática / SSR quebre durante o build por `ReferenceError: localStorage is not defined`.
+6. **`try/catch` no `ProductSlider` (`src/pages/ProductSlider/index.tsx`):**
+   * Adição de bloco `try/catch` com fallback para `products: []` no `getStaticProps` de [frontend/verdanzin/src/pages/ProductSlider/index.tsx](file:///workspace/TCC/frontend/verdanzin/src/pages/ProductSlider/index.tsx), mantendo estritamente a URL original `fetch('/api/products')` (sem redirecionar para porta 3001), permitindo que a geração estática finalize com sucesso sem depender de backend ativo em tempo de build.
+
+---
+
+## 5. Verificação Completa dos Resultados
+
+### 5.1 Execução dos Testes Unitários da Máquina (`npm test`)
 Os testes foram executados via `node --experimental-strip-types --test`:
 
 ```text
@@ -96,16 +117,16 @@ Os testes foram executados via `node --experimental-strip-types --test`:
 > node --experimental-strip-types --test src/machines/*.test.ts
 
 ▶ cartMachine (XState v6 Beta)
-  ✔ utility functions: calculateSubtotal and calculateShipping (1.033628ms)
-  ✔ initial state is idle and accepts setUser (11.516294ms)
-  ✔ transitions idle -> loading -> error upon failure (1.463047ms)
-  ✔ transitions to empty when loadSuccess has no items (1.14387ms)
-  ✔ transitions to ready when loadSuccess has items and calculates totals (0.775281ms)
-  ✔ updates quantity and enforces stock and minimum boundaries (1.05494ms)
-  ✔ removes items and transitions to empty when last item is removed (0.728958ms)
-  ✔ dynamically changes address and recalculates shipping (0.557293ms)
-  ✔ checkout and payment lifecycle: guard, submission, failure, retry and success (2.243189ms)
-✔ cartMachine (XState v6 Beta) (22.400109ms)
+  ✔ utility functions: calculateSubtotal and calculateShipping (0.812741ms)
+  ✔ initial state is idle and accepts setUser (8.669098ms)
+  ✔ transitions idle -> loading -> error upon failure (1.609662ms)
+  ✔ transitions to empty when loadSuccess has no items (0.913093ms)
+  ✔ transitions to ready when loadSuccess has items and calculates totals (0.507018ms)
+  ✔ updates quantity and enforces stock and minimum boundaries (0.83077ms)
+  ✔ removes items and transitions to empty when last item is removed (0.564486ms)
+  ✔ dynamically changes address and recalculates shipping (0.498483ms)
+  ✔ checkout and payment lifecycle: guard, submission, failure, retry and success (1.860596ms)
+✔ cartMachine (XState v6 Beta) (17.728418ms)
 ℹ tests 9
 ℹ suites 1
 ℹ pass 9
@@ -113,11 +134,19 @@ Os testes foram executados via `node --experimental-strip-types --test`:
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 175.596585
+ℹ duration_ms 153.883039
 ```
-**Resultado:** 9 de 9 testes passaram em ~22ms com 100% de sucesso.
+**Resultado:** 9 de 9 testes passaram em ~18ms com 100% de sucesso.
 
-### 4.2 Execução do Build do Pacote Tocado (`npm run build`)
+### 5.2 Execução da Verificação Estática de Tipos (`npx tsc --noEmit`)
+Executado em `frontend/verdanzin`:
+```text
+$ npx tsc --noEmit -p .
+(saída vazia, código de retorno 0)
+```
+**Resultado:** Verificação estática concluída com 0 erros. O compilador TypeScript validou rigorosamente as chamadas tipadas do `actor.trigger`, confirmando que eventos sem payload não aceitam argumentos.
+
+### 5.3 Execução do Build do Pacote Tocado (`npm run build`)
 Executado em `frontend/verdanzin`:
 
 ```text
@@ -161,7 +190,7 @@ Route (pages)                              Size     First Load JS
 ```
 **Resultado:** Build compilado com sucesso e 23 páginas estáticas geradas com código de saída 0.
 
-### 4.3 Verificação Manual do Fluxo
+### 5.4 Verificação do Fluxo da Máquina
 * Validação via script e instanciamento do ator simulando o fluxo de usuário do início ao fim:
   1. Estado inicial `idle` com usuário identificado.
   2. Carregamento de itens com transição para `ready`.
@@ -173,20 +202,20 @@ Route (pages)                              Size     First Load JS
 
 ---
 
-## 5. Avaliação Técnica Detalhada (Notas 1 a 5)
+## 6. Avaliação Técnica Detalhada (Notas 1 a 5)
 
 | Critério | Nota (1-5) | Justificativa |
 | :--- | :---: | :--- |
 | **5a. Nuance da API** | **4 / 5** | O v6 reduziu drasticamente o ruído eliminando `assign`, `enqueueActions`, combinadores `and`/`or` e múltiplos criadores de ação. A assinatura unificada `(args, enq) => ...` é muito mais direta tanto para desenvolvedores quanto para agentes de IA. Perde 1 ponto porque o conceito intrínseco de máquinas de estado ainda impõe estrutura formal mais densa do que um hook simples. |
-| **5b. Segurança de Tipagem (Type Safety)** | **4.5 / 5** | Excelente inferência de contexto e eventos com o gerador tipado `actor.trigger.<evento>()`. O helper `types<T>()` nativo do XState evita atrito de compatibilidade de esquemas externos. Requer obrigatoriamente TypeScript >= 5.0 devido ao uso de parâmetros de tipo com `const` (`<const T>`). |
+| **5b. Segurança de Tipagem (Type Safety)** | **4.5 / 5** | Excelente inferência de contexto e eventos com o gerador tipado `actor.trigger.<evento>()`. O helper `types<T>()` nativo do XState evita atrito de compatibilidade de esquemas externos. Requer obrigatoriamente TypeScript >= 5.0 devido ao uso de parâmetros de tipo com `const` (`<const T>`). **Evidência prática:** durante a verificação estática com `npx tsc --noEmit -p .`, o compilador detectou com precisão erros `TS2554` em chamadas de teste que passavam payload vazio `{}` para eventos declarados como sem payload (`types<void>()`, como `startLoading()`, `submitPayment()`, `retryPayment()`, `paymentSuccess()` e `reset()`). Essa checagem ilustra o benefício direto da tipagem rigorosa do XState v6, visto que o runner do Node (`node --experimental-strip-types`) apenas remove tipos e não checa contratos tipados em runtime. |
 | **5c. Facilidade de Teste** | **5 / 5** | Excepcional. Testar a lógica de negócio do carrinho não requer renderizar componentes React, nem simular DOM ou mockar `window`. Transições puras e verificações de eventos proibidos foram testadas em menos de 25ms. |
 | **5d. Complexidade Ciclomática** | **4.5 / 5** | **Antes:** Complexidade ciclomática de ~30 dispersa em 7 estados, múltiplos `useEffect` assíncronos concorrentes e manipuladores com condicionais frágeis. **Depois:** Lógica concentrada em manipuladores determinísticos com complexidade entre 1 e 3 cada, reduzindo a complexidade do componente visual para ~8. |
 | **5e. Qualidade da Documentação** | **4.5 / 5** | A documentação inclusa no pacote (`node_modules/xstate/docs/`) e o guia de migração `xstate-v5-to-v6.md` são exemplares, com tabelas comparativas detalhadas e exemplos antes/depois. Perde meio ponto por ainda ser versão beta com detalhes de documentação online em constante atualização. |
-| **5f. Mudanças Necessárias para Deploy** | **4 / 5** | Nenhuma alteração de infraestrutura, banco de dados ou servidor backend. Requer apenas atualização das ferramentas de build para TypeScript >= 5.0 (atualizado para 5.3.0 no `frontend/verdanzin`). O overhead de bundle do core é desprezível (~15kB gzipped). |
+| **5f. Mudanças Necessárias para Deploy** | **4 / 5** | Nenhuma alteração de infraestrutura, banco de dados ou servidor backend. Requer apenas atualização das ferramentas de build para TypeScript >= 5.0 (atualizado para 5.9.3 no `frontend/verdanzin`). O overhead de bundle do core é desprezível (~15kB gzipped). |
 
 ---
 
-## 6. Recomendação Geral e Principal Risco
+## 7. Recomendação Geral e Principal Risco
 
 ### Recomendação: **Adotar Apenas para Fluxos Críticos e Complexos** (*Adopt only for X*)
 Recomendamos a adoção do **XState v6 Beta** especificamente para:
@@ -201,19 +230,21 @@ Recomendamos a adoção do **XState v6 Beta** especificamente para:
 
 ---
 
-## 7. Comandos Executados e Resultados
+## 8. Comandos Executados e Resultados
 
 1. `git checkout -b eval/xstate-v6`: Branch de avaliação criada localmente.
 2. `npm install` em `frontend/verdanzin`: 508 pacotes instalados com sucesso.
 3. `npm i xstate@beta`: Instalou `xstate@6.0.0-beta.3`.
-4. `npm i -D typescript@^5.3.0`: Atualizou TypeScript para 5.3.0 para suporte a const type parameters (`<const T>`).
-5. `npm test` em `frontend/verdanzin`: 9 testes executados e aprovados via `node --experimental-strip-types --test`.
-6. `npm run build` em `frontend/verdanzin`: Compilação Next.js e validação de páginas estáticas aprovada com código de saída 0.
+4. `npm i -D typescript@5.9.3`: Atualizou TypeScript de 4.9 para 5.9.3 para suporte a const type parameters (`<const T>`).
+5. `npx tsc --noEmit -p .` em `frontend/verdanzin`: Verificação de tipos TypeScript concluída com 0 erros.
+6. `npm test` em `frontend/verdanzin`: 9 testes executados e aprovados via `node --experimental-strip-types --test`.
+7. `npm run build` em `frontend/verdanzin`: Compilação Next.js e validação de páginas estáticas aprovada com código de saída 0.
 
 ---
 
-## 8. O que NÃO foi Verificado
+## 9. O que NÃO foi Verificado
 
-1. **Ambiente com Backend ao Vivo Conectado:** A PoC foi validada no frontend e em suíte de testes unitários isolada; os endpoints de rede reais do backend em produção (`192.168.0.108:3001` e gateways de pagamento do Stripe e Banco Central para Pix) não foram chamados com chaves reais nem dependem de credenciais externas.
-2. **Outros Pacotes do Monorepo:** O subprojeto `admin` (Electron) e `backend` (Express) não foram modificados, mantendo escopo estrito e isolado conforme exigido nas regras da avaliação.
-3. **Persistência em LocalStorage / IndexedDB:** A máquina atual gerencia o estado na memória do cliente durante a sessão; persistência com `restoreActor` ou sincronização entre abas do navegador não foi implementada nesta fase de PoC.
+1. **Fluxo Manual no Navegador contra Backend Real:** O fluxo manual do usuário na interface visual do navegador não foi exercitado contra uma instância ativa do servidor backend com banco de dados real.
+2. **Ambiente com Backend ao Vivo Conectado:** A PoC foi validada no frontend e em suíte de testes unitários isolada; os endpoints de rede reais do backend em produção (`192.168.0.108:3001` e gateways de pagamento do Stripe e Banco Central para Pix) não foram chamados com chaves reais nem dependem de credenciais externas.
+3. **Outros Pacotes do Monorepo:** O subprojeto `admin` (Electron) e `backend` (Express) não foram modificados, mantendo escopo estrito e isolado conforme exigido nas regras da avaliação.
+4. **Persistência em LocalStorage / IndexedDB:** A máquina atual gerencia o estado na memória do cliente durante a sessão; persistência com `restoreActor` ou sincronização entre abas do navegador não foi implementada nesta fase de PoC.
