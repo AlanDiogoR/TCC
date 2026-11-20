@@ -73,21 +73,21 @@ describe('cartMachine (XState v6 Beta)', () => {
 
   test('transitions idle -> loading -> error upon failure', () => {
     const actor = createActor(cartMachine).start();
-    actor.trigger.startLoading({});
+    actor.trigger.startLoading();
     assert.strictEqual(actor.getSnapshot().value, 'loading');
 
     actor.trigger.loadFailure({ error: 'Falha de conexão com a API' });
     assert.strictEqual(actor.getSnapshot().value, 'error');
     assert.strictEqual(actor.getSnapshot().context.error, 'Falha de conexão com a API');
 
-    actor.trigger.reset({});
+    actor.trigger.reset();
     assert.strictEqual(actor.getSnapshot().value, 'idle');
     assert.strictEqual(actor.getSnapshot().context.error, null);
   });
 
   test('transitions to empty when loadSuccess has no items', () => {
     const actor = createActor(cartMachine).start();
-    actor.trigger.startLoading({});
+    actor.trigger.startLoading();
     actor.trigger.loadSuccess({ items: [] });
     assert.strictEqual(actor.getSnapshot().value, 'empty');
     assert.strictEqual(actor.getSnapshot().context.items.length, 0);
@@ -172,7 +172,7 @@ describe('cartMachine (XState v6 Beta)', () => {
     actor.trigger.loadSuccess({ items: [sampleItem1], address: sampleAddressFartura });
 
     // Guard: cannot submit payment without selecting paymentMethod
-    actor.trigger.submitPayment({});
+    actor.trigger.submitPayment();
     assert.strictEqual(actor.getSnapshot().value, 'ready'); // stayed in ready
 
     // Select payment method
@@ -180,7 +180,7 @@ describe('cartMachine (XState v6 Beta)', () => {
     assert.strictEqual(actor.getSnapshot().context.paymentMethod, 'pix');
 
     // Submit payment
-    actor.trigger.submitPayment({});
+    actor.trigger.submitPayment();
     assert.strictEqual(actor.getSnapshot().value, 'submittingPayment');
 
     // While submitting payment, cart mutations are ignored
@@ -195,22 +195,22 @@ describe('cartMachine (XState v6 Beta)', () => {
     assert.strictEqual(actor.getSnapshot().context.error, 'Tempo limite esgotado no gateway');
 
     // Retry payment returns to ready
-    actor.trigger.retryPayment({});
+    actor.trigger.retryPayment();
     assert.strictEqual(actor.getSnapshot().value, 'ready');
 
     // Change payment method to stripe and re-submit
     actor.trigger.selectPaymentMethod({ method: 'stripe' });
-    actor.trigger.submitPayment({});
+    actor.trigger.submitPayment();
     assert.strictEqual(actor.getSnapshot().value, 'submittingPayment');
 
     // Successful payment
-    actor.trigger.paymentSuccess({});
+    actor.trigger.paymentSuccess();
     assert.strictEqual(actor.getSnapshot().value, 'paymentSuccess');
     assert.strictEqual(actor.getSnapshot().context.items.length, 0);
     assert.strictEqual(actor.getSnapshot().context.total, 0);
 
     // Reset machine returns to empty
-    actor.trigger.reset({});
+    actor.trigger.reset();
     assert.strictEqual(actor.getSnapshot().value, 'empty');
   });
 });
