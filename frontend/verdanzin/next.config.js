@@ -1,4 +1,7 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  pageExtensions: ['tsx'],
   images: {
     remotePatterns: [
       {
@@ -9,11 +12,6 @@ module.exports = {
       },
     ],
   },
-}
-
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
 }
 
 module.exports = nextConfig

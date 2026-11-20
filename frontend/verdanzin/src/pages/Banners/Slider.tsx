@@ -43,6 +43,8 @@ export function Slider() {
     </SliderContainer>
   );
 }
+
+export default Slider;
 /*export function Slider() {
   const [sliderRef] = useKeenSlider({
     slides: sliderImages.length,
@@ -60,4 +62,6 @@ export function Slider() {
     </SliderContainer>
   );
 }
+
+export default Slider;
 */

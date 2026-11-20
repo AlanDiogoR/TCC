@@ -33,6 +33,8 @@ import { ButtonCreate } from '../AddAddress/styles';
 import PixPayment from '../Pix';
 import StripeCheckout, { Token } from 'react-stripe-checkout';
 import { useRouter } from 'next/router';
+import { useCartMachine } from '@/machines/useCartMachine';
+import Link from 'next/link';
 
 export default function Cart() {
   const [address, setAddress] = useState<Adress | null>(null);
@@ -44,6 +46,28 @@ export default function Cart() {
   const [value, setValue] = useState(12);
   const [dia, setDia] = useState(5);
   const router = useRouter();
+
+  // XState v6 Beta PoC (isolado atrás de query param ?poc=xstate)
+  const isPoC = router.query.poc === 'xstate';
+  const cartActor = useCartMachine(state.user);
+
+  useEffect(() => {
+    if (isPoC && products.length > 0) {
+      cartActor.trigger.loadSuccess({
+        items: products.map(p => ({
+          productId: p._id,
+          name: p.name,
+          price: p.price,
+          stock: p.quantity,
+          quantity: inputQuantities[p._id] || 1,
+          imagePath: p.imagePath,
+          details: p.details,
+          purchaseItemId: (p as { purchaseItemId?: string }).purchaseItemId
+        })),
+        address: address ?? undefined
+      });
+    }
+  }, [isPoC, products, address]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -221,6 +245,33 @@ export default function Cart() {
   return (
     <>
       <NavBar />
+      <div style={{
+        background: isPoC ? '#1b5e20' : '#263238',
+        color: '#fff',
+        padding: '0.75rem 1.5rem',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        fontSize: '0.875rem'
+      }}>
+        <span>
+          <strong>[PoC XState v6 Beta]</strong> {isPoC ? `Ativo • Estado: [${String(cartActor.state)}] • Total Máquina: ${formatCurrency(cartActor.context.total)}` : 'Modo legado ativo.'}
+        </span>
+        <Link
+          href={isPoC ? '/Cart' : '/Cart?poc=xstate'}
+          style={{
+            background: isPoC ? '#c8e6c9' : '#eceff1',
+            color: '#121214',
+            padding: '0.35rem 0.75rem',
+            borderRadius: '4px',
+            textDecoration: 'none',
+            fontWeight: 'bold',
+            fontSize: '0.8rem'
+          }}
+        >
+          {isPoC ? 'Voltar para Fluxo Legado' : 'Testar PoC XState v6'}
+        </Link>
+      </div>
       {reinderizar ? (
         <>
           <Main>

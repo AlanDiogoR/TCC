@@ -10,10 +10,12 @@ export default function YourCard() {
   const {state} = useAuth();
   const router = useRouter();
 
-  if(state.user == null) {
-    toast.error('Você precisa fazer login para adcionar e ver cartões');
-    router.push('Login');
-  }
+  React.useEffect(() => {
+    if(state.user == null) {
+      toast.error('Você precisa fazer login para adcionar e ver cartões');
+      router.push('Login');
+    }
+  }, [state.user, router]);
 
   return (
     <>
