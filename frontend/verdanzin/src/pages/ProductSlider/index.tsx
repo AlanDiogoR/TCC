@@ -52,7 +52,7 @@ export default function ProductSlider({ products }:MenuProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const response = await fetch('http://localhost:3001/products');
+    const response = await fetch('/api/products');
     const productsData = await response.json();
     const products = (productsData || []).map((product: Product) => {
       return {
